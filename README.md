@@ -22,5 +22,6 @@ This application helps organizations upload their digitalized documents to Share
   * [Microsoft Exchange](../../wiki/Microsoft-Exchange-source)
   * [File System](../../wiki/File-system-source)
 * General considerations
+  * [Application configuration](../../wiki/Application-configuration)
   * [Text encryption](../../wiki/Text-encryption)
   * [Logging](../../wiki/Logging)
