@@ -14,3 +14,13 @@ This application helps organizations upload their digitalized documents to Share
   * Run the `sus.exe` command without any further arguments and follow the instructions on the screen.
     * Note: the service mode requires a proper application configuration, otherwise the connection to SharePoint, Exchange, or to the file system may malfunction.
   * To terminate the application issue the `quit` command in the application console.
+
+# Application documentation
+
+* Microsoft SharePoint connection
+* Document sources
+  * [Microsoft Exchange](wiki/Microsoft-Exchange-source)
+  * [File System](wiki/File-system-source)
+* General considerations
+  * [Text encryption](wiki/Text-encryption)
+  * [Logging](wiki/Logging)
