@@ -19,8 +19,8 @@ This application helps organizations upload their digitalized documents to Share
 
 * Microsoft SharePoint connection
 * Document sources
-  * [Microsoft Exchange](wiki/Microsoft-Exchange-source)
-  * [File System](wiki/File-system-source)
+  * [Microsoft Exchange](../../wiki/Microsoft-Exchange-source)
+  * [File System](../../wiki/File-system-source)
 * General considerations
-  * [Text encryption](wiki/Text-encryption)
-  * [Logging](wiki/Logging)
+  * [Text encryption](../../wiki/Text-encryption)
+  * [Logging](../../wiki/Logging)
