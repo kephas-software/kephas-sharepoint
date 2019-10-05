@@ -1,0 +1,168 @@
+﻿<Parameters>
+  <!--
+		AutoDoc rules
+		=============
+
+		For each documentation entry that needs to be generated, Atomineer executes an appropriate
+		section of the rules in this AutoDoc section (e.g. for a parameter, the <Parameters> section
+		is executed). Execution stops when a match is found and a documentation result is returned.
+
+		Full documentation can be found in the Atomineer user manual.
+		-->
+			<!-- Rules used for parameters
+
+				 Full documentation can be found in the Atomineer user manual.
+
+				 Note that you can delete all the examples, and as long as this section does not
+				 end with a <Set> command, Atomineer will "fall through" your custom rules and 
+				 use its defaults if your rules do not supply any documentation text.
+
+				 Additional values that can be used for filtering/documenting include:
+					name			The name of the parameter
+					sName			The name of the parameter, converted to sentence (space separated words) format, with abbreviated words expanded
+					type			The type of the parameter (const int*)
+					typeBase		The type of the parameter, not including any modifiers (int)
+					attrs			A semicolon-separated list of any attribute(s) associated with the parameter
+					index			The 1-based index of the parameter within the method's parameter list
+					word1			The first word of the parameter (often used for prefixes, e.g. m_, lpsz, etc)
+					coreName		The name with the first word removed (to allow processing of prefixed names)
+					isPointer		"y" or "n", indicating if the parameter type includes a "*" or "^"
+					isReference		"y" or "n", indicating if the parameter type includes an "&" or "ref"
+					isOut			"y" or "n", indicating if the parameter type includes an "out"
+					isOptional		"y" or "n", indicating if the parameter is optional
+					methodName		The name of the method for which this is a parameter
+					numArgs			The total number of arguments for the method
+			 -->
+
+			<If attrs="notnull" suffix=". This cannot be null" />
+			<If attrs="canbenull" suffix=". This may be null" />
+
+			<If type="params#,#params,#params#" desc="A variable-length parameters list containing %sName:LCase%" />
+			<If type="#..." desc="Variable arguments providing " continue="y" />				<!-- Java varargs -->
+			<If type="params" desc="Variable arguments providing additional information" />	<!-- C++ varargs -->
+
+			<If type="this #" desc="The %name% to act on" />
+
+			<If methodName="Main">
+				<If type="int" desc="The number of command-line arguments provided" />
+				<Set desc="An array of command-line argument strings" />
+			</If>
+
+			<!-- Augment the description for ref/out/pointer/optional parameters, and keep executing If commands -->
+			<IfNot suppressInOut="true,y">
+				<Set continue="yes" ioprefixed="n" />
+				<If isOptional="y">
+					<If name="result,pResult,output,pOutput" isPointer="y" desc="[out] %param-optional% If non-%null%, the result" />
+					<IfNot type="const#,#const#,#^">
+						<If isReference="y">
+							<Set continue="yes" desc="[in,out] %param-optional% " ioprefixed="y" />
+						</If>
+						<If isPointer="y">
+							<Set continue="yes" desc="[in,out] %param-optional% If non-%null%, " ioprefixed="y" />
+						</If>
+					</IfNot>
+
+					<If ioprefixed="n">
+						<If isOut="y">
+							<Set continue="yes" desc="[out] %param-optional% " ioprefixed="y" />
+						</If>
+					</If>
+					<If ioprefixed="n">
+						<If alwaysAddInForParams="true">
+							<Set continue="yes" desc="[in] %param-optional% " ioprefixed="y" />
+						</If>
+					</If>
+					<If ioprefixed="n">
+						<Set continue="yes" desc="%param-optional% " ioprefixed="y" />
+					</If>
+				</If>
+				<If isOptional="n">
+					<If name="result,pResult" isPointer="y" desc="[out] If non-%null%, the result" />
+					<IfNot type="const#,#const#,#^">
+						<If isReference="y">
+							<Set continue="yes" desc="[in,out] " ioprefixed="y" />
+						</If>
+						<If isPointer="y">
+							<Set continue="yes" desc="[in,out] If non-%null%, " ioprefixed="y" />
+						</If>
+					</IfNot>
+					<If ioprefixed="n">
+						<If isOut="y">
+							<Set continue="yes" desc="[out] " ioprefixed="y" />
+						</If>
+					</If>
+					<If ioprefixed="n">
+						<If alwaysAddInForParams="true">
+							<Set continue="yes" desc="[in] " ioprefixed="y" />
+						</If>
+					</If>
+				</If>
+			</IfNot>
+
+			<If name="other,source">
+				<If methodName="Copy,Clone,Duplicate,Copy#,Clone#,Duplicate#" desc="Another instance to copy" />
+				<If methodName="Compare,Compare#,__cmp__,__lt__,__gt__,__le__,__ge__" desc="Another instance to compare" />
+			</If>
+
+			<If type="#EventArgs,EventArgs" methodName="On#,Raise#,Fire#,Signal#" desc="Event information to send to registered event handlers" />
+
+			<If type="bool,boolean,system.boolean">
+				<If methodName="Dispose" name="disposing" desc="%true% to release both managed and unmanaged resources; %false% to release only unmanaged resources" />
+			</If>
+
+			<If methodName="Equals,Compare">
+				<If numArgs="1" desc="The %type:Sentence:LCase% to compare to this %object%" />
+				<Set desc="%type:Sentence:SCase% to be compared" />
+			</If>
+
+			<If methodName="CompareTo" desc="%type:Sentence:SCase% to compare to this" />
+
+			<If numArgs="1">
+				<If methodName="AddRange" desc="A %type% of items to append to this" />
+				<If methodName="Contains" desc="The %type% to test for containment" />
+				<IfNot type="#const#">
+					<If methodName="Push,Pop,Peek,Add,Append,Remove,Destroy,Delete,Link,Unlink,Delink,Connect,Disconnect,Write,Save,Read,Load,Dump,Scan,Get,Put,Set,Fetch,Store,Return,Retrieve" desc="The %sname% to %methodName:Sentence:LCase%" />
+				</IfNot>
+			</If>
+
+			<!-- Parameters for binary operators -->
+			<If numArgs="2">
+				<If methodName="+">
+					<If index="1" desc="The first value" />
+					<If index="2" desc="A value to add to it" />
+				</If>
+				<If methodName="-">
+					<If index="1" desc="The first value" />
+					<If index="2" desc="A value to subtract from it" />
+				</If>
+				<If methodName="*">
+					<If index="1" desc="The first value to multiply" />
+					<If index="2" desc="The second value to multiply" />
+				</If>
+				<If methodName="/,%">
+					<If index="1" desc="The numerator" />
+					<If index="2" desc="The denominator" />
+				</If>
+				<If methodName="&amp;">
+					<If index="1" desc="A bit-field to process" />
+					<If index="2" desc="A mask of bits to apply to the bit-field" />
+				</If>
+				<If methodName="|">
+					<If index="1" desc="A bit-field to process" />
+					<If index="2" desc="One or more bits to OR into the bit-field" />
+				</If>
+				<If methodName="^">
+					<If index="1" desc="A bit-field to process" />
+					<If index="2" desc="One or more bits to XOR against the bit-field" />
+				</If>
+				<If methodName="&gt;,&lt;,&gt;=,&lt;=,==,!=">
+					<If index="1" desc="The first instance to compare" />
+					<If index="2" desc="The second instance to compare" />
+				</If>
+			</If>
+
+			<!-- Special Python names -->
+			<If name="self" desc="The class instance that this method operates on" />
+
+			<Execute rules="Variables" />					<!-- Execute the Variable documenting rules -->
+		</Parameters>

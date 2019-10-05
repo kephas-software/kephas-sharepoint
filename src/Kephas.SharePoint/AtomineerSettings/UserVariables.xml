@@ -1,0 +1,6 @@
+<UserVariables>
+  <Variable name="company" ifSet="false" value="Kephas Software SRL" />
+  <Variable name="licenseName" ifSet="false" value="KEPHAS" />
+  <Variable name="licenseFile" ifSet="false" value="LICENSE" />
+  <Variable name="param-optional" ifSet="false" value="Optional." />
+</UserVariables>
