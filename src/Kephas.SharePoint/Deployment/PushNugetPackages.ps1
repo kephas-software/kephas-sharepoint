@@ -8,7 +8,6 @@ $packages = @(
 )
 
 foreach ($package in $packages) {
-    $packagepath = "..\$package\bin\$build\$packagename.$version.nupkg"
-    .\NuGet.exe push "$package.$version.nupkg" -Source https://api.nuget.org/v3/index.json 
-    .\NuGet.exe push "$package.$version.symbols.nupkg" -Source https://nuget.smbsrc.net
+    $packagepath = "..\$package\bin\$build\$package.$version.nupkg"
+    .\NuGet.exe push $packagepath -Source https://api.nuget.org/v3/index.json 
 }
