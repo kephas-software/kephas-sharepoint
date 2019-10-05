@@ -1,0 +1,95 @@
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Document.cs" company="Kephas Software SRL">
+//   Copyright (c) Kephas Software SRL. All rights reserved.
+//   Licensed under the KEPHAS license. See LICENSE file in the project root for full license information.
+// </copyright>
+// <summary>
+//   Implements the document class.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+namespace Kephas.SharePoint
+{
+    using Kephas.Dynamic;
+
+    /// <summary>
+    /// A document.
+    /// </summary>
+    public class Document : Expando
+    {
+        /// <summary>
+        /// Gets or sets the identifier.
+        /// </summary>
+        /// <value>
+        /// The identifier.
+        /// </value>
+        public long Id { get; set; }
+
+        /// <summary>
+        /// Gets or sets the name.
+        /// </summary>
+        /// <value>
+        /// The name.
+        /// </value>
+        public string Name { get; set; }
+
+        /// <summary>
+        /// Gets or sets the name of the original file.
+        /// </summary>
+        /// <value>
+        /// The name of the original file.
+        /// </value>
+        public string OriginalName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the library.
+        /// </summary>
+        /// <value>
+        /// The library.
+        /// </value>
+        public string Library { get; set; }
+
+        /// <summary>
+        /// Gets or sets the content.
+        /// </summary>
+        /// <value>
+        /// The content.
+        /// </value>
+        public byte[] FileContent { get; set; }
+
+        /// <summary>
+        /// Gets or sets the text content.
+        /// </summary>
+        /// <value>
+        /// The text content.
+        /// </value>
+        public string TextContent { get; set; }
+
+        /// <summary>
+        /// Gets or sets the identifier of the parent.
+        /// </summary>
+        /// <value>
+        /// The identifier of the parent.
+        /// </value>
+        public long? ParentId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the document properties.
+        /// </summary>
+        /// <value>
+        /// The document properties.
+        /// </value>
+        public IExpando Fields { get; set; } = new Expando();
+
+        /// <summary>
+        /// Returns a string that represents the current object.
+        /// </summary>
+        /// <returns>
+        /// A string that represents the current object.
+        /// </returns>
+        public override string ToString()
+        {
+            return $"{this.Library}/{this.OriginalName}/{this.Id} ({this.FileContent?.Length} bytes)";
+        }
+    }
+}
