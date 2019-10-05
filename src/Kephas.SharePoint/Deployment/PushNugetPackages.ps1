@@ -1,6 +1,6 @@
 param (
     [string]$version = $( Read-Host "Please provide package version" ),
-    [string]$build = "Release",
+    [string]$build = "Release"
 )
 
 $packages = @(

@@ -1,6 +1,5 @@
 ﻿param (
     [string]$version = $( Read-Host "Please provide package version" ),
-    [string]$refversion = $( Read-Host "Please provide the referenced package version" ),
     [string]$build = "Release",
     [string]$CertificateSubjectName = "Kephas Software SRL",
     [string]$Timestamper = "http://timestamp.digicert.com"
