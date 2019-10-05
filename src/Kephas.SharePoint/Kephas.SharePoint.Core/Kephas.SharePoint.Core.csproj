@@ -7,14 +7,18 @@
         <Version>1.0.0-rc.1</Version>
         <Authors>Kephas Software SRL</Authors>
         <Company>Kephas Software SRL</Company>
-        <Product>SharePoint Uploader Service</Product>
+        <Product>Microsoft SharePoint Integration Services</Product>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
         <FileVersion>1.0.0.0</FileVersion>
-        <Description>Provides a common infrastructure for all the other SharePoint integration components.</Description>
+        <Description>Provides a common infrastructure for all the other Microsoft SharePoint integration components.</Description>
         <Copyright>Copyright Kephas Software SRL 2019</Copyright>
         <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-        <PackageLicenseUrl>http://www.kephas-software.com/licenses/KEPHAS</PackageLicenseUrl>
+        <PackageLicenseUrl>http://opensource.org/licenses/MIT</PackageLicenseUrl>
+        <PackageProjectUrl>https://github.com/kephas-software/kephas-sharepoint-uploader-service</PackageProjectUrl>
+        <PackageIconUrl>http://kephas-framework.com/favicon.png</PackageIconUrl>
+        <RepositoryUrl>https://github.com/kephas-software/kephas-sharepoint-uploader-service</RepositoryUrl>
         <PackageTags>kephas sharepoint core</PackageTags>
+        <RepositoryType>github</RepositoryType>
         <NeutralLanguage>en</NeutralLanguage>
         <RootNamespace>Kephas.SharePoint</RootNamespace>
         <SignAssembly>True</SignAssembly>
