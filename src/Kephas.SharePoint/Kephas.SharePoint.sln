@@ -5,6 +5,13 @@ VisualStudioVersion = 16.0.29326.143
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kephas.SharePoint.Core", "Kephas.SharePoint.Core\Kephas.SharePoint.Core.csproj", "{E1436418-3311-442E-997A-F483ED894691}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deployment", "Deployment", "{D5BBB3B9-C953-44C9-8C40-032AD977AF1F}"
+	ProjectSection(SolutionItems) = preProject
+		Deployment\CreateNugetPackages.ps1 = Deployment\CreateNugetPackages.ps1
+		Deployment\NuGet.exe = Deployment\NuGet.exe
+		Deployment\PushNugetPackages.ps1 = Deployment\PushNugetPackages.ps1
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
