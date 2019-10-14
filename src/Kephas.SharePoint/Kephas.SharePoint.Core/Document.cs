@@ -97,7 +97,8 @@ namespace Kephas.SharePoint
         /// </returns>
         public override string ToString()
         {
-            return $"{this.Library}/{this.OriginalName}/{this.Id} ({this.FileContent?.Length} bytes)";
+            var folder = string.IsNullOrEmpty(this.Folder) ? string.Empty : $"{this.Folder}/";
+            return $"{this.Library}/{folder}{this.OriginalName}/{this.Id} ({this.FileContent?.Length} bytes)";
         }
     }
 }
