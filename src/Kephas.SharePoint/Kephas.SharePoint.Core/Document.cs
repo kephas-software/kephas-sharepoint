@@ -34,6 +34,14 @@ namespace Kephas.SharePoint
         public string Name { get; set; }
 
         /// <summary>
+        /// Gets or sets the pathname of the containing folder.
+        /// </summary>
+        /// <value>
+        /// The full pathname of the containing folder.
+        /// </value>
+        public string Folder { get; set; }
+
+        /// <summary>
         /// Gets or sets the name of the original file.
         /// </summary>
         /// <value>
