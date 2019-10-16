@@ -82,6 +82,14 @@ namespace Kephas.SharePoint
         public long? ParentId { get; set; }
 
         /// <summary>
+        /// Gets or sets the tags.
+        /// </summary>
+        /// <value>
+        /// The tags.
+        /// </value>
+        public string[] Tags { get; set; }
+
+        /// <summary>
         /// Gets or sets the document properties.
         /// </summary>
         /// <value>
