@@ -58,6 +58,14 @@ namespace Kephas.SharePoint.Configuration
         public string ParentIdField { get; set; } = "ParentID";
 
         /// <summary>
+        /// Gets or sets the search keywords field.
+        /// </summary>
+        /// <value>
+        /// The search keywords field.
+        /// </value>
+        public string KeywordsField { get; set; } = "Keywords";
+
+        /// <summary>
         /// Gets or sets the library.
         /// </summary>
         /// <value>
