@@ -12,11 +12,13 @@ namespace Kephas.SharePoint.Sources
 {
     using System;
     using System.IO;
+    using System.Reflection;
     using System.Threading;
     using System.Threading.Tasks;
 
     using Kephas.Configuration;
     using Kephas.ExceptionHandling;
+    using Kephas.Interaction;
     using Kephas.Logging;
     using Kephas.Messaging;
     using Kephas.Messaging.Messages;
@@ -24,6 +26,8 @@ namespace Kephas.SharePoint.Sources
     using Kephas.SharePoint;
     using Kephas.SharePoint.Configuration;
     using Kephas.Threading.Tasks;
+    using Kephas.Workflow;
+    using Kephas.Workflow.Interaction;
 
     /// <summary>
     /// A document source base.
@@ -33,23 +37,28 @@ namespace Kephas.SharePoint.Sources
         where TSettings : class, new()
     {
         private readonly IMessageProcessor messageProcessor;
+        private readonly IEventHub eventHub;
         private Task iterationTask;
+        private IEventSubscription retrySubscription;
         private bool stopIteration = false;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DocumentSourceBase{TSettings}"/> class.
         /// </summary>
         /// <param name="messageProcessor">The message processor.</param>
+        /// <param name="eventHub">The event hub.</param>
         /// <param name="configuration">The source configuration.</param>
         /// <param name="defaultsProvider">The defaults provider.</param>
         public DocumentSourceBase(
             IMessageProcessor messageProcessor,
+            IEventHub eventHub,
             IConfiguration<TSettings> configuration,
             IDefaultSettingsProvider defaultsProvider)
         {
             this.Settings = configuration.Settings;
             this.Defaults = defaultsProvider.Defaults;
             this.messageProcessor = messageProcessor;
+            this.eventHub = eventHub;
         }
 
         /// <summary>
@@ -88,6 +97,11 @@ namespace Kephas.SharePoint.Sources
         {
             this.AppContext = context;
             this.iterationTask = this.StartIterationAsync();
+            this.retrySubscription = this.eventHub.Subscribe<RetryActivitySignal>(
+                (e, ctx, token) => e.ActivityContext[InteractionHelper.SourceArgName] == null
+                                    || this.GetServiceName().Equals(e.ActivityContext[InteractionHelper.SourceArgName])
+                                        ? this.RetryAsync(e.ActivityContext, token)
+                                        : Task.CompletedTask);
             return TaskHelper.CompletedTask;
         }
 
@@ -106,6 +120,21 @@ namespace Kephas.SharePoint.Sources
             {
                 await this.iterationTask.PreserveThreadContext();
             }
+
+            this.retrySubscription?.Dispose();
+        }
+
+        /// <summary>
+        /// Retries to upload the failed documents asynchronously.
+        /// </summary>
+        /// <param name="retryContext">Context for the retry.</param>
+        /// <param name="cancellationToken">Optional. A token that allows processing to be cancelled.</param>
+        /// <returns>
+        /// An asynchronous result.
+        /// </returns>
+        protected virtual Task RetryAsync(IActivityContext retryContext, CancellationToken cancellationToken = default)
+        {
+            return Task.CompletedTask;
         }
 
         /// <summary>
@@ -133,6 +162,17 @@ namespace Kephas.SharePoint.Sources
             {
                 this.iterationTask = null;
             }
+        }
+
+        /// <summary>
+        /// Gets service name.
+        /// </summary>
+        /// <returns>
+        /// The service name.
+        /// </returns>
+        protected virtual string GetServiceName()
+        {
+            return this.GetType().GetCustomAttribute<ServiceNameAttribute>()?.Value;
         }
 
         /// <summary>
