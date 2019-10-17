@@ -31,6 +31,7 @@ The application runs on following operating systems:
 * General considerations
   * [Application configuration](../../wiki/Application-configuration)
   * [Text encryption](../../wiki/Text-encryption)
+  * [Retrying failed uploads](../../wiki/Retrying-failed-uploads)
   * [Logging](../../wiki/Logging)
 * Document sources
   * [Microsoft Exchange](../../wiki/Microsoft-Exchange-source)
