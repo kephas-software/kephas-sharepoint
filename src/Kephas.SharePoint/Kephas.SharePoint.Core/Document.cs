@@ -82,12 +82,12 @@ namespace Kephas.SharePoint
         public long? ParentId { get; set; }
 
         /// <summary>
-        /// Gets or sets the tags.
+        /// Gets or sets the search keywords.
         /// </summary>
         /// <value>
-        /// The tags.
+        /// The search keywords.
         /// </value>
-        public string[] Tags { get; set; }
+        public string[] Keywords { get; set; }
 
         /// <summary>
         /// Gets or sets the document properties.
