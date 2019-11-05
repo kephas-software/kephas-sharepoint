@@ -30,9 +30,12 @@ The application runs on following operating systems:
 
 * General considerations
   * [Application configuration](../../wiki/Application-configuration)
-  * [Text encryption](../../wiki/Text-encryption)
-  * [Retrying failed uploads](../../wiki/Retrying-failed-uploads)
   * [Logging](../../wiki/Logging)
+  * [Field value expressions](../../wiki/Field-value-expressions)
 * Document sources
   * [Microsoft Exchange](../../wiki/Microsoft-Exchange-source)
   * [File System](../../wiki/File-system-source)
+* Commands
+  * [Text encryption](../../wiki/Text-encryption)
+  * [Retrying failed uploads](../../wiki/Retrying-failed-uploads)
+  * [Inspecting SharePoint user permissions](../../wiki/Inspecting-permissions)
