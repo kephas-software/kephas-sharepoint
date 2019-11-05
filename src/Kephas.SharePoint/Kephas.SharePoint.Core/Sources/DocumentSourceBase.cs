@@ -195,11 +195,8 @@ namespace Kephas.SharePoint.Sources
         {
             try
             {
-                using (var context = new MessagingContext(this.AppContext, this.messageProcessor))
-                {
-                    var response = (ResponseMessage)await this.messageProcessor.ProcessAsync(doc, context, cancellationToken).PreserveThreadContext();
-                    return response;
-                }
+                var response = (ResponseMessage)await this.messageProcessor.ProcessAsync(doc, ctx => ctx.Impersonate(this.AppContext), cancellationToken).PreserveThreadContext();
+                return response;
             }
             catch (Exception ex)
             {
