@@ -31,7 +31,6 @@ The application runs on following operating systems:
 * General considerations
   * [Application configuration](../../wiki/Application-configuration)
   * [Logging](../../wiki/Logging)
-  * [Rule configuration](../../wiki/Rule-configuration)
   * [Field value expressions](../../wiki/Field-value-expressions)
 * Document sources
   * [Microsoft Exchange](../../wiki/Microsoft-Exchange-source)
