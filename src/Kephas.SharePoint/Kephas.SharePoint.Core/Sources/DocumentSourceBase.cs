@@ -49,7 +49,7 @@ namespace Kephas.SharePoint.Sources
         /// <param name="eventHub">The event hub.</param>
         /// <param name="configuration">The source configuration.</param>
         /// <param name="defaultsProvider">The defaults provider.</param>
-        public DocumentSourceBase(
+        protected DocumentSourceBase(
             IMessageProcessor messageProcessor,
             IEventHub eventHub,
             IConfiguration<TSettings> configuration,

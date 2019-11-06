@@ -15,7 +15,7 @@ namespace Kephas.SharePoint
     /// <summary>
     /// Exception for signalling maximum file size exceeded errors.
     /// </summary>
-    public class MaxFileSizeExceededException : System.Exception
+    public class MaxFileSizeExceededException : Exception
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="MaxFileSizeExceededException"/> class.
@@ -23,8 +23,10 @@ namespace Kephas.SharePoint
         /// <param name="fileName">Filename of the file.</param>
         /// <param name="fileSize">Size of the file.</param>
         /// <param name="maxSize">The maximum configured size.</param>
-        public MaxFileSizeExceededException(string fileName, long fileSize, long maxSize) 
-            : base(GetMessage(fileName, fileSize, maxSize)) { }
+        public MaxFileSizeExceededException(string fileName, long fileSize, long maxSize)
+            : base(GetMessage(fileName, fileSize, maxSize))
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MaxFileSizeExceededException"/> class.
@@ -33,8 +35,10 @@ namespace Kephas.SharePoint
         /// <param name="fileSize">Size of the file.</param>
         /// <param name="maxSize">The maximum configured size.</param>
         /// <param name="inner">The inner exception.</param>
-        public MaxFileSizeExceededException(string fileName, long fileSize, long maxSize, Exception inner) 
-            : base(GetMessage(fileName, fileSize, maxSize), inner) { }
+        public MaxFileSizeExceededException(string fileName, long fileSize, long maxSize, Exception inner)
+            : base(GetMessage(fileName, fileSize, maxSize), inner)
+        {
+        }
 
         private static string GetMessage(string fileName, long fileSize, long maxSize)
         {
