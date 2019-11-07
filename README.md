@@ -31,7 +31,8 @@ The application runs on following operating systems:
   * Execute the `sc` command to create the Windows service:
   `sc create sharepointdocuploader binPath= "\"<path-to-the-exe-file>\" service" start= auto DisplayName= "SharePoint Document Uploader"`
   * Start the service:
-  `sc create sharepointdocuploader`
+  `sc start sharepointdocuploader`
+  * For more information about starting, stopping, creating, and deleting Windows services check https://support.microsoft.com/en-us/help/251192/how-to-create-a-windows-service-by-using-sc-exe.
 
 # Application documentation
 
