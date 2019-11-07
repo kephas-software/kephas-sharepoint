@@ -1,10 +1,8 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b913be0d-6eda-4c28-adc9-e4108240b7f5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Kephas.SharePoint.Core/Kephas.SharePoint.Core.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Kephas.SharePoint.Core/Kephas.SharePoint.Core.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kephas.SharePoint.Core/MaxFileSizeExceededException.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Kephas.SharePoint.Core/MaxFileSizeExceededException.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kephas.SharePoint.Core/Sources/DocumentSourceBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Kephas.SharePoint.Core/Sources/DocumentSourceBase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Kephas.SharePoint/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Kephas.SharePoint/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -71,20 +69,23 @@
       <option name="presentableId" value="Default" />
       <updated>1573028533965</updated>
       <workItem from="1573028537260" duration="2836000" />
+      <workItem from="1573142396324" duration="664000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
-  <component name="UnityProjectConfiguration" hasMinimizedUI="null" />
+  <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
