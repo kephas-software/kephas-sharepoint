@@ -25,6 +25,13 @@ The application runs on following operating systems:
   * Run the `sus.exe` command without any further arguments and follow the instructions on the screen.
     * Note: the service mode requires a proper application configuration, otherwise the connection to SharePoint, Exchange, or to the file system may malfunction.
   * To terminate the application issue the `quit` command in the application console.
+  
+# Starting the application as a Windows service
+  * Start a command prompt as administrator.
+  * Execute the `sc` command to create the Windows service:
+  `sc create sharepointdocuploader binPath= "\"<path-to-the-exe-file>\" service" start= auto DisplayName= "SharePoint Document Uploader"`
+  * Start the service:
+  `sc create sharepointdocuploader`
 
 # Application documentation
 
