@@ -50,6 +50,22 @@ namespace Kephas.SharePoint
         public string OriginalName { get; set; }
 
         /// <summary>
+        /// Gets or sets the pathname of the original folder.
+        /// </summary>
+        /// <value>
+        /// The pathname of the original folder.
+        /// </value>
+        public string OriginalFolder { get; set; }
+
+        /// <summary>
+        /// Gets or sets the title.
+        /// </summary>
+        /// <value>
+        /// The title.
+        /// </value>
+        public string Title { get; set; }
+
+        /// <summary>
         /// Gets or sets the library.
         /// </summary>
         /// <value>
