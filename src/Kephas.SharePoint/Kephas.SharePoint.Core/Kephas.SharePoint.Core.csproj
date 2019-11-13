@@ -4,12 +4,12 @@
         <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
         <LangVersion>latest</LangVersion>
         <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-        <Version>1.1.0</Version>
+        <Version>1.1.1</Version>
         <Authors>Kephas Software SRL</Authors>
         <Company>Kephas Software SRL</Company>
         <Product>Microsoft SharePoint Integration Services</Product>
-        <AssemblyVersion>1.1.0.0</AssemblyVersion>
-        <FileVersion>1.1.0.0</FileVersion>
+        <AssemblyVersion>1.1.1.0</AssemblyVersion>
+        <FileVersion>1.1.1.0</FileVersion>
         <Description>Provides a common infrastructure for all the other Microsoft SharePoint integration components.</Description>
         <Copyright>Copyright Kephas Software SRL 2019</Copyright>
         <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
