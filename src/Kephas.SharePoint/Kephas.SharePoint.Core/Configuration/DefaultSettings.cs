@@ -58,6 +58,14 @@ namespace Kephas.SharePoint.Configuration
         public string ParentIdField { get; set; } = "ParentID";
 
         /// <summary>
+        /// Gets or sets the group field.
+        /// </summary>
+        /// <value>
+        /// The group field.
+        /// </value>
+        public string GroupField { get; set; } = "Group";
+
+        /// <summary>
         /// Gets or sets the search keywords field.
         /// </summary>
         /// <value>

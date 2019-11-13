@@ -98,6 +98,14 @@ namespace Kephas.SharePoint
         public long? ParentId { get; set; }
 
         /// <summary>
+        /// Gets or sets the group.
+        /// </summary>
+        /// <value>
+        /// The group.
+        /// </value>
+        public string Group { get; set; }
+
+        /// <summary>
         /// Gets or sets the search keywords.
         /// </summary>
         /// <value>
