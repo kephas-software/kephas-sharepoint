@@ -74,10 +74,18 @@ namespace Kephas.SharePoint.Configuration
         public string KeywordsField { get; set; } = "Keywords";
 
         /// <summary>
-        /// Gets or sets the library.
+        /// Gets or sets the default site.
         /// </summary>
         /// <value>
-        /// The library.
+        /// The default site.
+        /// </value>
+        public string Site { get; set; }
+
+        /// <summary>
+        /// Gets or sets the default library.
+        /// </summary>
+        /// <value>
+        /// The default library.
         /// </value>
         public string Library { get; set; } = "Unsorted";
 
