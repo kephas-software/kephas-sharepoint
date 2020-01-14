@@ -1,35 +1,37 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IDocumentRule.cs" company="Kephas Software SRL">
+// <copyright file="IOcrProcessor.cs" company="Kephas Software SRL">
 //   Copyright (c) Kephas Software SRL. All rights reserved.
 //   Licensed under the KEPHAS license. See LICENSE file in the project root for full license information.
 // </copyright>
 // <summary>
-//   Declares the IDocumentRule interface.
+//   Declares the IOcrProcessor interface.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Kephas.SharePoint.Rules
+namespace Kephas.SharePoint.TextProcessing
 {
+    using System;
+    using System.IO;
     using System.Threading;
     using System.Threading.Tasks;
 
     using Kephas.Services;
 
     /// <summary>
-    /// Interface for document rule.
+    /// Interface for OCR processor.
     /// </summary>
-    [AppServiceContract(AllowMultiple = true)]
-    public interface IDocumentRule
+    [SingletonAppServiceContract]
+    public interface IOcrProcessor
     {
         /// <summary>
-        /// Applies the rule asynchronously.
+        /// Process the image stream asynchronously.
         /// </summary>
-        /// <param name="doc">The document.</param>
-        /// <param name="context">Optional. The context.</param>
+        /// <param name="image">The image.</param>
+        /// <param name="optionsConfig">Optional. The options configuration.</param>
         /// <param name="cancellationToken">Optional. A token that allows processing to be cancelled.</param>
         /// <returns>
-        /// An asynchronous result.
+        /// An asynchronous result that yields the OCR result.
         /// </returns>
-        Task ApplyAsync(Document doc, IContext context = null, CancellationToken cancellationToken = default);
+        Task<IOcrResult> ProcessAsync(Stream image, Action<IOcrContext> optionsConfig = null, CancellationToken cancellationToken = default);
     }
 }
