@@ -8,8 +8,8 @@
         <Authors>Kephas Software SRL</Authors>
         <Company>Kephas Software SRL</Company>
         <Product>Microsoft SharePoint Integration Services</Product>
-        <AssemblyVersion>1.4.0.0</AssemblyVersion>
-        <FileVersion>1.4.0.0</FileVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <FileVersion>2.0.0.0</FileVersion>
         <Description>Provides a common infrastructure for all the other Microsoft SharePoint integration components.</Description>
         <Copyright>Copyright Kephas Software SRL 2019-2020</Copyright>
         <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
@@ -54,9 +54,9 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Kephas.Core" Version="7.2.5" />
-        <PackageReference Include="Kephas.Messaging" Version="7.2.5" />
-        <PackageReference Include="Kephas.Workflow" Version="7.2.5" />
+        <PackageReference Include="Kephas.Core" Version="7.3.0" />
+        <PackageReference Include="Kephas.Messaging" Version="7.3.0" />
+        <PackageReference Include="Kephas.Workflow" Version="7.3.0" />
         <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -85,10 +85,6 @@
             <Generator>PublicResXFileCodeGenerator</Generator>
             <LastGenOutput>Strings.Designer.cs</LastGenOutput>
         </EmbeddedResource>
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="TextProcessing\" />
     </ItemGroup>
 
 </Project>

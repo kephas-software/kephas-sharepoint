@@ -12,7 +12,6 @@ namespace Kephas.SharePoint.Core.Tests
 {
     using System.Collections.Generic;
     using System.Reflection;
-    using Kephas.SharePoint.Text;
     using Kephas.Testing.Composition;
 
     public abstract class SharePointTestBase : CompositionTestBase
@@ -20,7 +19,7 @@ namespace Kephas.SharePoint.Core.Tests
         public override IEnumerable<Assembly> GetDefaultConventionAssemblies()
         {
             return new List<Assembly>(base.GetDefaultConventionAssemblies()) {
-                typeof(ITokenizer).Assembly,            // Kephas.SharePoint.Core
+                typeof(IDefaultSettingsProvider).Assembly,            // Kephas.SharePoint.Core
             };
         }
     }
