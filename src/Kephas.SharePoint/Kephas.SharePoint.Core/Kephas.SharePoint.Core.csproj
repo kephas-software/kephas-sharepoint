@@ -54,9 +54,9 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Kephas.Core" Version="7.3.0" />
-        <PackageReference Include="Kephas.Messaging" Version="7.3.0" />
-        <PackageReference Include="Kephas.Workflow" Version="7.3.0" />
+        <PackageReference Include="Kephas.Core" Version="7.3.1" />
+        <PackageReference Include="Kephas.Messaging" Version="7.3.1" />
+        <PackageReference Include="Kephas.Workflow" Version="7.3.1" />
         <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
