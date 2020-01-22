@@ -4,7 +4,9 @@ param (
 )
 
 $packages = @(
-    "Kephas.SharePoint.Core"
+    "Kephas.SharePoint.Core",
+    "Kephas.SharePoint.Documents",
+    "Kephas.SharePoint.Data"
 )
 
 foreach ($package in $packages) {

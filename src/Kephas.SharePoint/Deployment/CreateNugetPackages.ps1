@@ -15,7 +15,9 @@ function get-packagename([string]$pathname) {
 }
 
 $paths = @(
-    "..\Kephas.SharePoint.Core"
+    "..\Kephas.SharePoint.Core",
+    "..\Kephas.SharePoint.Documents",
+    "..\Kephas.SharePoint.Data",
 )
 
 foreach ($path in $paths) {
