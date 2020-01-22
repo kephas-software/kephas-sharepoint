@@ -1,30 +1,28 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IDefaultSettingsProvider.cs" company="Kephas Software SRL">
+// <copyright file="ISharePointDataContext.cs" company="Kephas Software SRL">
 //   Copyright (c) Kephas Software SRL. All rights reserved.
 //   Licensed under the KEPHAS license. See LICENSE file in the project root for full license information.
 // </copyright>
 // <summary>
-//   Declares the IDefaultSettingsProvider interface.
+//   Declares the ISharePointDataContext interface.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Kephas.SharePoint
+namespace Kephas.SharePoint.Data
 {
-    using Kephas.Services;
-    using Kephas.SharePoint.Configuration;
+    using Kephas.Data;
 
     /// <summary>
-    /// A null default settings provider.
+    /// Interface for SharePoint data context.
     /// </summary>
-    [OverridePriority(Priority.Lowest)]
-    public class NullDefaultSettingsProvider : IDefaultSettingsProvider
+    public interface ISharePointDataContext : IDataContext
     {
         /// <summary>
-        /// Gets the defaults.
+        /// Gets the metadata cache.
         /// </summary>
         /// <value>
-        /// The defaults.
+        /// The metadata cache.
         /// </value>
-        public DefaultSettings Defaults { get; } = new DefaultSettings();
+        public ISharePointMetadataCache MetadataCache { get; }
     }
 }

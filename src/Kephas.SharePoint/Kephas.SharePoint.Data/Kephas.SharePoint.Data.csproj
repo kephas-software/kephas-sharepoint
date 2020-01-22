@@ -10,23 +10,23 @@
         <Product>Microsoft SharePoint Integration Services</Product>
         <AssemblyVersion>2.1.1.0</AssemblyVersion>
         <FileVersion>2.1.1.0</FileVersion>
-        <Description>Provides a common infrastructure for all the other Microsoft SharePoint integration components.</Description>
+        <Description>Provides the data adapters for Microsoft SharePoint.</Description>
         <Copyright>Copyright Kephas Software SRL 2019-2020</Copyright>
         <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
         <PackageLicenseUrl>http://opensource.org/licenses/MIT</PackageLicenseUrl>
         <PackageProjectUrl>https://github.com/kephas-software/kephas-sharepoint-uploader-service</PackageProjectUrl>
         <PackageIconUrl>http://kephas-framework.com/favicon.png</PackageIconUrl>
         <RepositoryUrl>https://github.com/kephas-software/kephas-sharepoint-uploader-service</RepositoryUrl>
-        <PackageTags>kephas sharepoint core</PackageTags>
+        <PackageTags>kephas sharepoint data</PackageTags>
         <RepositoryType>github</RepositoryType>
         <NeutralLanguage>en</NeutralLanguage>
-        <RootNamespace>Kephas.SharePoint</RootNamespace>
         <SignAssembly>True</SignAssembly>
         <AssemblyOriginatorKeyFile>..\..\..\..\..\devops\kephas-apps\kephas-apps.snk</AssemblyOriginatorKeyFile>
+        <RootNamespace>Kephas.SharePoint</RootNamespace>
     </PropertyGroup>
 
     <PropertyGroup>
-        <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Kephas.SharePoint.Core.xml</DocumentationFile>
+        <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Kephas.SharePoint.Data.xml</DocumentationFile>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
@@ -55,11 +55,17 @@
 
     <ItemGroup>
         <PackageReference Include="Kephas.Core" Version="7.3.1" />
+        <PackageReference Include="Kephas.Data" Version="7.3.1" />
+        <PackageReference Include="SharePointPnPCoreOnline" Version="3.17.2001.2" />
         <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="System.ValueTuple" Version="4.5.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Kephas.SharePoint.Core\Kephas.SharePoint.Core.csproj" />
     </ItemGroup>
 
     <ItemGroup>
@@ -75,6 +81,10 @@
             <Generator>PublicResXFileCodeGenerator</Generator>
             <LastGenOutput>Strings.Designer.cs</LastGenOutput>
         </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Data\Commands\" />
     </ItemGroup>
 
 </Project>

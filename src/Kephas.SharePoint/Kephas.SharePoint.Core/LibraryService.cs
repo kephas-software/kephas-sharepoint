@@ -13,26 +13,24 @@ namespace Kephas.SharePoint
     using System;
     using System.Linq;
 
-    using Kephas.Configuration;
-
     /// <summary>
     /// A library service.
     /// </summary>
     public class LibraryService : ILibraryService
     {
-        private readonly IConfiguration<SharePointSettings> sharePointConfig;
+        private readonly ISiteSettingsProvider siteSettingsProvider;
         private readonly IDefaultSettingsProvider defaultSettingsProvider;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LibraryService"/> class.
         /// </summary>
-        /// <param name="sharePointConfig">The SharePoint configuration.</param>
+        /// <param name="siteSettingsProvider">The site settings provider.</param>
         /// <param name="defaultSettingsProvider">The default settings provider.</param>
         public LibraryService(
-            IConfiguration<SharePointSettings> sharePointConfig,
+            ISiteSettingsProvider siteSettingsProvider,
             IDefaultSettingsProvider defaultSettingsProvider)
         {
-            this.sharePointConfig = sharePointConfig;
+            this.siteSettingsProvider = siteSettingsProvider;
             this.defaultSettingsProvider = defaultSettingsProvider;
         }
 
@@ -48,24 +46,6 @@ namespace Kephas.SharePoint
             return string.IsNullOrEmpty(defaultSettings.Site)
                                         ? defaultSettings.Library
                                         : $"{defaultSettings.Site}/{defaultSettings.Library}";
-        }
-
-        /// <summary>
-        /// Gets the document library.
-        /// </summary>
-        /// <param name="doc">The document.</param>
-        /// <returns>
-        /// The document library.
-        /// </returns>
-        public string GetDocumentLibrary(Document doc)
-        {
-            string defaultLibrarySpec = this.GetDefaultLibrary();
-            var librarySpec = string.IsNullOrEmpty(doc.Library)
-                ? defaultLibrarySpec
-                : string.IsNullOrEmpty(doc.Site)
-                    ? doc.Library
-                    : $"{doc.Site}/{doc.Library}";
-            return librarySpec;
         }
 
         /// <summary>
@@ -113,15 +93,16 @@ namespace Kephas.SharePoint
         public SiteSettings GetSiteSettings(string libraryFullName)
         {
             var (siteName, libraryName) = this.GetLibraryPathFragments(libraryFullName);
-            var sites = this.sharePointConfig.Settings.Sites;
+            var sites = this.siteSettingsProvider.GetSiteSettings();
             if (sites == null)
             {
                 throw new SharePointException("No 'sites' section in the configuration file.");
             }
 
-            if (!sites.TryGetValue(siteName, out var siteSettings))
+            var siteSettings = sites.FirstOrDefault(s => s.name == siteName).settings;
+            if (siteSettings == null)
             {
-                siteSettings = sites.FirstOrDefault(s => s.Value.SiteUrl == siteName).Value;
+                siteSettings = sites.FirstOrDefault(s => s.settings.SiteUrl == siteName).settings;
             }
 
             if (siteSettings == null)

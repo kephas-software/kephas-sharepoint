@@ -27,15 +27,6 @@ namespace Kephas.SharePoint
         string GetDefaultLibrary();
 
         /// <summary>
-        /// Gets the document library.
-        /// </summary>
-        /// <param name="doc">The document.</param>
-        /// <returns>
-        /// The document library.
-        /// </returns>
-        string GetDocumentLibrary(Document doc);
-
-        /// <summary>
         /// Gets the library path fragments.
         /// </summary>
         /// <param name="libraryFullName">The library full name, including site.</param>

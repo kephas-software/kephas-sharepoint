@@ -1,32 +1,29 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
         <LangVersion>latest</LangVersion>
         <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-        <Version>2.1.1</Version>
+        <Version>1.0.0-dev.1</Version>
         <Authors>Kephas Software SRL</Authors>
         <Company>Kephas Software SRL</Company>
-        <Product>Microsoft SharePoint Integration Services</Product>
-        <AssemblyVersion>2.1.1.0</AssemblyVersion>
-        <FileVersion>2.1.1.0</FileVersion>
-        <Description>Provides a common infrastructure for all the other Microsoft SharePoint integration components.</Description>
-        <Copyright>Copyright Kephas Software SRL 2019-2020</Copyright>
+        <Product>Kephas SharePoint Connector</Product>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <FileVersion>2.0.0.0</FileVersion>
+        <Description>Provides the uploader component.</Description>
+        <Copyright>Copyright © Kephas Software SRL 2010-2020</Copyright>
         <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-        <PackageLicenseUrl>http://opensource.org/licenses/MIT</PackageLicenseUrl>
-        <PackageProjectUrl>https://github.com/kephas-software/kephas-sharepoint-uploader-service</PackageProjectUrl>
-        <PackageIconUrl>http://kephas-framework.com/favicon.png</PackageIconUrl>
-        <RepositoryUrl>https://github.com/kephas-software/kephas-sharepoint-uploader-service</RepositoryUrl>
-        <PackageTags>kephas sharepoint core</PackageTags>
-        <RepositoryType>github</RepositoryType>
+        <PackageLicenseUrl>http://www.kephas-software.com/licenses/KEPHAS</PackageLicenseUrl>
+        <PackageTags>kephas sharepoint uploader susplugin</PackageTags>
+        <SignAssembly>True</SignAssembly>
+        <AssemblyOriginatorKeyFile>..\..\..\..\kephas-apps.snk</AssemblyOriginatorKeyFile>
         <NeutralLanguage>en</NeutralLanguage>
         <RootNamespace>Kephas.SharePoint</RootNamespace>
-        <SignAssembly>True</SignAssembly>
-        <AssemblyOriginatorKeyFile>..\..\..\..\..\devops\kephas-apps\kephas-apps.snk</AssemblyOriginatorKeyFile>
     </PropertyGroup>
 
     <PropertyGroup>
-        <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Kephas.SharePoint.Core.xml</DocumentationFile>
+        <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Sus.Uploader.xml</DocumentationFile>
+        <UserSecretsId>85b5ba5d-d01b-47b3-97a2-226252e0dcc7</UserSecretsId>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
@@ -54,11 +51,22 @@
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="Kephas.Application" Version="7.3.1" />
         <PackageReference Include="Kephas.Core" Version="7.3.1" />
+        <PackageReference Include="Kephas.Messaging" Version="7.3.1" />
+        <PackageReference Include="Kephas.Scripting" Version="7.3.1" />
+        <PackageReference Include="Kephas.Scripting.Python" Version="7.3.1" />
+        <PackageReference Include="Kephas.Serialization.Json" Version="7.3.1" />
+        <PackageReference Include="Kephas.SharePoint.Core" Version="2.1.1" />
+        <PackageReference Include="Kephas.Workflow" Version="7.3.1" />
+        <PackageReference Include="Microsoft.Data.OData" Version="5.8.4" />
+        <PackageReference Include="Microsoft.Data.Services.Client" Version="5.8.4" />
+        <PackageReference Include="SharePointPnPCoreOnline" Version="3.17.2001.2" />
         <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
+        <PackageReference Include="System.ComponentModel.Annotations" Version="4.6.0" />
         <PackageReference Include="System.ValueTuple" Version="4.5.0" />
     </ItemGroup>
 
@@ -75,6 +83,16 @@
             <Generator>PublicResXFileCodeGenerator</Generator>
             <LastGenOutput>Strings.Designer.cs</LastGenOutput>
         </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Include="Config/**/*.*">
+            <IncludeInPackage>true</IncludeInPackage>
+            <CopyToOutput>true</CopyToOutput>
+            <BuildAction>Content</BuildAction>
+            <PackageCopyToOutput>true</PackageCopyToOutput>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
     </ItemGroup>
 
 </Project>
