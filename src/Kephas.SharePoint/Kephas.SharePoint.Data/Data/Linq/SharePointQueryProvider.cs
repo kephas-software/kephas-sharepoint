@@ -20,15 +20,14 @@ namespace Kephas.SharePoint.Data.Linq
     using Kephas.Diagnostics.Contracts;
     using Kephas.Reflection;
     using Kephas.SharePoint;
+    using Kephas.Threading.Tasks;
+    using Microsoft.SharePoint.Client;
 
     /// <summary>
     /// A SharePoint query provider.
     /// </summary>
     public class SharePointQueryProvider : DataContextQueryProvider
     {
-        private readonly ILibraryService listService;
-        private readonly ISiteService siteService;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="SharePointQueryProvider"/> class.
         /// </summary>
@@ -38,12 +37,28 @@ namespace Kephas.SharePoint.Data.Linq
         public SharePointQueryProvider(IQueryOperationContext queryOperationContext, ILibraryService listService, ISiteService siteService)
             : base(queryOperationContext, new InternalQueryProvider())
         {
-            this.listService = listService;
-            this.siteService = siteService;
+            this.ListService = listService;
+            this.SiteService = siteService;
 
             var internalQueryProvider = (InternalQueryProvider)this.NativeQueryProvider;
             internalQueryProvider.Provider = this;
         }
+
+        /// <summary>
+        /// Gets the list service.
+        /// </summary>
+        /// <value>
+        /// The list service.
+        /// </value>
+        public ILibraryService ListService { get; }
+
+        /// <summary>
+        /// Gets the site service.
+        /// </summary>
+        /// <value>
+        /// The site service.
+        /// </value>
+        public ISiteService SiteService { get; }
 
         private class InternalQueryProvider : IQueryProvider
         {
@@ -129,7 +144,12 @@ namespace Kephas.SharePoint.Data.Linq
 
                 Requires.NotNull(listFullName, nameof(listFullName));
 
-                throw new System.NotImplementedException();
+                var list = this.Provider.SiteService.GetListAsync(listFullName).GetResultNonLocking();
+                var query = CamlQuery.CreateAllItemsQuery();
+                var listItems = this.Provider.SiteService.GetListItemsAsync(list, query).GetResultNonLocking();
+                var entities = listItems.Select(item => new SharePointEntity(item)).ToList();
+
+                return (TResult)(object)entities;
             }
         }
     }

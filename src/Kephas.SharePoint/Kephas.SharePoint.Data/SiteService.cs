@@ -11,6 +11,7 @@
 namespace Kephas.SharePoint
 {
     using System;
+    using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -159,6 +160,24 @@ namespace Kephas.SharePoint
             }
 
             return list;
+        }
+
+        /// <summary>
+        /// Gets the list items asynchronously.
+        /// </summary>
+        /// <param name="list">The list.</param>
+        /// <param name="query">The query.</param>
+        /// <param name="cancellationToken">Optional. A token that allows processing to be cancelled.</param>
+        /// <returns>
+        /// An asynchronous result that yields the list items.
+        /// </returns>
+        public async Task<IEnumerable<ListItem>> GetListItemsAsync(List list, CamlQuery query, CancellationToken cancellationToken = default)
+        {
+            var listItems = list.GetItems(query);
+            this.clientContext.Load(listItems);
+            await this.clientContext.ExecuteQueryAsync().PreserveThreadContext();
+
+            return listItems;
         }
 
         private void KeepAlive(object state)

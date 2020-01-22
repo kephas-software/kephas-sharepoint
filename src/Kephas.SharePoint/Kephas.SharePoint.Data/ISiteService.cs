@@ -10,6 +10,8 @@
 
 namespace Kephas.SharePoint
 {
+    using System.Collections.Generic;
+    using System.Threading;
     using System.Threading.Tasks;
 
     using Kephas.Services;
@@ -46,5 +48,16 @@ namespace Kephas.SharePoint
         /// An asynchronous result that yields the list.
         /// </returns>
         Task<List> GetListAsync(string listName, BaseType listType = BaseType.None);
+
+        /// <summary>
+        /// Gets the list items asynchronously.
+        /// </summary>
+        /// <param name="list">The list.</param>
+        /// <param name="query">The query.</param>
+        /// <param name="cancellationToken">Optional. A token that allows processing to be cancelled.</param>
+        /// <returns>
+        /// An asynchronous result that yields the list items.
+        /// </returns>
+        Task<IEnumerable<ListItem>> GetListItemsAsync(List list, CamlQuery query, CancellationToken cancellationToken = default);
     }
 }
