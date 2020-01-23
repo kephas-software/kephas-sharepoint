@@ -138,6 +138,8 @@ namespace Kephas.SharePoint
         /// </returns>
         public async Task<List> GetListAsync(string listName, BaseType listType = BaseType.None)
         {
+            this.initMonitor.AssertIsCompletedSuccessfully();
+
             // https://code.msdn.microsoft.com/Upload-document-to-32056dbf/sourcecode?fileId=205610&pathId=1577573997
 
             var (_, name) = this.libraryService.GetLibraryPathFragments(listName);
@@ -173,6 +175,8 @@ namespace Kephas.SharePoint
         /// </returns>
         public async Task<IEnumerable<ListItem>> GetListItemsAsync(List list, CamlQuery query, CancellationToken cancellationToken = default)
         {
+            this.initMonitor.AssertIsCompletedSuccessfully();
+
             var listItems = list.GetItems(query);
             this.clientContext.Load(listItems);
             await this.clientContext.ExecuteQueryAsync().PreserveThreadContext();

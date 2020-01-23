@@ -13,6 +13,7 @@ namespace Kephas.SharePoint.Data
     using System;
     using System.Collections.Generic;
 
+    using Kephas.Activation;
     using Kephas.Data;
     using Kephas.Data.Capabilities;
     using Kephas.Dynamic;
@@ -23,6 +24,7 @@ namespace Kephas.SharePoint.Data
     /// <summary>
     /// A SharePoint entity base.
     /// </summary>
+    [ImplementationFor(typeof(ISharePointEntity))]
     public class SharePointEntity : Expando, ISharePointEntity, IChangeStateTrackable, IEntityEntryAware
     {
         /// <summary>

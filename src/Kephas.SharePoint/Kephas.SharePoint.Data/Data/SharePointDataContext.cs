@@ -25,9 +25,14 @@ namespace Kephas.SharePoint.Data
     /// <summary>
     /// A SharePoint data context.
     /// </summary>
-    [SupportedDataStoreKinds("SharePoint")]
+    [SupportedDataStoreKinds(DataStoreKind)]
     public class SharePointDataContext : DataContextBase
     {
+        /// <summary>
+        /// The data store kind.
+        /// </summary>
+        public const string DataStoreKind = nameof(Kephas.Data.Store.DataStoreKind.SharePoint);
+
         private readonly ISiteServiceProvider siteServiceProvider;
         private readonly ILibraryService libraryService;
 
@@ -92,6 +97,7 @@ namespace Kephas.SharePoint.Data
         /// <param name="dataInitializationContext">The data initialization context.</param>
         protected override void Initialize(IDataInitializationContext dataInitializationContext)
         {
+            var dataStore = dataInitializationContext.DataStore;
             base.Initialize(dataInitializationContext);
         }
     }

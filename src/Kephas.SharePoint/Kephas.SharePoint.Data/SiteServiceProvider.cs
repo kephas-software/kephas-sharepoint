@@ -51,6 +51,7 @@ namespace Kephas.SharePoint
             this.contextFactory = contextFactory;
             this.siteSettingsProvider = siteSettingsProvider;
             this.siteServiceFactory = siteServiceFactory;
+            this.initMonitor = new InitializationMonitor<ISiteServiceProvider>(this.GetType());
         }
 
         /// <summary>
