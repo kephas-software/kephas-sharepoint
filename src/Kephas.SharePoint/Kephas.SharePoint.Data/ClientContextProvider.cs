@@ -69,7 +69,7 @@ namespace Kephas.SharePoint
                 }
 
                 clientContext.Load(clientContext.Web, w => w.ServerRelativeUrl);
-                clientContext.Load(clientContext.Site, s => s.Url);
+                clientContext.Load(clientContext.Site, s => s.Url, s => s.Id);
                 await clientContext.ExecuteQueryAsync().PreserveThreadContext();
 
                 return clientContext;
