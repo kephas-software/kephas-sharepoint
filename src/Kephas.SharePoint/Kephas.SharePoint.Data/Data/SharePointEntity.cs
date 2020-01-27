@@ -17,7 +17,6 @@ namespace Kephas.SharePoint.Data
     using Kephas.Data;
     using Kephas.Data.Capabilities;
     using Kephas.Dynamic;
-    using Kephas.Model;
     using Kephas.Reflection;
     using Microsoft.SharePoint.Client;
 
@@ -38,12 +37,14 @@ namespace Kephas.SharePoint.Data
         /// <summary>
         /// Initializes a new instance of the <see cref="SharePointEntity"/> class.
         /// </summary>
+        /// <param name="listTypeInfo">Information describing the list type.</param>
         /// <param name="listItem">The list item.</param>
-        public SharePointEntity(ListItem listItem)
+        public SharePointEntity(ITypeInfo listTypeInfo, ListItem listItem)
             : base(listItem.FieldValues)
         {
             this.values = listItem.FieldValues;
             this.listItem = listItem;
+            this.typeInfo = listTypeInfo;
         }
 
         /// <summary>Gets the identifier for this instance.</summary>
@@ -60,10 +61,7 @@ namespace Kephas.SharePoint.Data
         /// <returns>
         /// The type information.
         /// </returns>
-        public ITypeInfo GetTypeInfo()
-        {
-            return this.typeInfo ?? (this.typeInfo = this.ComputeTypeInfo());
-        }
+        public ITypeInfo GetTypeInfo() => this.typeInfo;
 
         /// <summary>
         /// Gets the associated entity entry.
@@ -94,17 +92,6 @@ namespace Kephas.SharePoint.Data
         /// The list item.
         /// </returns>
         public ListItem GetListItem() => this.listItem;
-
-        /// <summary>
-        /// Calculates the type information.
-        /// </summary>
-        /// <returns>
-        /// The calculated type information.
-        /// </returns>
-        protected virtual ITypeInfo ComputeTypeInfo()
-        {
-            return this.GetAbstractTypeInfo();
-        }
 
         /// <summary>
         /// Attempts to get the dynamic value with the given key.

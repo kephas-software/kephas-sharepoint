@@ -19,6 +19,7 @@ namespace Kephas.SharePoint.Tests.Data.Linq
     using Kephas.Data;
     using Kephas.Data.Capabilities;
     using Kephas.Logging;
+    using Kephas.Reflection;
     using Kephas.Services;
     using Kephas.SharePoint.Data;
     using Kephas.SharePoint.Data.Linq;
@@ -45,7 +46,8 @@ namespace Kephas.SharePoint.Tests.Data.Linq
             var provider = new SharePointQueryProvider(
                 queryContext,
                 new LibraryService(siteSettingsProvider, new NullDefaultSettingsProvider()),
-                siteServiceProvider.GetDefaultSiteService());
+                siteServiceProvider.GetDefaultSiteService(),
+                Substitute.For<ITypeInfo>());
 
             var results = provider.Execute<IEnumerable<ISharePointEntity>>(Substitute.For<Expression>()).ToList();
 

@@ -1,19 +1,21 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="SharePointMetadataCache.cs" company="Kephas Software SRL">
+// <copyright file="IListTypeInfo.cs" company="Kephas Software SRL">
 //   Copyright (c) Kephas Software SRL. All rights reserved.
 //   Licensed under the KEPHAS license. See LICENSE file in the project root for full license information.
 // </copyright>
 // <summary>
-//   Implements the SharePoint metadata cache class.
+//   Declares the IListTypeInfo interface.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Kephas.SharePoint.Data
+namespace Kephas.SharePoint.Reflection
 {
+    using Kephas.Reflection;
+
     /// <summary>
-    /// A SharePoint metadata cache.
+    /// Interface for list type information.
     /// </summary>
-    public class SharePointMetadataCache : ISharePointMetadataCache
+    public interface IListTypeInfo : ITypeInfo
     {
     }
 }

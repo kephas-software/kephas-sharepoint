@@ -10,6 +10,7 @@
 
 namespace Kephas.SharePoint
 {
+    using System;
     using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
@@ -30,6 +31,14 @@ namespace Kephas.SharePoint
         /// The site name.
         /// </value>
         string SiteName { get; }
+
+        /// <summary>
+        /// Gets URL of the site.
+        /// </summary>
+        /// <value>
+        /// The site URL.
+        /// </value>
+        Uri SiteUrl { get; }
 
         /// <summary>
         /// Gets a context for the client.

@@ -8,8 +8,12 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Kephas.SharePoint.Data
+namespace Kephas.SharePoint.Reflection
 {
+    using System.Threading;
+    using System.Threading.Tasks;
+
+    using Kephas.Reflection;
     using Kephas.Services;
 
     /// <summary>
@@ -18,5 +22,19 @@ namespace Kephas.SharePoint.Data
     [SingletonAppServiceContract]
     public interface ISharePointMetadataCache
     {
+        /// <summary>
+        /// Gets the list type information asynchronously.
+        /// </summary>
+        /// <param name="listFullName">Full name of the list.</param>
+        /// <param name="cancellationToken">Optional. a token that allows processing to be cancelled.</param>
+        /// <returns>
+        /// An asynchronous result that yields the list type information.
+        /// </returns>
+        Task<ITypeInfo> GetListTypeInfoAsync(string listFullName, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Clears the cache to its blank/initial state.
+        /// </summary>
+        void Clear();
     }
 }

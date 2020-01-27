@@ -21,6 +21,8 @@ namespace Kephas.SharePoint.Data
     using Kephas.Diagnostics.Contracts;
     using Kephas.SharePoint;
     using Kephas.SharePoint.Data.Linq;
+    using Kephas.SharePoint.Reflection;
+    using Kephas.Threading.Tasks;
 
     /// <summary>
     /// A SharePoint data context.
@@ -87,7 +89,9 @@ namespace Kephas.SharePoint.Data
                 ? this.siteServiceProvider.GetDefaultSiteService()
                 : this.siteServiceProvider.GetSiteService(siteName);
 
-            var provider = new SharePointQueryProvider(queryOperationContext, this.libraryService, siteService);
+            var listTypeInfo = this.MetadataCache.GetListTypeInfoAsync(listFullName).GetResultNonLocking();
+
+            var provider = new SharePointQueryProvider(queryOperationContext, this.libraryService, siteService, listTypeInfo);
             return provider.CreateQuery<T>(new List<T>().AsQueryable().Expression);
         }
 

@@ -11,6 +11,7 @@
 namespace Kephas.SharePoint.Data
 {
     using Kephas.Data;
+    using Kephas.SharePoint.Reflection;
 
     /// <summary>
     /// Interface for SharePoint data context.

@@ -59,6 +59,14 @@ namespace Kephas.SharePoint
         public string SiteName { get; private set; }
 
         /// <summary>
+        /// Gets URL of the site.
+        /// </summary>
+        /// <value>
+        /// The site URL.
+        /// </value>
+        public Uri SiteUrl { get; private set; }
+
+        /// <summary>
         /// Gets a context for the client.
         /// </summary>
         /// <value>
@@ -95,6 +103,13 @@ namespace Kephas.SharePoint
                 {
                     throw new SharePointException($"No site settings provided for '{this.SiteName}'.");
                 }
+
+                if (string.IsNullOrWhiteSpace(this.siteSettings.SiteUrl))
+                {
+                    throw new SharePointException($"No site URL provided for '{this.SiteName}'.");
+                }
+
+                this.SiteUrl = new Uri(this.siteSettings.SiteUrl);
 
                 this.clientContext = await this.contextProvider.GetClientContextAsync(this.siteSettings).PreserveThreadContext();
 

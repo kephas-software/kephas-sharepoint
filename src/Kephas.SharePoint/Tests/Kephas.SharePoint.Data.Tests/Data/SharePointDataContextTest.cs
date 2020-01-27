@@ -14,18 +14,17 @@ namespace Kephas.SharePoint.Tests.Data
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using Kephas.Composition;
     using Kephas.Composition.ExportFactories;
-    using Kephas.Cryptography;
     using Kephas.Data;
     using Kephas.Data.Store;
-    using Kephas.Logging;
-    using Kephas.Runtime;
     using Kephas.Services;
     using Kephas.Services.Composition;
     using Kephas.SharePoint;
     using Kephas.SharePoint.Activation;
     using Kephas.SharePoint.Data;
+    using Kephas.SharePoint.Reflection;
     using NSubstitute;
     using NUnit.Framework;
 
