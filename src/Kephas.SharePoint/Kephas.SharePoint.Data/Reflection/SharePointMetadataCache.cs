@@ -19,6 +19,7 @@ namespace Kephas.SharePoint.Reflection
 
     using Kephas.Reflection;
     using Kephas.Services;
+    using Kephas.SharePoint;
     using Kephas.Threading.Tasks;
     using Microsoft.SharePoint.Client;
 
@@ -28,15 +29,18 @@ namespace Kephas.SharePoint.Reflection
     [OverridePriority(Priority.Low)]
     public class SharePointMetadataCache : ISharePointMetadataCache
     {
+        private readonly ILibraryService libraryService;
         private readonly ISiteServiceProvider siteServiceProvider;
         private readonly ConcurrentDictionary<ListIdentity, ITypeInfo> listTypeInfos = new ConcurrentDictionary<ListIdentity, ITypeInfo>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SharePointMetadataCache"/> class.
         /// </summary>
+        /// <param name="libraryService">The library service.</param>
         /// <param name="siteServiceProvider">The site service provider.</param>
-        public SharePointMetadataCache(ISiteServiceProvider siteServiceProvider)
+        public SharePointMetadataCache(ILibraryService libraryService, ISiteServiceProvider siteServiceProvider)
         {
+            this.libraryService = libraryService;
             this.siteServiceProvider = siteServiceProvider;
         }
 
@@ -65,15 +69,17 @@ namespace Kephas.SharePoint.Reflection
                 return typeInfo;
             }
 
-            var siteService = this.siteServiceProvider.GetSiteService(listFullName);
+            var (siteName, listName) = this.libraryService.GetLibraryPathFragments(listFullName);
+            var siteService = this.siteServiceProvider.GetSiteService(siteName);
             var list = await siteService.GetListAsync(listFullName).PreserveThreadContext();
-            key.UpdateIdentity(siteService, list);
 
             var clientContext = siteService.ClientContext;
             var fields = list.Fields;
+            clientContext.Load(list, l => l.Title, l => l.ParentWebUrl);
             clientContext.Load(fields);
             await clientContext.ExecuteQueryAsync().PreserveThreadContext();
 
+            key.UpdateIdentity(siteService, list);
             typeInfo = this.listTypeInfos.GetOrAdd(key, k => new ListTypeInfo(list, siteService.SiteUrl));
             return typeInfo;
         }
