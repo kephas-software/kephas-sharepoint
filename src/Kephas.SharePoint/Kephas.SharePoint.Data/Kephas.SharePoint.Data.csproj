@@ -4,7 +4,7 @@
         <TargetFrameworks>netstandard2.1;netstandard2.0;net461</TargetFrameworks>
         <LangVersion>latest</LangVersion>
         <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-        <Version>2.2.0-dev.1</Version>
+        <Version>2.2.0-dev.2</Version>
         <Authors>Kephas Software SRL</Authors>
         <Company>Kephas Software SRL</Company>
         <Product>Microsoft SharePoint Integration Services</Product>
@@ -68,8 +68,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Kephas.Core" Version="7.4.0-dev.1" />
-        <PackageReference Include="Kephas.Data" Version="7.4.0-dev.1" />
+        <PackageReference Include="Kephas.Core" Version="7.4.0-dev.2" />
+        <PackageReference Include="Kephas.Data" Version="7.4.0-dev.2" />
         <PackageReference Include="Microsoft.Data.OData" Version="5.8.4" />
         <PackageReference Include="Microsoft.Data.Services.Client" Version="5.8.4" />
         <PackageReference Include="SharePointPnPCoreOnline" Version="3.17.2001.2" />
