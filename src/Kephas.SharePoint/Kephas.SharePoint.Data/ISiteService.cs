@@ -25,6 +25,14 @@ namespace Kephas.SharePoint
     public interface ISiteService
     {
         /// <summary>
+        /// Gets the identifier of the site.
+        /// </summary>
+        /// <value>
+        /// The identifier of the site.
+        /// </value>
+        Guid SiteId { get; }
+
+        /// <summary>
         /// Gets the site name.
         /// </summary>
         /// <value>

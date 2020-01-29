@@ -12,19 +12,12 @@ namespace Kephas.SharePoint.Data
 {
     using Kephas.Data;
     using Kephas.Dynamic;
-    using Microsoft.SharePoint.Client;
+    using Kephas.SharePoint.Reflection;
 
     /// <summary>
     /// Interface for SharePoint entity.
     /// </summary>
-    public interface ISharePointEntity : IEntity, IExpando
+    public interface ISharePointEntity : IEntity, IExpando, IInstance<IListTypeInfo>
     {
-        /// <summary>
-        /// Gets the list item.
-        /// </summary>
-        /// <returns>
-        /// The list item.
-        /// </returns>
-        ListItem GetListItem();
     }
 }

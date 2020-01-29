@@ -10,15 +10,18 @@
 
 namespace Kephas.SharePoint.Reflection
 {
+    using System;
+
+    using Kephas.Data;
     using Kephas.Reflection;
     using Kephas.Reflection.Dynamic;
+    using Kephas.SharePoint.Data;
     using Microsoft.SharePoint.Client;
-    using System;
 
     /// <summary>
     /// Information about the list property.
     /// </summary>
-    public class ListPropertyInfo : DynamicPropertyInfo
+    public class ListPropertyInfo : DynamicPropertyInfo, IListPropertyInfo
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ListPropertyInfo"/> class.
@@ -29,7 +32,16 @@ namespace Kephas.SharePoint.Reflection
             this.Field = field;
             this.Name = field.InternalName;
             this.ValueType = this.GetPropertyType(field);
+            this.IsRequired = field.Required;
         }
+
+        /// <summary>
+        /// Gets a value indicating whether a value is required.
+        /// </summary>
+        /// <value>
+        /// True if a value is required, false if not.
+        /// </value>
+        public bool IsRequired { get; }
 
         /// <summary>
         /// Gets the field.
@@ -65,6 +77,8 @@ namespace Kephas.SharePoint.Reflection
                 case FieldType.Note:
                 case FieldType.Text:
                     return typeof(string).AsRuntimeTypeInfo();
+                case FieldType.Lookup:
+                    return typeof(IRef<ISharePointEntity>).AsRuntimeTypeInfo();
             }
 
             return typeof(object).AsRuntimeTypeInfo();

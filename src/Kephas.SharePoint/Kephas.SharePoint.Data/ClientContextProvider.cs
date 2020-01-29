@@ -68,7 +68,7 @@ namespace Kephas.SharePoint
                     throw new InvalidOperationException($"Either the application ID and password or the user name and password must be provided to connect to SharePoint.");
                 }
 
-                clientContext.Load(clientContext.Web, w => w.ServerRelativeUrl);
+                clientContext.Load(clientContext.Web, w => w.ServerRelativeUrl, w => w.Id, w => w.Url);
                 clientContext.Load(clientContext.Site, s => s.Url, s => s.Id);
                 await clientContext.ExecuteQueryAsync().PreserveThreadContext();
 

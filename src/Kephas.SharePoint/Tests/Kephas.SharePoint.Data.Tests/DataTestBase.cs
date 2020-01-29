@@ -30,7 +30,7 @@ namespace Kephas.SharePoint.Tests
             return new List<Assembly>(base.GetDefaultConventionAssemblies())
             {
                 typeof(IDataContext).Assembly,              // Kephas.Data
-                typeof(ILibraryService).Assembly,           // Kephas.SharePoint.Core
+                typeof(IListService).Assembly,           // Kephas.SharePoint.Core
                 typeof(ISharePointDataContext).Assembly,    // Kephas.SharePoint.Data
             };
         }
@@ -48,7 +48,7 @@ namespace Kephas.SharePoint.Tests
         protected static ISiteServiceProvider GetTestSiteServiceProvider(ISiteSettingsProvider siteSettingsProvider, string siteName = "test")
         {
             var clientContextProvider = new ClientContextProvider(Substitute.For<IEncryptionService>());
-            var libraryService = new LibraryService(siteSettingsProvider, new NullDefaultSettingsProvider());
+            var libraryService = new ListService(siteSettingsProvider, new NullDefaultSettingsProvider());
             var siteService = new SiteService(clientContextProvider, libraryService, Substitute.For<ILogManager>());
             var siteServiceProvider = Substitute.For<ISiteServiceProvider>();
             siteServiceProvider.GetDefaultSiteService(Arg.Any<bool>()).Returns(siteService);

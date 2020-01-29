@@ -25,7 +25,7 @@ namespace Kephas.SharePoint
         /// <returns>
         /// The document library.
         /// </returns>
-        public static string GetDocumentLibrary(this ILibraryService libraryService, Document doc)
+        public static string GetDocumentLibrary(this IListService libraryService, Document doc)
         {
             Requires.NotNull(libraryService, nameof(libraryService));
 

@@ -1,30 +1,22 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IListTypeInfo.cs" company="Kephas Software SRL">
+// <copyright file="IListPropertyInfo.cs" company="Kephas Software SRL">
 //   Copyright (c) Kephas Software SRL. All rights reserved.
 //   Licensed under the KEPHAS license. See LICENSE file in the project root for full license information.
 // </copyright>
 // <summary>
-//   Declares the IListTypeInfo interface.
+//   Declares the IListPropertyInfo interface.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace Kephas.SharePoint.Reflection
 {
-    using System.Collections.Generic;
 
     using Kephas.Reflection;
 
     /// <summary>
-    /// Interface for list type information.
+    /// Interface for property information.
     /// </summary>
-    public interface IListTypeInfo : ITypeInfo
+    public interface IListPropertyInfo : IPropertyInfo
     {
-        /// <summary>
-        /// Gets the properties.
-        /// </summary>
-        /// <value>
-        /// The properties.
-        /// </value>
-        new IEnumerable<IListPropertyInfo> Properties { get; }
     }
 }

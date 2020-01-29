@@ -10,9 +10,12 @@
 
 namespace Kephas.SharePoint.Reflection
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
     using Kephas.Reflection.Dynamic;
     using Microsoft.SharePoint.Client;
-    using System;
 
     /// <summary>
     /// Information about the list type.
@@ -37,6 +40,14 @@ namespace Kephas.SharePoint.Reflection
                 this.AddMember(this.CreatePropertyInfo(field));
             }
         }
+
+        /// <summary>
+        /// Gets the properties.
+        /// </summary>
+        /// <value>
+        /// The properties.
+        /// </value>
+        public new IEnumerable<IListPropertyInfo> Properties => base.Properties.OfType<IListPropertyInfo>();
 
         /// <summary>
         /// Creates property information.

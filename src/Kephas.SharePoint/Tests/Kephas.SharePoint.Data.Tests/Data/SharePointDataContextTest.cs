@@ -41,7 +41,7 @@ namespace Kephas.SharePoint.Tests.Data
 
             var siteServiceProvider = GetTestSiteServiceProvider(siteSettingsProvider);
 
-            var libraryService = new LibraryService(siteSettingsProvider, new NullDefaultSettingsProvider());
+            var libraryService = new ListService(siteSettingsProvider, new NullDefaultSettingsProvider());
             var dataContext = new SharePointDataContext(container, container.GetExport<ISharePointMetadataCache>(), siteServiceProvider, libraryService);
             var dataStore = Substitute.For<IDataStore>();
             dataStore.EntityActivator.Returns(new SharePointEntityActivator());

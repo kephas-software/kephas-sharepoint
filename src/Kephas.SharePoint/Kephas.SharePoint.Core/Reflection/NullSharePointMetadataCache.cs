@@ -13,7 +13,6 @@ namespace Kephas.SharePoint.Reflection
     using System.Threading;
     using System.Threading.Tasks;
 
-    using Kephas.Reflection;
     using Kephas.Services;
 
     /// <summary>
@@ -37,9 +36,9 @@ namespace Kephas.SharePoint.Reflection
         /// <returns>
         /// An asynchronous result that yields the list type information.
         /// </returns>
-        public Task<ITypeInfo> GetListTypeInfoAsync(string listFullName, CancellationToken cancellationToken = default)
+        public Task<IListTypeInfo> GetListTypeInfoAsync(string listFullName, CancellationToken cancellationToken = default)
         {
-            return Task.FromResult<ITypeInfo>(null);
+            return Task.FromResult<IListTypeInfo>(null);
         }
     }
 }

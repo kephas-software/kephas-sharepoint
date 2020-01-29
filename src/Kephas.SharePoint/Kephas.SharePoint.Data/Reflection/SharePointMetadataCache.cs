@@ -17,7 +17,6 @@ namespace Kephas.SharePoint.Reflection
     using System.Threading;
     using System.Threading.Tasks;
 
-    using Kephas.Reflection;
     using Kephas.Services;
     using Kephas.SharePoint;
     using Kephas.Threading.Tasks;
@@ -29,16 +28,16 @@ namespace Kephas.SharePoint.Reflection
     [OverridePriority(Priority.Low)]
     public class SharePointMetadataCache : ISharePointMetadataCache
     {
-        private readonly ILibraryService libraryService;
+        private readonly IListService libraryService;
         private readonly ISiteServiceProvider siteServiceProvider;
-        private readonly ConcurrentDictionary<ListIdentity, ITypeInfo> listTypeInfos = new ConcurrentDictionary<ListIdentity, ITypeInfo>();
+        private readonly ConcurrentDictionary<ListIdentity, IListTypeInfo> listTypeInfos = new ConcurrentDictionary<ListIdentity, IListTypeInfo>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SharePointMetadataCache"/> class.
         /// </summary>
         /// <param name="libraryService">The library service.</param>
         /// <param name="siteServiceProvider">The site service provider.</param>
-        public SharePointMetadataCache(ILibraryService libraryService, ISiteServiceProvider siteServiceProvider)
+        public SharePointMetadataCache(IListService libraryService, ISiteServiceProvider siteServiceProvider)
         {
             this.libraryService = libraryService;
             this.siteServiceProvider = siteServiceProvider;
@@ -60,7 +59,7 @@ namespace Kephas.SharePoint.Reflection
         /// <returns>
         /// An asynchronous result that yields the list type information.
         /// </returns>
-        public async Task<ITypeInfo> GetListTypeInfoAsync(string listFullName, CancellationToken cancellationToken = default)
+        public async Task<IListTypeInfo> GetListTypeInfoAsync(string listFullName, CancellationToken cancellationToken = default)
         {
             var key = new ListIdentity(listFullName);
             this.listTypeInfos.TryGetValue(key, out var typeInfo);
@@ -69,7 +68,7 @@ namespace Kephas.SharePoint.Reflection
                 return typeInfo;
             }
 
-            var (siteName, listName) = this.libraryService.GetLibraryPathFragments(listFullName);
+            var (siteName, listName) = this.libraryService.GetListPathFragments(listFullName);
             var siteService = this.siteServiceProvider.GetSiteService(siteName);
             var list = await siteService.GetListAsync(listFullName).PreserveThreadContext();
 

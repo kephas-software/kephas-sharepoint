@@ -13,11 +13,13 @@ namespace Kephas.SharePoint.Data
     using System;
     using System.Collections.Generic;
 
+    using Kephas;
     using Kephas.Activation;
     using Kephas.Data;
     using Kephas.Data.Capabilities;
     using Kephas.Dynamic;
     using Kephas.Reflection;
+    using Kephas.SharePoint.Reflection;
     using Microsoft.SharePoint.Client;
 
     /// <summary>
@@ -29,7 +31,7 @@ namespace Kephas.SharePoint.Data
         /// <summary>
         /// Information describing the type.
         /// </summary>
-        private ITypeInfo typeInfo;
+        private IListTypeInfo typeInfo;
         private WeakReference<IEntityEntry> weakEntityEntry;
         private IDictionary<string, object> values;
         private ListItem listItem;
@@ -39,7 +41,7 @@ namespace Kephas.SharePoint.Data
         /// </summary>
         /// <param name="listTypeInfo">Information describing the list type.</param>
         /// <param name="listItem">The list item.</param>
-        public SharePointEntity(ITypeInfo listTypeInfo, ListItem listItem)
+        public SharePointEntity(IListTypeInfo listTypeInfo, ListItem listItem)
             : base(listItem.FieldValues)
         {
             this.values = listItem.FieldValues;
@@ -56,12 +58,20 @@ namespace Kephas.SharePoint.Data
         ChangeState IChangeStateTrackable.ChangeState { get; set; }
 
         /// <summary>
+        /// Gets type information.
+        /// </summary>
+        /// <returns>
+        /// The type information.
+        /// </returns>
+        ITypeInfo IInstance.GetTypeInfo() => this.typeInfo;
+
+        /// <summary>
         /// Gets the type information for this instance.
         /// </summary>
         /// <returns>
         /// The type information.
         /// </returns>
-        public ITypeInfo GetTypeInfo() => this.typeInfo;
+        public IListTypeInfo GetTypeInfo() => this.typeInfo;
 
         /// <summary>
         /// Gets the associated entity entry.

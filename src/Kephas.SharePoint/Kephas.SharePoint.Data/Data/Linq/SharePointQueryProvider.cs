@@ -20,6 +20,7 @@ namespace Kephas.SharePoint.Data.Linq
     using Kephas.Diagnostics.Contracts;
     using Kephas.Reflection;
     using Kephas.SharePoint;
+    using Kephas.SharePoint.Reflection;
     using Kephas.Threading.Tasks;
     using Microsoft.SharePoint.Client;
 
@@ -35,7 +36,7 @@ namespace Kephas.SharePoint.Data.Linq
         /// <param name="listService">The list service.</param>
         /// <param name="siteService">The site service.</param>
         /// <param name="listTypeInfo">Information describing the list type.</param>
-        public SharePointQueryProvider(IQueryOperationContext queryOperationContext, ILibraryService listService, ISiteService siteService, ITypeInfo listTypeInfo)
+        public SharePointQueryProvider(IQueryOperationContext queryOperationContext, IListService listService, ISiteService siteService, IListTypeInfo listTypeInfo)
             : base(queryOperationContext, new InternalQueryProvider())
         {
             this.ListService = listService;
@@ -52,7 +53,7 @@ namespace Kephas.SharePoint.Data.Linq
         /// <value>
         /// The list service.
         /// </value>
-        public ILibraryService ListService { get; }
+        public IListService ListService { get; }
 
         /// <summary>
         /// Gets the site service.
@@ -68,7 +69,7 @@ namespace Kephas.SharePoint.Data.Linq
         /// <value>
         /// Information describing the list type.
         /// </value>
-        public ITypeInfo ListTypeInfo { get; }
+        public IListTypeInfo ListTypeInfo { get; }
 
         private class InternalQueryProvider : IQueryProvider
         {

@@ -36,7 +36,7 @@ namespace Kephas.SharePoint.Data
         public const string DataStoreKind = nameof(Kephas.Data.Store.DataStoreKind.SharePoint);
 
         private readonly ISiteServiceProvider siteServiceProvider;
-        private readonly ILibraryService libraryService;
+        private readonly IListService libraryService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SharePointDataContext"/> class.
@@ -51,7 +51,7 @@ namespace Kephas.SharePoint.Data
             ICompositionContext compositionContext,
             ISharePointMetadataCache metadataCache,
             ISiteServiceProvider siteServiceProvider,
-            ILibraryService libraryService,
+            IListService libraryService,
             IDataCommandProvider dataCommandProvider = null,
             IDataBehaviorProvider dataBehaviorProvider = null)
             : base(compositionContext, dataCommandProvider, dataBehaviorProvider)
@@ -84,7 +84,7 @@ namespace Kephas.SharePoint.Data
 
             Requires.NotNull(listFullName, nameof(listFullName));
 
-            var (siteName, _) = this.libraryService.GetLibraryPathFragments(listFullName);
+            var (siteName, _) = this.libraryService.GetListPathFragments(listFullName);
             var siteService = string.IsNullOrEmpty(siteName)
                 ? this.siteServiceProvider.GetDefaultSiteService()
                 : this.siteServiceProvider.GetSiteService(siteName);

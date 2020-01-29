@@ -27,7 +27,7 @@ namespace Kephas.SharePoint
     public class SiteService : Loggable, ISiteService, IAsyncInitializable, IAsyncFinalizable
     {
         private readonly IClientContextProvider contextProvider;
-        private readonly ILibraryService libraryService;
+        private readonly IListService libraryService;
         private readonly InitializationMonitor<ISiteService> initMonitor;
         private SiteSettings siteSettings;
         private ClientContext clientContext;
@@ -41,7 +41,7 @@ namespace Kephas.SharePoint
         /// <param name="logManager">Manager for log.</param>
         public SiteService(
             IClientContextProvider contextProvider,
-            ILibraryService libraryService,
+            IListService libraryService,
             ILogManager logManager)
             : base(logManager)
         {
@@ -49,6 +49,14 @@ namespace Kephas.SharePoint
             this.libraryService = libraryService;
             this.initMonitor = new InitializationMonitor<ISiteService>(this.GetType());
         }
+
+        /// <summary>
+        /// Gets the identifier of the site.
+        /// </summary>
+        /// <value>
+        /// The identifier of the site.
+        /// </value>
+        public Guid SiteId { get; private set; }
 
         /// <summary>
         /// Gets the site name.
@@ -109,9 +117,10 @@ namespace Kephas.SharePoint
                     throw new SharePointException($"No site URL provided for '{this.SiteName}'.");
                 }
 
-                this.SiteUrl = new Uri(this.siteSettings.SiteUrl);
-
                 this.clientContext = await this.contextProvider.GetClientContextAsync(this.siteSettings).PreserveThreadContext();
+
+                this.SiteId = this.clientContext.Web.Id;
+                this.SiteUrl = new Uri(this.siteSettings.SiteUrl);
 
                 this.initMonitor.Complete();
 
@@ -157,7 +166,7 @@ namespace Kephas.SharePoint
 
             // https://code.msdn.microsoft.com/Upload-document-to-32056dbf/sourcecode?fileId=205610&pathId=1577573997
 
-            var (_, name) = this.libraryService.GetLibraryPathFragments(listName);
+            var (_, name) = this.libraryService.GetListPathFragments(listName);
             var list = this.clientContext.Web.Lists.GetByTitle(name);
             if (list == null)
             {
