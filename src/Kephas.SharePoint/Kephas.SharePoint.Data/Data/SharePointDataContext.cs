@@ -89,9 +89,9 @@ namespace Kephas.SharePoint.Data
                 ? this.siteServiceProvider.GetDefaultSiteService()
                 : this.siteServiceProvider.GetSiteService(siteName);
 
-            var listTypeInfo = this.MetadataCache.GetListTypeInfoAsync(listFullName).GetResultNonLocking();
+            var listInfo = this.MetadataCache.GetListInfoAsync(listFullName).GetResultNonLocking();
 
-            var provider = new SharePointQueryProvider(queryOperationContext, this.libraryService, siteService, listTypeInfo);
+            var provider = new SharePointQueryProvider(queryOperationContext, this.libraryService, siteService, listInfo);
             return provider.CreateQuery<T>(new List<T>().AsQueryable().Expression);
         }
 

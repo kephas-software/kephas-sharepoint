@@ -18,6 +18,7 @@ namespace Kephas.SharePoint
     /// </summary>
     public class ListService : IListService
     {
+        private const char FullNameSeparator = '/';
         private readonly ISiteSettingsProvider siteSettingsProvider;
         private readonly IDefaultSettingsProvider defaultSettingsProvider;
 
@@ -45,7 +46,7 @@ namespace Kephas.SharePoint
             var defaultSettings = this.defaultSettingsProvider.Defaults;
             return string.IsNullOrEmpty(defaultSettings.Site)
                                         ? defaultSettings.Library
-                                        : $"{defaultSettings.Site}/{defaultSettings.Library}";
+                                        : $"{defaultSettings.Site}{FullNameSeparator}{defaultSettings.Library}";
         }
 
         /// <summary>
@@ -56,29 +57,29 @@ namespace Kephas.SharePoint
         /// <returns>
         /// The library path fragments.
         /// </returns>
-        public (string siteName, string libraryName) GetListPathFragments(string listFullName)
+        public (string siteName, string listName) GetListPathFragments(string listFullName)
         {
             var defaultSettings = this.defaultSettingsProvider.Defaults;
             if (string.IsNullOrEmpty(listFullName))
             {
                 listFullName = string.IsNullOrEmpty(defaultSettings.Site)
                     ? defaultSettings.Library
-                    : $"{defaultSettings.Site}/{defaultSettings.Library}";
+                    : $"{defaultSettings.Site}{FullNameSeparator}{defaultSettings.Library}";
 
                 if (string.IsNullOrEmpty(listFullName))
                 {
-                    throw new InvalidOperationException($"Library full name not provided and the default settings do not specify a library, either.");
+                    throw new InvalidOperationException($"List full name not provided and the default settings do not specify a list, either.");
                 }
             }
 
-            var librarySeparator = listFullName.LastIndexOf('/');
-            if (librarySeparator <= 0 && string.IsNullOrEmpty(defaultSettings.Site))
+            var listSeparator = listFullName.LastIndexOf(FullNameSeparator);
+            if (listSeparator <= 0 && string.IsNullOrEmpty(defaultSettings.Site))
             {
-                throw new InvalidOperationException($"Library full name does not contain a site: '{listFullName}', and the default settings do not specify a site, either. Library full names should have the form: <site-name>/<library-name>.");
+                throw new InvalidOperationException($"List full name does not contain a site: '{listFullName}', and the default settings do not specify a site, either. List full names should have the form: <site-name>{FullNameSeparator}<list-name>.");
             }
 
-            var libraryName = librarySeparator <= 0 ? listFullName : listFullName.Substring(librarySeparator + 1);
-            var siteName = librarySeparator <= 0 ? defaultSettings.Site : listFullName.Substring(0, librarySeparator);
+            var libraryName = listSeparator <= 0 ? listFullName : listFullName.Substring(listSeparator + 1);
+            var siteName = listSeparator <= 0 ? defaultSettings.Site : listFullName.Substring(0, listSeparator);
 
             return (siteName, libraryName);
         }
@@ -111,6 +112,18 @@ namespace Kephas.SharePoint
             }
 
             return siteSettings;
+        }
+
+        /// <summary>
+        /// Query if the provided parameter is a list full name.
+        /// </summary>
+        /// <param name="listFullName">The list full name to check.</param>
+        /// <returns>
+        /// True if the parameter is a list full name, false if not.
+        /// </returns>
+        public bool IsListFullName(string listFullName)
+        {
+            return listFullName?.IndexOf(FullNameSeparator) > 0;
         }
     }
 }

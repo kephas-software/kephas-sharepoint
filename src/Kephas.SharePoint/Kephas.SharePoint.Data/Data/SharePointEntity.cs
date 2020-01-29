@@ -39,14 +39,14 @@ namespace Kephas.SharePoint.Data
         /// <summary>
         /// Initializes a new instance of the <see cref="SharePointEntity"/> class.
         /// </summary>
-        /// <param name="listTypeInfo">Information describing the list type.</param>
+        /// <param name="listInfo">Information describing the list type.</param>
         /// <param name="listItem">The list item.</param>
-        public SharePointEntity(IListInfo listTypeInfo, ListItem listItem)
+        public SharePointEntity(IListInfo listInfo, ListItem listItem)
             : base(listItem.FieldValues)
         {
             this.values = listItem.FieldValues;
             this.listItem = listItem;
-            this.typeInfo = listTypeInfo;
+            this.typeInfo = listInfo;
         }
 
         /// <summary>Gets the identifier for this instance.</summary>

@@ -29,11 +29,20 @@ namespace Kephas.SharePoint
         /// <summary>
         /// Gets the list path fragments.
         /// </summary>
-        /// <param name="libraryFullName">The list full name, including site.</param>
+        /// <param name="listFullName">The list full name, including site.</param>
         /// <returns>
         /// The list path fragments.
         /// </returns>
-        (string siteName, string libraryName) GetListPathFragments(string libraryFullName);
+        (string siteName, string listName) GetListPathFragments(string listFullName);
+
+        /// <summary>
+        /// Query if the provided parameter is a list full name.
+        /// </summary>
+        /// <param name="listFullName">The list full name to check.</param>
+        /// <returns>
+        /// True if the parameter is a list full name, false if not.
+        /// </returns>
+        bool IsListFullName(string listFullName);
 
         /// <summary>
         /// Gets the site settings.

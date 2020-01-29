@@ -30,7 +30,7 @@ namespace Kephas.SharePoint.Reflection
     {
         private readonly IListService libraryService;
         private readonly ISiteServiceProvider siteServiceProvider;
-        private readonly ConcurrentDictionary<ListIdentity, IListInfo> listTypeInfos = new ConcurrentDictionary<ListIdentity, IListInfo>();
+        private readonly ConcurrentDictionary<ListIdentity, IListInfo> listInfos = new ConcurrentDictionary<ListIdentity, IListInfo>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SharePointMetadataCache"/> class.
@@ -48,7 +48,7 @@ namespace Kephas.SharePoint.Reflection
         /// </summary>
         public void Clear()
         {
-            this.listTypeInfos.Clear();
+            this.listInfos.Clear();
         }
 
         /// <summary>
@@ -59,10 +59,10 @@ namespace Kephas.SharePoint.Reflection
         /// <returns>
         /// An asynchronous result that yields the list type information.
         /// </returns>
-        public async Task<IListInfo> GetListTypeInfoAsync(string listFullName, CancellationToken cancellationToken = default)
+        public async Task<IListInfo> GetListInfoAsync(string listFullName, CancellationToken cancellationToken = default)
         {
             var key = new ListIdentity(listFullName);
-            this.listTypeInfos.TryGetValue(key, out var typeInfo);
+            this.listInfos.TryGetValue(key, out var typeInfo);
             if (typeInfo != null)
             {
                 return typeInfo;
@@ -72,14 +72,59 @@ namespace Kephas.SharePoint.Reflection
             var siteService = this.siteServiceProvider.GetSiteService(siteName);
             var list = await siteService.GetListAsync(listFullName).PreserveThreadContext();
 
+            return await this.GetOrUpdateListInfoAsync(key, siteService, list).PreserveThreadContext();
+        }
+
+        /// <summary>
+        /// Gets the list type information asynchronously.
+        /// </summary>
+        /// <param name="siteId">Identifier for the site.</param>
+        /// <param name="listName">Name of the list.</param>
+        /// <param name="cancellationToken">Optional. a token that allows processing to be
+        ///                                 cancelled.</param>
+        /// <returns>
+        /// An asynchronous result that yields the list type information.
+        /// </returns>
+        public async Task<IListInfo> GetListInfoAsync(Guid siteId, string listName, CancellationToken cancellationToken = default)
+        {
+            var key = new ListIdentity(siteId, listName);
+            this.listInfos.TryGetValue(key, out var typeInfo);
+            if (typeInfo != null)
+            {
+                return typeInfo;
+            }
+
+            var siteService = this.siteServiceProvider.GetSiteService(siteId);
+            var list = await siteService.GetListAsync(listName).PreserveThreadContext();
+
+            return await this.GetOrUpdateListInfoAsync(key, siteService, list).PreserveThreadContext();
+        }
+
+        /// <summary>
+        /// Gets the list type information asynchronously.
+        /// </summary>
+        /// <param name="siteId">Identifier for the site.</param>
+        /// <param name="listId">Identifier for the list.</param>
+        /// <param name="cancellationToken">Optional. a token that allows processing to be
+        ///                                 cancelled.</param>
+        /// <returns>
+        /// An asynchronous result that yields the list type information.
+        /// </returns>
+        public Task<IListInfo> GetListInfoAsync(Guid siteId, Guid listId, CancellationToken cancellationToken = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        private async Task<IListInfo> GetOrUpdateListInfoAsync(ListIdentity key, ISiteService siteService, List list)
+        {
             var clientContext = siteService.ClientContext;
             var fields = list.Fields;
-            clientContext.Load(list, l => l.Title, l => l.ParentWebUrl);
+            clientContext.Load(list, l => l.Id, l => l.Title, l => l.ParentWebUrl);
             clientContext.Load(fields);
             await clientContext.ExecuteQueryAsync().PreserveThreadContext();
 
             key.UpdateIdentity(siteService, list);
-            typeInfo = this.listTypeInfos.GetOrAdd(key, k => new ListInfo(list, siteService.SiteUrl));
+            var typeInfo = this.listInfos.GetOrAdd(key, k => new ListInfo(list, siteService.SiteUrl));
             return typeInfo;
         }
 
@@ -90,6 +135,16 @@ namespace Kephas.SharePoint.Reflection
             public ListIdentity(string listFullName)
             {
                 this.identities.Add(listFullName.ToLower());
+            }
+
+            public ListIdentity(Guid siteId, string listName)
+            {
+                this.identities.Add($"{siteId:N}/{listName}".ToLower());
+            }
+
+            public ListIdentity(Guid siteId, Guid listId)
+            {
+                this.identities.Add($"{siteId:N}/{listId:N}".ToLower());
             }
 
             /// <summary>
@@ -124,6 +179,8 @@ namespace Kephas.SharePoint.Reflection
             {
                 this.identities.Add($"{siteService.SiteName}/{list.Title}".ToLower());
                 this.identities.Add($"{siteService.SiteUrl}/{list.Title}".ToLower());
+                this.identities.Add($"{siteService.SiteId:N}/{list.Id:N}".ToLower());
+                this.identities.Add($"{siteService.SiteId:N}/{list.Title}".ToLower());
             }
         }
     }

@@ -14,6 +14,7 @@ namespace Kephas.SharePoint.Reflection
     using System.Collections.Generic;
     using System.Linq;
 
+    using Kephas.Data;
     using Kephas.Reflection.Dynamic;
     using Microsoft.SharePoint.Client;
 
@@ -32,6 +33,7 @@ namespace Kephas.SharePoint.Reflection
         internal ListInfo(List list, Uri siteUrl)
         {
             this.list = list;
+            this.Name = list.Title;
             this.Namespace = siteUrl.ToString();
             this.QualifiedFullName = this.FullName = $"{this.Namespace}/{list.Title}";
 
@@ -48,6 +50,14 @@ namespace Kephas.SharePoint.Reflection
         /// The properties.
         /// </value>
         public new IEnumerable<IListPropertyInfo> Properties => base.Properties.OfType<IListPropertyInfo>();
+
+        /// <summary>
+        /// Gets the identifier.
+        /// </summary>
+        /// <value>
+        /// The identifier.
+        /// </value>
+        public object Id => this.list.Id;
 
         /// <summary>
         /// Creates property information.

@@ -35,13 +35,13 @@ namespace Kephas.SharePoint.Data.Linq
         /// <param name="queryOperationContext">Context for the query operation.</param>
         /// <param name="listService">The list service.</param>
         /// <param name="siteService">The site service.</param>
-        /// <param name="listTypeInfo">Information describing the list type.</param>
-        public SharePointQueryProvider(IQueryOperationContext queryOperationContext, IListService listService, ISiteService siteService, IListInfo listTypeInfo)
+        /// <param name="listInfo">Information describing the list type.</param>
+        public SharePointQueryProvider(IQueryOperationContext queryOperationContext, IListService listService, ISiteService siteService, IListInfo listInfo)
             : base(queryOperationContext, new InternalQueryProvider())
         {
             this.ListService = listService;
             this.SiteService = siteService;
-            this.ListTypeInfo = listTypeInfo;
+            this.ListInfo = listInfo;
 
             var internalQueryProvider = (InternalQueryProvider)this.NativeQueryProvider;
             internalQueryProvider.Provider = this;
@@ -69,7 +69,7 @@ namespace Kephas.SharePoint.Data.Linq
         /// <value>
         /// Information describing the list type.
         /// </value>
-        public IListInfo ListTypeInfo { get; }
+        public IListInfo ListInfo { get; }
 
         private class InternalQueryProvider : IQueryProvider
         {
@@ -158,7 +158,7 @@ namespace Kephas.SharePoint.Data.Linq
                 var list = this.Provider.SiteService.GetListAsync(listFullName).GetResultNonLocking();
                 var query = CamlQuery.CreateAllItemsQuery();
                 var listItems = this.Provider.SiteService.GetListItemsAsync(list, query).GetResultNonLocking();
-                var entities = listItems.Select(item => new SharePointEntity(this.Provider.ListTypeInfo, item)).ToList();
+                var entities = listItems.Select(item => new SharePointEntity(this.Provider.ListInfo, item)).ToList();
 
                 return (TResult)(object)entities;
             }

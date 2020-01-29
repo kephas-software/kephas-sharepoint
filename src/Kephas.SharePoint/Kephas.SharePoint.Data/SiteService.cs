@@ -37,16 +37,16 @@ namespace Kephas.SharePoint
         /// Initializes a new instance of the <see cref="SiteService"/> class.
         /// </summary>
         /// <param name="contextProvider">The context provider.</param>
-        /// <param name="libraryService">The library service.</param>
+        /// <param name="listService">The list service.</param>
         /// <param name="logManager">Manager for log.</param>
         public SiteService(
             IClientContextProvider contextProvider,
-            IListService libraryService,
+            IListService listService,
             ILogManager logManager)
             : base(logManager)
         {
             this.contextProvider = contextProvider;
-            this.libraryService = libraryService;
+            this.libraryService = listService;
             this.initMonitor = new InitializationMonitor<ISiteService>(this.GetType());
         }
 
@@ -166,11 +166,11 @@ namespace Kephas.SharePoint
 
             // https://code.msdn.microsoft.com/Upload-document-to-32056dbf/sourcecode?fileId=205610&pathId=1577573997
 
-            var (_, name) = this.libraryService.GetListPathFragments(listName);
-            var list = this.clientContext.Web.Lists.GetByTitle(name);
+            listName = this.GetListName(listName);
+            var list = this.clientContext.Web.Lists.GetByTitle(listName);
             if (list == null)
             {
-                throw new InvalidOperationException($"List {name} not found.");
+                throw new InvalidOperationException($"List {listName} not found in {this.SiteName} ({this.SiteUrl}).");
             }
 
             await this.PreloadListPropertiesAsync(list, listType).PreserveThreadContext();
@@ -195,7 +195,7 @@ namespace Kephas.SharePoint
             var list = this.clientContext.Web.Lists.GetById(listId);
             if (list == null)
             {
-                throw new InvalidOperationException($"List with ID '{listId} not found.");
+                throw new InvalidOperationException($"List with ID '{listId} not found in {this.SiteName} ({this.SiteUrl}).");
             }
 
             await this.PreloadListPropertiesAsync(list, listType).PreserveThreadContext();
@@ -221,6 +221,16 @@ namespace Kephas.SharePoint
             await this.clientContext.ExecuteQueryAsync().PreserveThreadContext();
 
             return listItems;
+        }
+
+        private string GetListName(string listName)
+        {
+            if (!this.libraryService.IsListFullName(listName))
+            {
+                return listName;
+            }
+
+            return this.libraryService.GetListPathFragments(listName).listName;
         }
 
         private async Task PreloadListPropertiesAsync(List list, BaseType listType)
