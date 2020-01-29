@@ -110,9 +110,19 @@ namespace Kephas.SharePoint.Reflection
         /// <returns>
         /// An asynchronous result that yields the list type information.
         /// </returns>
-        public Task<IListInfo> GetListInfoAsync(Guid siteId, Guid listId, CancellationToken cancellationToken = default)
+        public async Task<IListInfo> GetListInfoAsync(Guid siteId, Guid listId, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var key = new ListIdentity(siteId, listId);
+            this.listInfos.TryGetValue(key, out var typeInfo);
+            if (typeInfo != null)
+            {
+                return typeInfo;
+            }
+
+            var siteService = this.siteServiceProvider.GetSiteService(siteId);
+            var list = await siteService.GetListAsync(listId).PreserveThreadContext();
+
+            return await this.GetOrUpdateListInfoAsync(key, siteService, list).PreserveThreadContext();
         }
 
         private async Task<IListInfo> GetOrUpdateListInfoAsync(ListIdentity key, ISiteService siteService, List list)
