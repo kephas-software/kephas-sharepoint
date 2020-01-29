@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ListTypeInfo.cs" company="Kephas Software SRL">
+// <copyright file="ListInfo.cs" company="Kephas Software SRL">
 //   Copyright (c) Kephas Software SRL. All rights reserved.
 //   Licensed under the KEPHAS license. See LICENSE file in the project root for full license information.
 // </copyright>
@@ -20,16 +20,16 @@ namespace Kephas.SharePoint.Reflection
     /// <summary>
     /// Information about the list type.
     /// </summary>
-    public class ListTypeInfo : DynamicTypeInfo, IListTypeInfo
+    public class ListInfo : DynamicTypeInfo, IListInfo
     {
         private readonly List list;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ListTypeInfo"/> class.
+        /// Initializes a new instance of the <see cref="ListInfo"/> class.
         /// </summary>
         /// <param name="list">The list.</param>
         /// <param name="siteUrl">URL of the site.</param>
-        internal ListTypeInfo(List list, Uri siteUrl)
+        internal ListInfo(List list, Uri siteUrl)
         {
             this.list = list;
             this.Namespace = siteUrl.ToString();

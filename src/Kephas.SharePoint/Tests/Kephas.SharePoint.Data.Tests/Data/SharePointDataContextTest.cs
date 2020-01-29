@@ -42,7 +42,8 @@ namespace Kephas.SharePoint.Tests.Data
             var siteServiceProvider = GetTestSiteServiceProvider(siteSettingsProvider);
 
             var libraryService = new ListService(siteSettingsProvider, new NullDefaultSettingsProvider());
-            var dataContext = new SharePointDataContext(container, container.GetExport<ISharePointMetadataCache>(), siteServiceProvider, libraryService);
+            var spMetadataCache = new SharePointMetadataCache(libraryService, siteServiceProvider);
+            var dataContext = new SharePointDataContext(container, spMetadataCache, siteServiceProvider, libraryService);
             var dataStore = Substitute.For<IDataStore>();
             dataStore.EntityActivator.Returns(new SharePointEntityActivator());
             var initContext = new DataInitializationContext(dataContext, dataStore);
@@ -53,6 +54,14 @@ namespace Kephas.SharePoint.Tests.Data
             var results = query.ToList();
 
             Assert.IsNotNull(results);
+
+            var entity = results.FirstOrDefault();
+            if (entity == null)
+            {
+                return;
+            }
+
+            var listInfo = entity.GetTypeInfo();
         }
 
         [Test]

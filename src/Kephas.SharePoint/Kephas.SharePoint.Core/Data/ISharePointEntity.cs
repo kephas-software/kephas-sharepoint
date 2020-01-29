@@ -17,7 +17,7 @@ namespace Kephas.SharePoint.Data
     /// <summary>
     /// Interface for SharePoint entity.
     /// </summary>
-    public interface ISharePointEntity : IEntity, IExpando, IInstance<IListTypeInfo>
+    public interface ISharePointEntity : IEntity, IExpando, IInstance<IListInfo>
     {
     }
 }

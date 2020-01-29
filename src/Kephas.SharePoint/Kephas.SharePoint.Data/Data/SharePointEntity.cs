@@ -31,7 +31,7 @@ namespace Kephas.SharePoint.Data
         /// <summary>
         /// Information describing the type.
         /// </summary>
-        private IListTypeInfo typeInfo;
+        private IListInfo typeInfo;
         private WeakReference<IEntityEntry> weakEntityEntry;
         private IDictionary<string, object> values;
         private ListItem listItem;
@@ -41,7 +41,7 @@ namespace Kephas.SharePoint.Data
         /// </summary>
         /// <param name="listTypeInfo">Information describing the list type.</param>
         /// <param name="listItem">The list item.</param>
-        public SharePointEntity(IListTypeInfo listTypeInfo, ListItem listItem)
+        public SharePointEntity(IListInfo listTypeInfo, ListItem listItem)
             : base(listItem.FieldValues)
         {
             this.values = listItem.FieldValues;
@@ -71,7 +71,7 @@ namespace Kephas.SharePoint.Data
         /// <returns>
         /// The type information.
         /// </returns>
-        public IListTypeInfo GetTypeInfo() => this.typeInfo;
+        public IListInfo GetTypeInfo() => this.typeInfo;
 
         /// <summary>
         /// Gets the associated entity entry.

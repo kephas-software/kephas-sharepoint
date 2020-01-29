@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IListTypeInfo.cs" company="Kephas Software SRL">
+// <copyright file="IListInfo.cs" company="Kephas Software SRL">
 //   Copyright (c) Kephas Software SRL. All rights reserved.
 //   Licensed under the KEPHAS license. See LICENSE file in the project root for full license information.
 // </copyright>
@@ -17,7 +17,7 @@ namespace Kephas.SharePoint.Reflection
     /// <summary>
     /// Interface for list type information.
     /// </summary>
-    public interface IListTypeInfo : ITypeInfo
+    public interface IListInfo : ITypeInfo
     {
         /// <summary>
         /// Gets the properties.

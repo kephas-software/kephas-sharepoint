@@ -30,7 +30,7 @@ namespace Kephas.SharePoint.Reflection
     {
         private readonly IListService libraryService;
         private readonly ISiteServiceProvider siteServiceProvider;
-        private readonly ConcurrentDictionary<ListIdentity, IListTypeInfo> listTypeInfos = new ConcurrentDictionary<ListIdentity, IListTypeInfo>();
+        private readonly ConcurrentDictionary<ListIdentity, IListInfo> listTypeInfos = new ConcurrentDictionary<ListIdentity, IListInfo>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SharePointMetadataCache"/> class.
@@ -59,7 +59,7 @@ namespace Kephas.SharePoint.Reflection
         /// <returns>
         /// An asynchronous result that yields the list type information.
         /// </returns>
-        public async Task<IListTypeInfo> GetListTypeInfoAsync(string listFullName, CancellationToken cancellationToken = default)
+        public async Task<IListInfo> GetListTypeInfoAsync(string listFullName, CancellationToken cancellationToken = default)
         {
             var key = new ListIdentity(listFullName);
             this.listTypeInfos.TryGetValue(key, out var typeInfo);
@@ -79,7 +79,7 @@ namespace Kephas.SharePoint.Reflection
             await clientContext.ExecuteQueryAsync().PreserveThreadContext();
 
             key.UpdateIdentity(siteService, list);
-            typeInfo = this.listTypeInfos.GetOrAdd(key, k => new ListTypeInfo(list, siteService.SiteUrl));
+            typeInfo = this.listTypeInfos.GetOrAdd(key, k => new ListInfo(list, siteService.SiteUrl));
             return typeInfo;
         }
 

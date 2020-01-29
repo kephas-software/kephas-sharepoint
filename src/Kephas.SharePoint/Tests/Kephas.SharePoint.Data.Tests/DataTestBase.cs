@@ -68,9 +68,9 @@ namespace Kephas.SharePoint.Tests
         {
             return new SiteSettings
             {
-                SiteUrl = "<url>",
-                UserName = "<user>",
-                UserPassword = "<pwd>",
+                SiteUrl = "https://quartzsoftware.sharepoint.com/sites/odoo",
+                UserName = "odoo@kephas-software.com",
+                UserPassword = "scwcf6wcu6@p!0p=i7HfREv",
             };
         }
     }

@@ -44,7 +44,7 @@ namespace Kephas.SharePoint.Tests.Data.Linq
                 queryContext,
                 new ListService(siteSettingsProvider, new NullDefaultSettingsProvider()),
                 siteServiceProvider.GetDefaultSiteService(),
-                Substitute.For<IListTypeInfo>());
+                Substitute.For<IListInfo>());
 
             var results = provider.Execute<IEnumerable<ISharePointEntity>>(Substitute.For<Expression>()).ToList();
 
