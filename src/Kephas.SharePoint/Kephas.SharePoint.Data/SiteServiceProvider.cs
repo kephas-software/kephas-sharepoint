@@ -133,6 +133,30 @@ namespace Kephas.SharePoint
         }
 
         /// <summary>
+        /// Gets the site service for the provided site name.
+        /// </summary>
+        /// <param name="siteId">Name of the site.</param>
+        /// <param name="throwOnNotFound">Optional. True to throw on not found.</param>
+        /// <returns>
+        /// The site service.
+        /// </returns>
+        public ISiteService GetSiteService(Guid siteId, bool throwOnNotFound = true)
+        {
+            this.initMonitor.AssertIsCompletedSuccessfully();
+
+            var siteService = this.siteServicesMap.FirstOrDefault(svc => svc.Value.SiteId == siteId).Value;
+            if (siteService == null)
+            {
+                if (throwOnNotFound)
+                {
+                    throw new KeyNotFoundException($"SharePoint site with ID '{siteId}' not found. Possible resolution: There may be cases when lookup fields reference lists from other sites; please configure these sites too.");
+                }
+            }
+
+            return siteService;
+        }
+
+        /// <summary>
         /// Gets the default site service.
         /// </summary>
         /// <exception cref="KeyNotFoundException">Thrown when a Key Not Found error condition occurs.</exception>

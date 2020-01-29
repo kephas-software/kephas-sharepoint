@@ -10,6 +10,8 @@
 
 namespace Kephas.SharePoint
 {
+    using System;
+
     using Kephas.Services;
 
     /// <summary>
@@ -36,5 +38,15 @@ namespace Kephas.SharePoint
         /// The site service.
         /// </returns>
         ISiteService GetSiteService(string siteName, bool throwOnNotFound = true);
+
+        /// <summary>
+        /// Gets the site service for the provided site name.
+        /// </summary>
+        /// <param name="siteId">Name of the site.</param>
+        /// <param name="throwOnNotFound">Optional. True to throw on not found.</param>
+        /// <returns>
+        /// The site service.
+        /// </returns>
+        ISiteService GetSiteService(Guid siteId, bool throwOnNotFound = true);
     }
 }

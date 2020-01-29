@@ -173,17 +173,32 @@ namespace Kephas.SharePoint
                 throw new InvalidOperationException($"List {name} not found.");
             }
 
-            var currentUser = this.clientContext.Web.CurrentUser;
-            this.clientContext.Load(this.clientContext.Web);
-            this.clientContext.Load(currentUser);
-            this.clientContext.Load(list, l => l.Id, l => l.EffectiveBasePermissions, l => l.BaseType, l => l.BaseTemplate);
-            this.clientContext.Load(list.RootFolder, f => f.ServerRelativeUrl, f => f.Name);
-            await this.clientContext.ExecuteQueryAsync().PreserveThreadContext();
+            await this.PreloadListPropertiesAsync(list, listType).PreserveThreadContext();
 
-            if (listType != BaseType.None && list.BaseType != listType)
+            return list;
+        }
+
+        /// <summary>
+        /// Gets the list by name asynchronously.
+        /// </summary>
+        /// <param name="listId">The list identity.</param>
+        /// <param name="listType">Optional. Type of the list.</param>
+        /// <returns>
+        /// An asynchronous result that yields the list.
+        /// </returns>
+        public async Task<List> GetListAsync(Guid listId, BaseType listType = BaseType.None)
+        {
+            this.initMonitor.AssertIsCompletedSuccessfully();
+
+            // https://code.msdn.microsoft.com/Upload-document-to-32056dbf/sourcecode?fileId=205610&pathId=1577573997
+
+            var list = this.clientContext.Web.Lists.GetById(listId);
+            if (list == null)
             {
-                throw new InvalidOperationException($"List {name} must be a {listType}, instead it is a {list.BaseType}.");
+                throw new InvalidOperationException($"List with ID '{listId} not found.");
             }
+
+            await this.PreloadListPropertiesAsync(list, listType).PreserveThreadContext();
 
             return list;
         }
@@ -206,6 +221,21 @@ namespace Kephas.SharePoint
             await this.clientContext.ExecuteQueryAsync().PreserveThreadContext();
 
             return listItems;
+        }
+
+        private async Task PreloadListPropertiesAsync(List list, BaseType listType)
+        {
+            var currentUser = this.clientContext.Web.CurrentUser;
+            this.clientContext.Load(this.clientContext.Web);
+            this.clientContext.Load(currentUser);
+            this.clientContext.Load(list, l => l.Id, l => l.Title, l => l.EffectiveBasePermissions, l => l.BaseType, l => l.BaseTemplate);
+            this.clientContext.Load(list.RootFolder, f => f.ServerRelativeUrl, f => f.Name);
+            await this.clientContext.ExecuteQueryAsync().PreserveThreadContext();
+
+            if (listType != BaseType.None && list.BaseType != listType)
+            {
+                throw new InvalidOperationException($"List '{list.Title}' must be a {listType}, instead it is a {list.BaseType}.");
+            }
         }
 
         private void KeepAlive(object state)

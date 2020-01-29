@@ -67,6 +67,16 @@ namespace Kephas.SharePoint
         Task<List> GetListAsync(string listName, BaseType listType = BaseType.None);
 
         /// <summary>
+        /// Gets the list by name asynchronously.
+        /// </summary>
+        /// <param name="listId">The list identity.</param>
+        /// <param name="listType">Optional. Type of the list.</param>
+        /// <returns>
+        /// An asynchronous result that yields the list.
+        /// </returns>
+        Task<List> GetListAsync(Guid listId, BaseType listType = BaseType.None);
+
+        /// <summary>
         /// Gets the list items asynchronously.
         /// </summary>
         /// <param name="list">The list.</param>
