@@ -152,5 +152,16 @@ namespace Kephas.SharePoint.Data
 
             return true;
         }
+
+        /// <summary>
+        /// Gets the <see cref="T:Kephas.Reflection.ITypeInfo" /> of this expando object.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="T:Kephas.Reflection.ITypeInfo" /> of this expando object.
+        /// </returns>
+        protected override ITypeInfo GetThisTypeInfo()
+        {
+            return this.GetType().AsRuntimeTypeInfo();
+        }
     }
 }
