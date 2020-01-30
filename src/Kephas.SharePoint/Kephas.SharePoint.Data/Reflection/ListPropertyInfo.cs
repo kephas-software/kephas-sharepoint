@@ -79,6 +79,8 @@ namespace Kephas.SharePoint.Reflection
                     return typeof(string).AsRuntimeTypeInfo();
                 case FieldType.Lookup:
                     return typeof(IRef<ISharePointEntity>).AsRuntimeTypeInfo();
+                case FieldType.URL:
+                    return typeof(Uri).AsRuntimeTypeInfo();
             }
 
             return typeof(object).AsRuntimeTypeInfo();
