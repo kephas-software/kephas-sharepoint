@@ -10,7 +10,27 @@
 
 namespace Kephas.SharePoint.TextProcessing
 {
-    public class FindResult
+    using Kephas.Operations;
+
+    /// <summary>
+    /// Encapsulates the result of a find operation.
+    /// </summary>
+    public class FindResult : OperationResult<bool>, IFindResult
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FindResult"/> class.
+        /// </summary>
+        public FindResult()
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FindResult"/> class.
+        /// </summary>
+        /// <param name="returnValue">True to return value.</param>
+        public FindResult(bool returnValue)
+            : base(returnValue)
+        {
+        }
     }
 }

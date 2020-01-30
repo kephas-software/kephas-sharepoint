@@ -10,11 +10,9 @@
 
 namespace Kephas.SharePoint.TextProcessing
 {
-    using System;
     using System.Threading;
     using System.Threading.Tasks;
 
-    using Kephas.Operations;
     using Kephas.Services;
 
     /// <summary>
@@ -33,6 +31,6 @@ namespace Kephas.SharePoint.TextProcessing
         /// <returns>
         /// An asynchronous result that yields the find result.
         /// </returns>
-        Task<IOperationResult> FindAsync(string query, Document doc, IFindContext context, CancellationToken cancellationToken = default);
+        Task<IFindResult> FindAsync(string query, Document doc, IFindContext context, CancellationToken cancellationToken = default);
     }
 }
