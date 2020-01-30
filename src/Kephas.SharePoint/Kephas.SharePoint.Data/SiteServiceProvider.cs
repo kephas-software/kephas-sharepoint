@@ -15,7 +15,7 @@ namespace Kephas.SharePoint
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
-
+    using Kephas.Collections;
     using Kephas.Composition;
     using Kephas.Dynamic;
     using Kephas.Logging;
@@ -121,7 +121,11 @@ namespace Kephas.SharePoint
         {
             this.initMonitor.AssertIsCompletedSuccessfully();
 
-            if (!this.siteServicesMap.TryGetValue(siteName, out var siteService))
+            var siteService = Guid.TryParse(siteName, out var siteId)
+                ? this.siteServicesMap.FirstOrDefault(svc => svc.Value.SiteId == siteId).Value
+                : this.siteServicesMap.TryGetValue(siteName);
+
+            if (siteService == null)
             {
                 if (throwOnNotFound)
                 {
