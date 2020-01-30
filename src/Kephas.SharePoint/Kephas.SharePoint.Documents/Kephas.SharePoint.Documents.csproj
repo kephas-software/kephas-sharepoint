@@ -4,7 +4,7 @@
         <TargetFrameworks>netstandard2.1;netstandard2.0;net461</TargetFrameworks>
         <LangVersion>latest</LangVersion>
         <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-        <Version>2.2.0-dev.9</Version>
+        <Version>2.2.0-dev.11</Version>
         <Authors>Kephas Software SRL</Authors>
         <Company>Kephas Software SRL</Company>
         <Product>Kephas Integration Services for Microsoft (r) SharePoint</Product>
