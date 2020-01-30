@@ -28,11 +28,11 @@ namespace Kephas.SharePoint.TextProcessing
         /// </summary>
         /// <param name="query">The query.</param>
         /// <param name="doc">The document.</param>
-        /// <param name="options">Optional. Options for controlling the operation.</param>
+        /// <param name="context">The find context.</param>
         /// <param name="cancellationToken">Optional. A token that allows processing to be cancelled.</param>
         /// <returns>
         /// An asynchronous result that yields the find result.
         /// </returns>
-        Task<IOperationResult> FindAsync(string query, Document doc, Action<IFindContext> options = null, CancellationToken cancellationToken = default);
+        Task<IOperationResult> FindAsync(string query, Document doc, IFindContext context, CancellationToken cancellationToken = default);
     }
 }
