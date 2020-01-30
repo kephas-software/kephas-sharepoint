@@ -10,11 +10,10 @@
 
 namespace Kephas.SharePoint.Reflection
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
 
-    using Kephas.Data;
+    using Kephas.Reflection;
     using Kephas.Reflection.Dynamic;
     using Microsoft.SharePoint.Client;
 
@@ -30,13 +29,14 @@ namespace Kephas.SharePoint.Reflection
         /// </summary>
         /// <param name="list">The list.</param>
         /// <param name="siteName">Name of the site.</param>
-        internal ListInfo(List list, string siteName)
+        /// <param name="siteUrl">URL of the site.</param>
+        internal ListInfo(List list, string siteName, string siteUrl)
         {
             this.list = list;
             this.Name = list.Title;
             this.FullName = $"{siteName}/{list.Title}";
-            this.Namespace = list.ParentWebUrl;
-            this.QualifiedFullName = this.FullName = $"{this.Namespace}/{list.Title}";
+            this.Namespace = siteUrl;
+            this.QualifiedFullName = $"{siteUrl}/{list.Title}";
 
             foreach (var field in list.Fields)
             {
@@ -75,6 +75,17 @@ namespace Kephas.SharePoint.Reflection
             }
 
             return new ListPropertyInfo(field);
+        }
+
+        /// <summary>
+        /// Gets the <see cref="T:Kephas.Reflection.ITypeInfo" /> of this expando object.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="T:Kephas.Reflection.ITypeInfo" /> of this expando object.
+        /// </returns>
+        protected override ITypeInfo GetThisTypeInfo()
+        {
+            return this.GetType().AsRuntimeTypeInfo();
         }
     }
 }
