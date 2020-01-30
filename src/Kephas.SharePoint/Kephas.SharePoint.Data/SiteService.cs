@@ -164,14 +164,7 @@ namespace Kephas.SharePoint
         {
             this.initMonitor.AssertIsCompletedSuccessfully();
 
-            // https://code.msdn.microsoft.com/Upload-document-to-32056dbf/sourcecode?fileId=205610&pathId=1577573997
-
-            listName = this.GetListName(listName);
-            var list = this.clientContext.Web.Lists.GetByTitle(listName);
-            if (list == null)
-            {
-                throw new InvalidOperationException($"List {listName} not found in {this.SiteName} ({this.SiteUrl}).");
-            }
+            var list = this.GetListByName(listName);
 
             await this.PreloadListPropertiesAsync(list, listType).PreserveThreadContext();
 
@@ -179,7 +172,27 @@ namespace Kephas.SharePoint
         }
 
         /// <summary>
-        /// Gets the list by name asynchronously.
+        /// Gets the list by name.
+        /// </summary>
+        /// <exception cref="InvalidOperationException">Thrown when the requested operation is invalid.</exception>
+        /// <param name="listName">Name of the list.</param>
+        /// <param name="listType">Optional. Type of the list.</param>
+        /// <returns>
+        /// The list.
+        /// </returns>
+        public List GetList(string listName, BaseType listType = BaseType.None)
+        {
+            this.initMonitor.AssertIsCompletedSuccessfully();
+
+            var list = this.GetListByName(listName);
+
+            this.PreloadListProperties(list, listType);
+
+            return list;
+        }
+
+        /// <summary>
+        /// Gets the list by ID asynchronously.
         /// </summary>
         /// <param name="listId">The list identity.</param>
         /// <param name="listType">Optional. Type of the list.</param>
@@ -190,15 +203,28 @@ namespace Kephas.SharePoint
         {
             this.initMonitor.AssertIsCompletedSuccessfully();
 
-            // https://code.msdn.microsoft.com/Upload-document-to-32056dbf/sourcecode?fileId=205610&pathId=1577573997
-
-            var list = this.clientContext.Web.Lists.GetById(listId);
-            if (list == null)
-            {
-                throw new InvalidOperationException($"List with ID '{listId} not found in {this.SiteName} ({this.SiteUrl}).");
-            }
+            var list = this.GetListById(listId);
 
             await this.PreloadListPropertiesAsync(list, listType).PreserveThreadContext();
+
+            return list;
+        }
+
+        /// <summary>
+        /// Gets the list by ID asynchronously.
+        /// </summary>
+        /// <param name="listId">The list identity.</param>
+        /// <param name="listType">Optional. Type of the list.</param>
+        /// <returns>
+        /// The list.
+        /// </returns>
+        public List GetList(Guid listId, BaseType listType = BaseType.None)
+        {
+            this.initMonitor.AssertIsCompletedSuccessfully();
+
+            var list = this.GetListById(listId);
+
+            this.PreloadListProperties(list, listType);
 
             return list;
         }
@@ -223,6 +249,54 @@ namespace Kephas.SharePoint
             return listItems;
         }
 
+        /// <summary>
+        /// Gets the list items.
+        /// </summary>
+        /// <param name="list">The list.</param>
+        /// <param name="query">The query.</param>
+        /// <returns>
+        /// The list items.
+        /// </returns>
+        public IEnumerable<ListItem> GetListItems(List list, CamlQuery query)
+        {
+            this.initMonitor.AssertIsCompletedSuccessfully();
+
+            var listItems = list.GetItems(query);
+            this.clientContext.Load(listItems);
+            this.clientContext.ExecuteQuery();
+
+            return listItems;
+        }
+
+        private List GetListById(Guid listId)
+        {
+            // https://code.msdn.microsoft.com/Upload-document-to-32056dbf/sourcecode?fileId=205610&pathId=1577573997
+
+            var list = this.clientContext.Web.Lists.GetById(listId);
+            if (list == null)
+            {
+                throw new InvalidOperationException($"List with ID '{listId} not found in {this.SiteName} ({this.SiteUrl}).");
+            }
+
+            return list;
+        }
+
+        private List GetListByName(string listName)
+        {
+            // https://code.msdn.microsoft.com/Upload-document-to-32056dbf/sourcecode?fileId=205610&pathId=1577573997
+
+            listName = this.GetListName(listName);
+            var list = Guid.TryParse(listName, out var listId)
+                ? this.clientContext.Web.Lists.GetById(listId)
+                : this.clientContext.Web.Lists.GetByTitle(listName);
+            if (list == null)
+            {
+                throw new InvalidOperationException($"List {listName} not found in {this.SiteName} ({this.SiteUrl}).");
+            }
+
+            return list;
+        }
+
         private string GetListName(string listName)
         {
             if (!this.libraryService.IsListFullName(listName))
@@ -235,17 +309,33 @@ namespace Kephas.SharePoint
 
         private async Task PreloadListPropertiesAsync(List list, BaseType listType)
         {
+            this.PrepareListProperties(list);
+            await this.clientContext.ExecuteQueryAsync().PreserveThreadContext();
+            this.AssertListType(list, listType);
+        }
+
+        private void PreloadListProperties(List list, BaseType listType)
+        {
+            this.PrepareListProperties(list);
+            this.clientContext.ExecuteQuery();
+            this.AssertListType(list, listType);
+        }
+
+        private void AssertListType(List list, BaseType listType)
+        {
+            if (listType != BaseType.None && list.BaseType != listType)
+            {
+                throw new InvalidOperationException($"List '{list.Title}' must be a {listType}, instead it is a {list.BaseType}.");
+            }
+        }
+
+        private void PrepareListProperties(List list)
+        {
             var currentUser = this.clientContext.Web.CurrentUser;
             this.clientContext.Load(this.clientContext.Web);
             this.clientContext.Load(currentUser);
             this.clientContext.Load(list, l => l.Id, l => l.Title, l => l.EffectiveBasePermissions, l => l.BaseType, l => l.BaseTemplate);
             this.clientContext.Load(list.RootFolder, f => f.ServerRelativeUrl, f => f.Name);
-            await this.clientContext.ExecuteQueryAsync().PreserveThreadContext();
-
-            if (listType != BaseType.None && list.BaseType != listType)
-            {
-                throw new InvalidOperationException($"List '{list.Title}' must be a {listType}, instead it is a {list.BaseType}.");
-            }
         }
 
         private void KeepAlive(object state)

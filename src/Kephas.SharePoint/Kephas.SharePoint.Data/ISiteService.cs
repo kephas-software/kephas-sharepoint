@@ -67,7 +67,17 @@ namespace Kephas.SharePoint
         Task<List> GetListAsync(string listName, BaseType listType = BaseType.None);
 
         /// <summary>
-        /// Gets the list by name asynchronously.
+        /// Gets the list by name.
+        /// </summary>
+        /// <param name="listName">Name of the list.</param>
+        /// <param name="listType">Optional. Type of the list.</param>
+        /// <returns>
+        /// The list.
+        /// </returns>
+        List GetList(string listName, BaseType listType = BaseType.None);
+
+        /// <summary>
+        /// Gets the list by ID.
         /// </summary>
         /// <param name="listId">The list identity.</param>
         /// <param name="listType">Optional. Type of the list.</param>
@@ -75,6 +85,16 @@ namespace Kephas.SharePoint
         /// An asynchronous result that yields the list.
         /// </returns>
         Task<List> GetListAsync(Guid listId, BaseType listType = BaseType.None);
+
+        /// <summary>
+        /// Gets the list by ID.
+        /// </summary>
+        /// <param name="listId">The list identity.</param>
+        /// <param name="listType">Optional. Type of the list.</param>
+        /// <returns>
+        /// The list.
+        /// </returns>
+        List GetList(Guid listId, BaseType listType = BaseType.None);
 
         /// <summary>
         /// Gets the list items asynchronously.
@@ -86,5 +106,15 @@ namespace Kephas.SharePoint
         /// An asynchronous result that yields the list items.
         /// </returns>
         Task<IEnumerable<ListItem>> GetListItemsAsync(List list, CamlQuery query, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Gets the list items.
+        /// </summary>
+        /// <param name="list">The list.</param>
+        /// <param name="query">The query.</param>
+        /// <returns>
+        /// The list items.
+        /// </returns>
+        IEnumerable<ListItem> GetListItems(List list, CamlQuery query);
     }
 }

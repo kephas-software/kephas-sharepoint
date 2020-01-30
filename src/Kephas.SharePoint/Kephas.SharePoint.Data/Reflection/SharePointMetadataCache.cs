@@ -134,7 +134,7 @@ namespace Kephas.SharePoint.Reflection
             await clientContext.ExecuteQueryAsync().PreserveThreadContext();
 
             key.UpdateIdentity(siteService, list);
-            var typeInfo = this.listInfos.GetOrAdd(key, k => new ListInfo(list, siteService.SiteUrl));
+            var typeInfo = this.listInfos.GetOrAdd(key, k => new ListInfo(list, siteService.SiteName ?? siteService.SiteUrl.ToString()));
             return typeInfo;
         }
 

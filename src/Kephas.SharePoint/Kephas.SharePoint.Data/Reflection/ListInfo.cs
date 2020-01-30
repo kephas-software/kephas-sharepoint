@@ -29,12 +29,13 @@ namespace Kephas.SharePoint.Reflection
         /// Initializes a new instance of the <see cref="ListInfo"/> class.
         /// </summary>
         /// <param name="list">The list.</param>
-        /// <param name="siteUrl">URL of the site.</param>
-        internal ListInfo(List list, Uri siteUrl)
+        /// <param name="siteName">Name of the site.</param>
+        internal ListInfo(List list, string siteName)
         {
             this.list = list;
             this.Name = list.Title;
-            this.Namespace = siteUrl.ToString();
+            this.FullName = $"{siteName}/{list.Title}";
+            this.Namespace = list.ParentWebUrl;
             this.QualifiedFullName = this.FullName = $"{this.Namespace}/{list.Title}";
 
             foreach (var field in list.Fields)
