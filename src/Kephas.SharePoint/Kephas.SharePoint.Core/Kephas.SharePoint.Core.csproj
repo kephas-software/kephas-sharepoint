@@ -4,7 +4,7 @@
         <TargetFrameworks>netstandard2.1;netstandard2.0;net461</TargetFrameworks>
         <LangVersion>latest</LangVersion>
         <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-        <Version>3.0.0-dev.7</Version>
+        <Version>3.0.0</Version>
         <Authors>Kephas Software SRL</Authors>
         <Company>Kephas Software SRL</Company>
         <Product>Kephas Integration Services for Microsoft (r) SharePoint</Product>
@@ -62,8 +62,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Kephas.Core" Version="7.4.0-dev.4" />
-        <PackageReference Include="Kephas.Data" Version="7.4.0-dev.4" />
+        <PackageReference Include="Kephas.Core" Version="7.4.0" />
+        <PackageReference Include="Kephas.Data" Version="7.4.0" />
         <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

@@ -23,7 +23,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Kephas.Testing" Version="7.4.0-dev.4" />
+        <PackageReference Include="Kephas.Testing" Version="7.4.0" />
         <PackageReference Include="NSubstitute" Version="4.2.1" />
         <PackageReference Include="NUnit" Version="3.12.0" />
         <PackageReference Include="NUnit3TestAdapter" Version="3.16.1">
