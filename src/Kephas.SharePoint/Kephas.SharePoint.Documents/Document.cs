@@ -103,7 +103,7 @@ namespace Kephas.SharePoint
         /// <value>
         /// The identifier of the parent.
         /// </value>
-        public long? ParentId { get; set; }
+        public long? ChildOf { get; set; }
 
         /// <summary>
         /// Gets or sets the group.

@@ -50,12 +50,12 @@ namespace Kephas.SharePoint.Configuration
         public string OriginalNameField { get; set; } = "OriginalName";
 
         /// <summary>
-        /// Gets or sets the parent identifier field.
+        /// Gets or sets the field storing the parent identifier.
         /// </summary>
         /// <value>
-        /// The parent identifier field.
+        /// The field storing the parent identifier.
         /// </value>
-        public string ParentIdField { get; set; } = "ParentID";
+        public string ChildOfField { get; set; } = "ChildOf";
 
         /// <summary>
         /// Gets or sets the group field.
