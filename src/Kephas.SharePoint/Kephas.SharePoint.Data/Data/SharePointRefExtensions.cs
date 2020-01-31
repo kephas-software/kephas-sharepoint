@@ -27,9 +27,7 @@ namespace Kephas.SharePoint.Data
         /// </returns>
         public static FieldLookupValue ToLookupValue(this SharePointRef spRef)
         {
-            Requires.NotNull(spRef, nameof(spRef));
-
-            if (spRef.Id == null)
+            if (spRef?.Id == null)
             {
                 return null;
             }
