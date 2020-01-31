@@ -23,7 +23,7 @@ namespace Kephas.SharePoint.Data
     public class SharePointRef : Ref<ISharePointEntity>, IIndexable
     {
         private object id;
-        private IDictionary<string, object> values = new Dictionary<string, object>();
+        private IDictionary<string, object> values;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SharePointRef"/> class.
@@ -44,16 +44,16 @@ namespace Kephas.SharePoint.Data
         public override object Id
         {
             get => this.id;
-            set => this.id = value;
+            set => this.id = (int?)value;
         }
 
         /// <summary>
-        /// Gets or sets the value.
+        /// Gets the values.
         /// </summary>
         /// <value>
-        /// The value.
+        /// The values.
         /// </value>
-        public object Value { get; set; }
+        private IDictionary<string, object> Values => this.values ?? (this.values = new Dictionary<string, object>());
 
         /// <summary>
         /// Convenience method that provides a string Indexer to the Properties collection AND the
@@ -68,8 +68,8 @@ namespace Kephas.SharePoint.Data
         /// <returns>The requested property value.</returns>
         public object this[string key]
         {
-            get => this.values[key];
-            set => this.values[key] = value;
+            get => this.Values[key];
+            set => this.Values[key] = value;
         }
 
         /// <summary>

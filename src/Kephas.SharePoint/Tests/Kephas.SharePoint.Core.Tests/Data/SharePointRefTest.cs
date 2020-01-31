@@ -24,10 +24,10 @@ namespace Kephas.SharePoint.Core.Tests.Data
             var spRef = new SharePointRef(doc, "Parent");
 
             spRef.Id = 3;
-            spRef.Value = "hello";
+            spRef["Value"] = "hello";
 
             Assert.AreEqual(3, spRef.Id);
-            Assert.AreEqual("hello", spRef.Value);
+            Assert.AreEqual("hello", spRef["Value"]);
         }
     }
 }
