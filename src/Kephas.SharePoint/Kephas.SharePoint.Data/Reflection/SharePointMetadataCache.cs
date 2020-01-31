@@ -219,8 +219,9 @@ namespace Kephas.SharePoint.Reflection
             {
                 this.identities.Add($"{siteService.SiteName}/{list.Title}".ToLower());
                 this.identities.Add($"{siteService.SiteUrl}/{list.Title}".ToLower());
-                this.identities.Add($"{siteService.SiteId:N}/{list.Id:N}".ToLower());
+                this.identities.Add($"{siteService.SiteUrl:N}/{list.Id:N}".ToLower());
                 this.identities.Add($"{siteService.SiteId:N}/{list.Title}".ToLower());
+                this.identities.Add($"{siteService.SiteId:N}/{list.Id:N}".ToLower());
             }
         }
     }
