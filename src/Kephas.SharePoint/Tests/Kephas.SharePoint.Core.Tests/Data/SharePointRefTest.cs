@@ -21,7 +21,7 @@ namespace Kephas.SharePoint.Core.Tests.Data
         public void SharePointRef_ID_and_value()
         {
             var doc = new Expando();
-            var spRef = new SharePointRef(doc);
+            var spRef = new SharePointRef(doc, "Parent");
 
             spRef.Id = 3;
             spRef.Value = "hello";

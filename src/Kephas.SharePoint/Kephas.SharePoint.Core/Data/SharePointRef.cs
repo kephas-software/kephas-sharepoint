@@ -9,24 +9,29 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace Kephas.SharePoint.Data
 {
-    using Kephas.Data;
     using System;
+    using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
+
+    using Kephas.Data;
+    using Kephas.Dynamic;
 
     /// <summary>
     /// A SharePoint reference.
     /// </summary>
-    public class SharePointRef : Ref<ISharePointEntity>
+    public class SharePointRef : Ref<ISharePointEntity>, IIndexable
     {
         private object id;
+        private IDictionary<string, object> values = new Dictionary<string, object>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SharePointRef"/> class.
         /// </summary>
         /// <param name="containerEntity">The container entity.</param>
-        public SharePointRef(object containerEntity)
-            : base(containerEntity, nameof(IIdentifiable.Id))
+        /// <param name="refFieldName">Name of the reference field.</param>
+        public SharePointRef(object containerEntity, string refFieldName)
+            : base(containerEntity, refFieldName)
         {
         }
 
@@ -49,6 +54,23 @@ namespace Kephas.SharePoint.Data
         /// The value.
         /// </value>
         public object Value { get; set; }
+
+        /// <summary>
+        /// Convenience method that provides a string Indexer to the Properties collection AND the
+        /// strongly typed properties of the object by name.
+        ///
+        /// dynamic exp["Address"] = "112 nowhere lane";
+        /// var name = exp["StronglyTypedProperty"] as string;
+        ///
+        /// </summary>
+        /// <param name="key">The key.</param>
+        /// <returns>The <see cref="T:System.Object" /> identified by the key.</returns>
+        /// <returns>The requested property value.</returns>
+        public object this[string key]
+        {
+            get => this.values[key];
+            set => this.values[key] = value;
+        }
 
         /// <summary>
         /// Gets the referenced entity asynchronously.

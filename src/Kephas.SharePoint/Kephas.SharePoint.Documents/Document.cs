@@ -11,6 +11,7 @@
 namespace Kephas.SharePoint
 {
     using Kephas.Dynamic;
+    using Kephas.SharePoint.Data;
 
     /// <summary>
     /// A document.
@@ -103,7 +104,7 @@ namespace Kephas.SharePoint
         /// <value>
         /// The identifier of the parent.
         /// </value>
-        public long? ChildOf { get; set; }
+        public SharePointRef ChildOf { get; set; }
 
         /// <summary>
         /// Gets or sets the group.
