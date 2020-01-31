@@ -17,6 +17,7 @@ namespace Kephas.SharePoint.Reflection
     using System.Threading;
     using System.Threading.Tasks;
 
+    using Kephas.Logging;
     using Kephas.Services;
     using Kephas.SharePoint;
     using Kephas.Threading.Tasks;
@@ -26,7 +27,7 @@ namespace Kephas.SharePoint.Reflection
     /// A SharePoint metadata cache.
     /// </summary>
     [OverridePriority(Priority.Low)]
-    public class SharePointMetadataCache : ISharePointMetadataCache
+    public class SharePointMetadataCache : Loggable, ISharePointMetadataCache
     {
         private readonly IListService libraryService;
         private readonly ISiteServiceProvider siteServiceProvider;
@@ -37,7 +38,9 @@ namespace Kephas.SharePoint.Reflection
         /// </summary>
         /// <param name="libraryService">The library service.</param>
         /// <param name="siteServiceProvider">The site service provider.</param>
-        public SharePointMetadataCache(IListService libraryService, ISiteServiceProvider siteServiceProvider)
+        /// <param name="logManager">Optional. Manager for log.</param>
+        public SharePointMetadataCache(IListService libraryService, ISiteServiceProvider siteServiceProvider, ILogManager logManager = null)
+            : base(logManager)
         {
             this.libraryService = libraryService;
             this.siteServiceProvider = siteServiceProvider;
@@ -123,6 +126,33 @@ namespace Kephas.SharePoint.Reflection
             var list = await siteService.GetListAsync(listId).PreserveThreadContext();
 
             return await this.GetOrUpdateListInfoAsync(key, siteService, list).PreserveThreadContext();
+        }
+
+        /// <summary>
+        /// Invalidates teh entry for the provided list.
+        /// </summary>
+        /// <param name="siteId">Identifier for the site.</param>
+        /// <param name="listName">Name of the list.</param>
+        public void Invalidate(Guid siteId, string listName)
+        {
+            var key = new ListIdentity(siteId, listName);
+            if (!this.listInfos.TryRemove(key, out var typeInfo))
+            {
+                this.Logger.Info("List {list} not found to invalidate the cache.", $"{siteId}/{listName}");
+            }
+        }
+
+        /// <summary>
+        /// Invalidates teh entry for the provided list.
+        /// </summary>
+        /// <param name="listFullName">Full name of the list.</param>
+        public void Invalidate(string listFullName)
+        {
+            var key = new ListIdentity(listFullName);
+            if (!this.listInfos.TryRemove(key, out var typeInfo))
+            {
+                this.Logger.Info("List {list} not found to invalidate the cache.", listFullName);
+            }
         }
 
         private async Task<IListInfo> GetOrUpdateListInfoAsync(ListIdentity key, ISiteService siteService, List list)

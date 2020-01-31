@@ -57,6 +57,19 @@ namespace Kephas.SharePoint.Reflection
         Task<IListInfo> GetListInfoAsync(Guid siteId, Guid listId, CancellationToken cancellationToken = default);
 
         /// <summary>
+        /// Invalidates teh entry for the provided list.
+        /// </summary>
+        /// <param name="listFullName">Full name of the list.</param>
+        void Invalidate(string listFullName);
+
+        /// <summary>
+        /// Invalidates teh entry for the provided list.
+        /// </summary>
+        /// <param name="siteId">Identifier for the site.</param>
+        /// <param name="listName">Name of the list.</param>
+        void Invalidate(Guid siteId, string listName);
+
+        /// <summary>
         /// Clears the cache to its blank/initial state.
         /// </summary>
         void Clear();

@@ -71,5 +71,22 @@ namespace Kephas.SharePoint.Reflection
         {
             return Task.FromResult<IListInfo>(null);
         }
+
+        /// <summary>
+        /// Invalidates teh entry for the provided list.
+        /// </summary>
+        /// <param name="siteId">Identifier for the site.</param>
+        /// <param name="listName">Name of the list.</param>
+        public void Invalidate(Guid siteId, string listName)
+        {
+        }
+
+        /// <summary>
+        /// Invalidates teh entry for the provided list.
+        /// </summary>
+        /// <param name="listFullName">Full name of the list.</param>
+        public void Invalidate(string listFullName)
+        {
+        }
     }
 }
