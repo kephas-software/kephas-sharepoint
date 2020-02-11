@@ -4,12 +4,12 @@
         <TargetFrameworks>netstandard2.1;netstandard2.0;net461</TargetFrameworks>
         <LangVersion>latest</LangVersion>
         <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-        <Version>3.0.1</Version>
+        <Version>3.1.0-dev.3</Version>
         <Authors>Kephas Software SRL</Authors>
         <Company>Kephas Software SRL</Company>
         <Product>Kephas Integration Services for Microsoft (r) SharePoint</Product>
-        <AssemblyVersion>3.0.1.0</AssemblyVersion>
-        <FileVersion>3.0.1.0</FileVersion>
+        <AssemblyVersion>3.1.0.0</AssemblyVersion>
+        <FileVersion>3.1.0.0</FileVersion>
         <Description>Provides the data adapters for Microsoft SharePoint.</Description>
         <Copyright>Copyright Kephas Software SRL 2019-2020</Copyright>
         <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
@@ -68,8 +68,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Kephas.Core" Version="7.4.1" />
-        <PackageReference Include="Kephas.Data" Version="7.4.1" />
+        <PackageReference Include="Kephas.Core" Version="7.5.0-dev.3" />
+        <PackageReference Include="Kephas.Data" Version="7.5.0-dev.3" />
         <PackageReference Include="Microsoft.Data.OData" Version="5.8.4" />
         <PackageReference Include="Microsoft.Data.Services.Client" Version="5.8.4" />
         <PackageReference Include="SharePointPnPCoreOnline" Version="3.17.2001.2" />
