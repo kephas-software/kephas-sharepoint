@@ -229,6 +229,7 @@ _Pvt_Extensions
 
 # Custom entries
 /src/.idea/
+/src/Kephas.SharePoint/.idea/
 /src/Deployment/SetNuGetApiKey.bat
 /externals/local-package-source
 !/externals/nugets/MongoDB*/lib/**/*.dll
