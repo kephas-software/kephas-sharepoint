@@ -23,7 +23,7 @@ namespace Kephas.SharePoint.Reflection
         /// <value>
         /// The identifier of the site.
         /// </value>
-        public Guid RefSiteId { get; }
+        Guid RefSiteId { get; }
 
         /// <summary>
         /// Gets the identifier of the referenced list.
@@ -31,7 +31,7 @@ namespace Kephas.SharePoint.Reflection
         /// <value>
         /// The identifier of the referenced list.
         /// </value>
-        public string RefListId { get; }
+        string RefListId { get; }
 
         /// <summary>
         /// Gets the reference field.
@@ -39,6 +39,6 @@ namespace Kephas.SharePoint.Reflection
         /// <value>
         /// The reference field.
         /// </value>
-        public string RefField { get; }
+        string RefField { get; }
     }
 }

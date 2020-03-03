@@ -24,6 +24,6 @@ namespace Kephas.SharePoint.Data
         /// <value>
         /// The metadata cache.
         /// </value>
-        public ISharePointMetadataCache MetadataCache { get; }
+        ISharePointMetadataCache MetadataCache { get; }
     }
 }
