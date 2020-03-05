@@ -2,9 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b913be0d-6eda-4c28-adc9-e4108240b7f5" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Kephas.SharePoint/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Kephas.SharePoint/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Kephas.SharePoint/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Kephas.SharePoint/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kephas.SharePoint.Core/Kephas.SharePoint.Core.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Kephas.SharePoint.Core/Kephas.SharePoint.Core.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kephas.SharePoint.Data/Kephas.SharePoint.Data.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Kephas.SharePoint.Data/Kephas.SharePoint.Data.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kephas.SharePoint.Documents/Kephas.SharePoint.Documents.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Kephas.SharePoint.Documents/Kephas.SharePoint.Documents.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/Kephas.SharePoint.Core.Tests/Kephas.SharePoint.Core.Tests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Kephas.SharePoint.Core.Tests/Kephas.SharePoint.Core.Tests.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/Kephas.SharePoint.Data.Tests/Kephas.SharePoint.Data.Tests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Kephas.SharePoint.Data.Tests/Kephas.SharePoint.Data.Tests.csproj" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,14 +19,30 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Kephas.SharePoint.Core/IDefaultSettingsProvider.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Kephas.SharePoint.Core/MaxFileSizeExceededException.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Kephas.SharePoint.Core/NullDefaultSettingsProvider.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Kephas.SharePoint.Core/Document.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Kephas.SharePoint.Core/InteractionHelper.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Kephas.SharePoint.Core/Sources/DocumentSourceBase.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Kephas.SharePoint.Core/Sources/IDocumentSource.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Kephas.SharePoint.Data/Data/Linq/SharePointQuery.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Tests/Kephas.SharePoint.Data.Tests/DataTestBase.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Kephas.SharePoint.Data/Data/Linq/SharePointQueryProvider.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Kephas.SharePoint.Core/NullSiteSettingsProvider.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Tests/Kephas.SharePoint.Data.Tests/Data/SharePointDataContextTest.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Kephas.SharePoint.Core/MaxFileSizeExceededException.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Kephas.SharePoint.Data/Reflection/ListInfo.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Kephas.SharePoint.Core/IListService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../kephas/src/Kephas.Data/Store/IDataStoreMatcher.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Kephas.SharePoint.Documents/SiteSettingsProvider.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Kephas.SharePoint.Core/Data/SharePointRef.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Kephas.SharePoint.Core/Data/SharePointContextExtensions.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Kephas.SharePoint.Core/Reflection/IListPropertyInfo.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Kephas.SharePoint.Core/Reflection/IListLookupPropertyInfo.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Kephas.SharePoint.Data/Data/ISharePointDataContext.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Kephas.SharePoint.Data/SiteService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Kephas.SharePoint.Core/Configuration/DefaultSettings.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Kephas.SharePoint.Data/Data/SharePointDataStoreMatcher.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Kephas.SharePoint.Core/ISiteSettingsProvider.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Kephas.SharePoint.Core/IDefaultSettingsProvider.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Kephas.SharePoint.Data/Data/SharePointRefExtensions.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Kephas.SharePoint.Data/Data/SharePointDataContext.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Kephas.SharePoint.Core/ListService.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -45,18 +66,6 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="settings.editor.selected.configurable" value="CodeInspectionSettingsId" />
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -91,8 +100,11 @@
       </map>
     </option>
   </component>
-  <component name="VcsManagerConfiguration">
-    <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="true" />
+  <component name="WindowStateProjectService">
+    <state x="352" y="127" width="736" height="606" key="find.popup" timestamp="1583417231787">
+      <screen x="0" y="0" width="1440" height="860" />
+    </state>
+    <state x="352" y="127" width="736" height="606" key="find.popup/0.0.1440.860/1440.-540.2560.1400@0.0.1440.860" timestamp="1583417231787" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
