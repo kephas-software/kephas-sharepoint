@@ -10,7 +10,6 @@
 
 namespace Kephas.SharePoint.Reflection
 {
-
     using Kephas.Reflection;
 
     /// <summary>

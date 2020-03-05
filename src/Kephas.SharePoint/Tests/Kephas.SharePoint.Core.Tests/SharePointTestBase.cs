@@ -12,6 +12,7 @@ namespace Kephas.SharePoint.Core.Tests
 {
     using System.Collections.Generic;
     using System.Reflection;
+
     using Kephas.Testing.Composition;
 
     public abstract class SharePointTestBase : CompositionTestBase

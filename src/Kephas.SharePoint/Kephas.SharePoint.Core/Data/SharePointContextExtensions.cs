@@ -10,11 +10,12 @@
 
 namespace Kephas.SharePoint.Data
 {
+    using System;
+    using System.Linq;
+
     using Kephas.Data;
     using Kephas.Diagnostics.Contracts;
     using Kephas.Dynamic;
-    using System;
-    using System.Linq;
 
     /// <summary>
     /// A SharePoint query operation context extensions.
