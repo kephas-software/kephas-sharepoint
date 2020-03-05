@@ -10,7 +10,7 @@
         </When>
         <Otherwise>
             <ItemGroup>
-                <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
+                <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.0-preview-20200226-03" />
             </ItemGroup>
         </Otherwise>
     </Choose>
@@ -24,14 +24,14 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Kephas.Testing" Version="7.5.0-dev.15" />
+        <PackageReference Include="Kephas.Testing" Version="7.5.0-dev.17" />
         <PackageReference Include="NSubstitute" Version="4.2.1" />
         <PackageReference Include="NUnit" Version="3.12.0" />
         <PackageReference Include="NUnit3TestAdapter" Version="3.16.1">
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+        <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.164">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
