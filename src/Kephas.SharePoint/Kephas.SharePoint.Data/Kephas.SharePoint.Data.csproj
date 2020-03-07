@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>netstandard2.1;netstandard2.0;net461</TargetFrameworks>
+        <TargetFrameworks>netstandard2.1;net461</TargetFrameworks>
         <LangVersion>latest</LangVersion>
         <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
         <Version>3.1.0-dev.18</Version>
@@ -37,10 +37,6 @@
         <DefineConstants>$(DefineConstants);NETSTANDARD2_1</DefineConstants>
     </PropertyGroup>
 
-    <PropertyGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
-        <DefineConstants>$(DefineConstants);NETSTANDARD2_0</DefineConstants>
-    </PropertyGroup>
-
     <PropertyGroup Condition="'$(TargetFramework)'=='net461'">
         <DefineConstants>$(DefineConstants);NET461</DefineConstants>
     </PropertyGroup>
@@ -58,13 +54,25 @@
     <ItemGroup>
         <AdditionalFiles Include="stylecop.json" />
     </ItemGroup>
+    
+    <Choose>
+        <When Condition="'$(TargetFramework)'=='net461'">
+            <ItemGroup>
+                <PackageReference Include="SharePointPnPCoreOnline" Version="3.18.2002" />
+            </ItemGroup>
+        </When>
+        <Otherwise>
+            <ItemGroup>
+                <PackageReference Include="Kephas.SharePoint.PnP.Core" Version="3.18.2002-dev.18" />
+            </ItemGroup>
+        </Otherwise>
+    </Choose>
 
     <ItemGroup>
         <PackageReference Include="Kephas.Core" Version="7.5.0-dev.18" />
         <PackageReference Include="Kephas.Data" Version="7.5.0-dev.18" />
         <PackageReference Include="Microsoft.Data.OData" Version="5.8.4" />
         <PackageReference Include="Microsoft.Data.Services.Client" Version="5.8.4" />
-        <PackageReference Include="SharePointPnPCoreOnline" Version="3.18.2002" />
         <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.164">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
