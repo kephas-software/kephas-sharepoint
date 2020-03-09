@@ -4,12 +4,12 @@
     <list default="true" id="b913be0d-6eda-4c28-adc9-e4108240b7f5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Kephas.SharePoint/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Kephas.SharePoint/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Kephas.SharePoint/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Kephas.SharePoint/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kephas.SharePoint.Client/Kephas.SharePoint.Client.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Kephas.SharePoint.Client/Kephas.SharePoint.Client.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Kephas.SharePoint.Core/Kephas.SharePoint.Core.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Kephas.SharePoint.Core/Kephas.SharePoint.Core.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kephas.SharePoint.Data/ClientContextProvider.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Kephas.SharePoint.Data/ClientContextProvider.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Kephas.SharePoint.Data/Kephas.SharePoint.Data.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Kephas.SharePoint.Data/Kephas.SharePoint.Data.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Kephas.SharePoint.Documents/Kephas.SharePoint.Documents.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Kephas.SharePoint.Documents/Kephas.SharePoint.Documents.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kephas.SharePoint.sln" beforeDir="false" afterPath="$PROJECT_DIR$/Kephas.SharePoint.sln" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tests/Kephas.SharePoint.Core.Tests/Kephas.SharePoint.Core.Tests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Kephas.SharePoint.Core.Tests/Kephas.SharePoint.Core.Tests.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/Kephas.SharePoint.Data.Tests/DataTestBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Kephas.SharePoint.Data.Tests/DataTestBase.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tests/Kephas.SharePoint.Data.Tests/Kephas.SharePoint.Data.Tests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Kephas.SharePoint.Data.Tests/Kephas.SharePoint.Data.Tests.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -108,7 +108,7 @@
       <updated>1573028533965</updated>
       <workItem from="1573028537260" duration="2836000" />
       <workItem from="1573142396324" duration="664000" />
-      <workItem from="1583496242946" duration="1998000" />
+      <workItem from="1583496242946" duration="2168000" />
     </task>
     <task id="LOCAL-00001" summary="Upgrade to Kephas 7.5.0-dev.17">
       <created>1583417263702</created>

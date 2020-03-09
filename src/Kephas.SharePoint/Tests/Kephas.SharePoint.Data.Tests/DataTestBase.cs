@@ -22,6 +22,7 @@ namespace Kephas.SharePoint.Tests
     using Kephas.SharePoint.Data;
     using Kephas.Testing.Composition;
     using Kephas.Threading.Tasks;
+    using Microsoft.Extensions.Configuration;
     using NSubstitute;
 
     public abstract class DataTestBase : CompositionTestBase
@@ -67,11 +68,14 @@ namespace Kephas.SharePoint.Tests
 
         protected static SiteSettings GetTestSiteSettings()
         {
+            var appSettings = new ConfigurationBuilder()
+                .AddUserSecrets<DataTestBase>()
+                .Build();
             return new SiteSettings
             {
-                SiteUrl = "<site>",
-                UserName = "<user>",
-                UserPassword = "<clear-text-pwd>",
+                SiteUrl = appSettings["SiteSettings:SiteUrl"] ?? "<please provide site url>",
+                UserName = appSettings["SiteSettings:UserName"] ?? "<please provide user name>",
+                UserPassword = appSettings["SiteSettings:UserPassword"] ?? "<please provide user password>",
             };
         }
     }

@@ -4,6 +4,7 @@
         <TargetFrameworks>netcoreapp3.1;net461</TargetFrameworks>
         <LangVersion>latest</LangVersion>
         <RootNamespace>Kephas.SharePoint.Tests</RootNamespace>
+        <UserSecretsId>20a1887e-d852-431d-9278-8e62cf36b05b</UserSecretsId>
     </PropertyGroup>
 
     <Choose>
@@ -11,7 +12,7 @@
         </When>
         <Otherwise>
             <ItemGroup>
-                <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.0-preview-20200226-03" />
+                <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
             </ItemGroup>
         </Otherwise>
     </Choose>
@@ -26,17 +27,17 @@
 
     <ItemGroup>
         <PackageReference Include="Kephas.Testing" Version="7.5.0-dev.18" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="3.1.1" />
         <PackageReference Include="NSubstitute" Version="4.2.1" />
         <PackageReference Include="NUnit" Version="3.12.0" />
         <PackageReference Include="NUnit3TestAdapter" Version="3.16.1">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.164">
+        <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
     </ItemGroup>
 
     <ItemGroup>
