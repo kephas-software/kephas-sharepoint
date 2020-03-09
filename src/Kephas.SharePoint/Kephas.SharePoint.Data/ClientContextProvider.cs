@@ -14,12 +14,10 @@ namespace Kephas.SharePoint
     using System.Net;
     using System.Security;
     using System.Threading.Tasks;
-
     using Kephas.Collections;
     using Kephas.Cryptography;
     using Kephas.Threading.Tasks;
     using Microsoft.SharePoint.Client;
-
     using AuthenticationManager = OfficeDevPnP.Core.AuthenticationManager;
 
     /// <summary>
@@ -50,22 +48,21 @@ namespace Kephas.SharePoint
             // https://www.youtube.com/watch?v=prNlFdHP1ZM
             // https://www.c-sharpcorner.com/article/connect-to-sharepoint-online-site-with-app-only-authentication/
             var am = new AuthenticationManager();
-            ClientContext clientContext;
 
             try
             {
-                if (!string.IsNullOrWhiteSpace(settings.AppId))
-                {
-                    clientContext = am.GetAppOnlyAuthenticatedContext(settings.SiteUrl, settings.AppId, this.GetPassword(settings.AppPassword, settings.AppEncryptedPassword));
-                }
-                else if (!string.IsNullOrWhiteSpace(settings.UserName))
-                {
-                    clientContext = am.GetSharePointOnlineAuthenticatedContextTenant(settings.SiteUrl, settings.UserName, this.GetSecurePassword(settings.UserPassword, settings.UserEncryptedPassword));
-                }
-                else
-                {
-                    throw new InvalidOperationException($"Either the application ID and password or the user name and password must be provided to connect to SharePoint.");
-                }
+                var clientContext = !string.IsNullOrWhiteSpace(settings.AppId)
+                    ? am.GetAppOnlyAuthenticatedContext(
+                        settings.SiteUrl,
+                        settings.AppId,
+                        this.GetPassword(settings.AppPassword, settings.AppEncryptedPassword))
+                    : !string.IsNullOrWhiteSpace(settings.UserName)
+                        ? am.GetSharePointOnlineAuthenticatedContextTenant(
+                            settings.SiteUrl,
+                            settings.UserName,
+                            this.GetSecurePassword(settings.UserPassword, settings.UserEncryptedPassword))
+                        : throw new InvalidOperationException(
+                            $"Either the application ID and password or the user name and password must be provided to connect to SharePoint.");
 
                 clientContext.Load(clientContext.Web, w => w.ServerRelativeUrl, w => w.Id, w => w.Url);
                 clientContext.Load(clientContext.Site, s => s.Url, s => s.Id);
@@ -75,9 +72,11 @@ namespace Kephas.SharePoint
             }
             catch (WebException ex)
             {
-                if (((HttpWebResponse)ex.Response).StatusCode == HttpStatusCode.Unauthorized)
+                if (((HttpWebResponse) ex.Response).StatusCode == HttpStatusCode.Unauthorized)
                 {
-                    throw new SharePointException($"Cannot connect to SharePoint site '{settings.SiteUrl}' with '{settings.AppId ?? settings.UserName}', check whether the user name/password are correct.", ex);
+                    throw new SharePointException(
+                        $"Cannot connect to SharePoint site '{settings.SiteUrl}' with '{settings.AppId ?? settings.UserName}', check whether the user name/password are correct.",
+                        ex);
                 }
 
                 throw;
