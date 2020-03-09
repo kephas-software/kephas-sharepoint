@@ -27,11 +27,13 @@ namespace Kephas.SharePoint.Tests.Data.Linq
     public class SharePointQueryProviderTest : DataTestBase
     {
         [Test]
-        public async Task Execute()
+        [TestCase((string)null)]
+        [TestCase("sc")]
+        public async Task Execute(string siteNamespace)
         {
             var container = this.CreateContainer();
 
-            var siteSettingsProvider = GetTestSiteSettingsProvider();
+            var siteSettingsProvider = GetTestSiteSettingsProvider(siteNamespace: siteNamespace);
             var (siteName, siteSettings) = siteSettingsProvider.GetSiteSettings().First();
 
             var siteServiceProvider = GetTestSiteServiceProvider(siteSettingsProvider);

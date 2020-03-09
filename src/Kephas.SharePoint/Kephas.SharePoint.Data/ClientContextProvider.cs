@@ -60,12 +60,7 @@ namespace Kephas.SharePoint
                 }
                 else if (!string.IsNullOrWhiteSpace(settings.UserName))
                 {
-#if NETSTANDARD2_1
                     clientContext = am.GetSharePointOnlineAuthenticatedContextTenant(settings.SiteUrl, settings.UserName, this.GetSecurePassword(settings.UserPassword, settings.UserEncryptedPassword));
-#else
-                    // clientContext = am.GetSharePointOnlineAuthenticatedContextTenant(settings.SiteUrl, settings.UserName, this.GetSecurePassword(settings.UserPassword, settings.UserEncryptedPassword));
-                    clientContext = am.GetAzureADCredentialsContext(settings.SiteUrl, settings.UserName, this.GetSecurePassword(settings.UserPassword, settings.UserEncryptedPassword));
-#endif
                 }
                 else
                 {

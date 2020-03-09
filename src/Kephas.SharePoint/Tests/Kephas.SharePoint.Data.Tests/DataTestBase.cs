@@ -37,9 +37,9 @@ namespace Kephas.SharePoint.Tests
             };
         }
 
-        protected static ISiteSettingsProvider GetTestSiteSettingsProvider(string siteName = "test")
+        protected static ISiteSettingsProvider GetTestSiteSettingsProvider(string siteName = "test", string siteNamespace = null)
         {
-            var testSettings = GetTestSiteSettings();
+            var testSettings = GetTestSiteSettings(siteNamespace);
             var siteSettingsProvider = Substitute.For<ISiteSettingsProvider>();
             siteSettingsProvider.GetSiteSettings().Returns(
                 new List<(string name, SiteSettings settings)> { (siteName, testSettings) });
@@ -66,16 +66,19 @@ namespace Kephas.SharePoint.Tests
             return siteServiceProvider;
         }
 
-        protected static SiteSettings GetTestSiteSettings()
+        protected static SiteSettings GetTestSiteSettings(string siteNamespace)
         {
             var appSettings = new ConfigurationBuilder()
                 .AddUserSecrets<DataTestBase>()
                 .Build();
+            var ns = string.IsNullOrEmpty(siteNamespace)
+                ? string.Empty
+                : $"{siteNamespace}-";
             return new SiteSettings
             {
-                SiteUrl = appSettings["SiteSettings:SiteUrl"] ?? "<please provide site url>",
-                UserName = appSettings["SiteSettings:UserName"] ?? "<please provide user name>",
-                UserPassword = appSettings["SiteSettings:UserPassword"] ?? "<please provide user password>",
+                SiteUrl = appSettings[$"{ns}SiteSettings:SiteUrl"] ?? "<please provide site url>",
+                UserName = appSettings[$"{ns}SiteSettings:UserName"] ?? "<please provide user name>",
+                UserPassword = appSettings[$"{ns}SiteSettings:UserPassword"] ?? "<please provide user password>",
             };
         }
     }
