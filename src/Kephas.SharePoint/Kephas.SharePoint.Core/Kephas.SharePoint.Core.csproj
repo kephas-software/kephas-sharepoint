@@ -4,12 +4,12 @@
         <TargetFrameworks>netstandard2.1;net461</TargetFrameworks>
         <LangVersion>latest</LangVersion>
         <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-        <Version>3.1.3</Version>
+        <Version>3.1.4</Version>
         <Authors>Kephas Software SRL</Authors>
         <Company>Kephas Software SRL</Company>
         <Product>Kephas Integration Services for Microsoft (r) SharePoint</Product>
-        <AssemblyVersion>3.1.3.0</AssemblyVersion>
-        <FileVersion>3.1.3.0</FileVersion>
+        <AssemblyVersion>3.1.4.0</AssemblyVersion>
+        <FileVersion>3.1.4.0</FileVersion>
         <Description>Provides a common infrastructure for all the other Microsoft SharePoint integration components.</Description>
         <Copyright>Copyright Kephas Software SRL 2019-2020</Copyright>
         <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
