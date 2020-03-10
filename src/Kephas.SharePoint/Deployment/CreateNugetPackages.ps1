@@ -23,5 +23,7 @@ $paths = @(
 foreach ($path in $paths) {
     $packagename = get-packagename $path
     $packagepath = "$path\bin\$build\$packagename.$version.nupkg"
+    $symbolspackagepath = "$path\bin\$build\$packagename.$version.snupkg"
     .\NuGet.exe sign "$packagepath" -CertificateSubjectName "$CertificateSubjectName" -Timestamper "$Timestamper"
+    .\NuGet.exe sign "$symbolspackagepath" -CertificateSubjectName "$CertificateSubjectName" -Timestamper "$Timestamper"
 }
