@@ -10,6 +10,7 @@
 
 namespace Kephas.SharePoint
 {
+    using System;
     using System.Collections.Generic;
 
     /// <summary>
@@ -24,6 +25,22 @@ namespace Kephas.SharePoint
         /// The default text finder.
         /// </value>
         public string DefaultTextFinder { get; set; }
+
+        /// <summary>
+        /// Gets or sets the strategy when a referenced entry is not found.
+        /// </summary>
+        /// <value>
+        /// The not found strategy.
+        /// </value>
+        public string RefEntryNotFoundStrategy { get; set; }
+
+        /// <summary>
+        /// Gets or sets the cache expiration interval.
+        /// </summary>
+        /// <value>
+        /// The cache expiration interval.
+        /// </value>
+        public TimeSpan? CacheExpirationInterval { get; set; } = TimeSpan.FromHours(1);
 
         /// <summary>
         /// Gets or sets the document libraries.
