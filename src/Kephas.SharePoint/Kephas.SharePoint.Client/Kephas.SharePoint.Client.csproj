@@ -25,6 +25,9 @@
         <SignAssembly>True</SignAssembly>
         <AssemblyOriginatorKeyFile>..\..\..\..\..\devops\kephas-apps\kephas-apps.snk</AssemblyOriginatorKeyFile>
 
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+
         <NeutralLanguage>en</NeutralLanguage>
         <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(MSBuildProjectName).xml</DocumentationFile>
         <DefineConstants>KEPHASAPPS</DefineConstants>

@@ -23,6 +23,9 @@
         <RootNamespace>Kephas.SharePoint</RootNamespace>
         <SignAssembly>True</SignAssembly>
 
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+
         <NeutralLanguage>en</NeutralLanguage>
         <AssemblyOriginatorKeyFile>..\..\..\..\..\devops\kephas-apps\kephas-apps.snk</AssemblyOriginatorKeyFile>
         <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(MSBuildProjectName).xml</DocumentationFile>
