@@ -53,15 +53,15 @@ namespace Kephas.SharePoint.Data
         /// <value>
         /// The values.
         /// </value>
-        private IDictionary<string, object> Values => this.values ?? (this.values = new Dictionary<string, object>());
+        private IDictionary<string, object> Values => this.values ??= new Dictionary<string, object>();
 
         /// <summary>
         /// Convenience method that provides a string Indexer to the Properties collection AND the
         /// strongly typed properties of the object by name.
-        ///
+        /// <code>
         /// dynamic exp["Address"] = "112 nowhere lane";
         /// var name = exp["StronglyTypedProperty"] as string;
-        ///
+        /// </code>
         /// </summary>
         /// <param name="key">The key.</param>
         /// <returns>The <see cref="T:System.Object" /> identified by the key.</returns>

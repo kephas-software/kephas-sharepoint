@@ -72,7 +72,7 @@ namespace Kephas.SharePoint
             }
             catch (WebException ex)
             {
-                if (((HttpWebResponse) ex.Response).StatusCode == HttpStatusCode.Unauthorized)
+                if (((HttpWebResponse)ex.Response).StatusCode == HttpStatusCode.Unauthorized)
                 {
                     throw new SharePointException(
                         $"Cannot connect to SharePoint site '{settings.SiteUrl}' with '{settings.AppId ?? settings.UserName}', check whether the user name/password are correct.",

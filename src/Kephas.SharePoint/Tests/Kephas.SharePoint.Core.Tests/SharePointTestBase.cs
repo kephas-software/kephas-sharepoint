@@ -19,9 +19,10 @@ namespace Kephas.SharePoint.Core.Tests
     {
         public override IEnumerable<Assembly> GetDefaultConventionAssemblies()
         {
-            return new List<Assembly>(base.GetDefaultConventionAssemblies()) {
-                typeof(IDefaultSettingsProvider).Assembly,            // Kephas.SharePoint.Core
-            };
+            return new List<Assembly>(base.GetDefaultConventionAssemblies())
+                    {
+                        typeof(IDefaultSettingsProvider).Assembly,            // Kephas.SharePoint.Core
+                    };
         }
     }
 }

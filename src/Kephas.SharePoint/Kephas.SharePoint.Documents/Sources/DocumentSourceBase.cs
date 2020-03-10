@@ -102,7 +102,7 @@ namespace Kephas.SharePoint.Sources
                                     || this.GetServiceName().Equals(e.ActivityContext[InteractionHelper.SourceArgName])
                                         ? this.RetryAsync(e.ActivityContext, token)
                                         : Task.CompletedTask);
-            return TaskHelper.CompletedTask;
+            return Task.CompletedTask;
         }
 
         /// <summary>
