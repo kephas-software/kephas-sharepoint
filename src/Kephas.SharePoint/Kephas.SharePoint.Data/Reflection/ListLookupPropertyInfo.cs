@@ -22,9 +22,11 @@ namespace Kephas.SharePoint.Reflection
         /// <summary>
         /// Initializes a new instance of the <see cref="ListLookupPropertyInfo"/> class.
         /// </summary>
+        /// <exception cref="InvalidOperationException">Thrown when the requested operation is invalid.</exception>
         /// <param name="field">The field.</param>
-        protected internal ListLookupPropertyInfo(Field field)
-            : base(field)
+        /// <param name="declaringContainer">The declaring container.</param>
+        protected internal ListLookupPropertyInfo(Field field, IListInfo declaringContainer)
+            : base(field, declaringContainer)
         {
             if (!(field is FieldLookup fieldLookup))
             {

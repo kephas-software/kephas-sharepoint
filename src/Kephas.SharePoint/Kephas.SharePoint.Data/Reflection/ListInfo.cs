@@ -71,10 +71,10 @@ namespace Kephas.SharePoint.Reflection
         {
             if (field.FieldTypeKind == FieldType.Lookup)
             {
-                return new ListLookupPropertyInfo(field);
+                return new ListLookupPropertyInfo(field, this);
             }
 
-            return new ListPropertyInfo(field);
+            return new ListPropertyInfo(field, this);
         }
     }
 }

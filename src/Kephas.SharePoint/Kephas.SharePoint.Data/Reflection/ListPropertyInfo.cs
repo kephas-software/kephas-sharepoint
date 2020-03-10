@@ -27,13 +27,16 @@ namespace Kephas.SharePoint.Reflection
         /// Initializes a new instance of the <see cref="ListPropertyInfo"/> class.
         /// </summary>
         /// <param name="field">The field.</param>
-        protected internal ListPropertyInfo(Field field)
+        /// <param name="declaringContainer">The declaring container.</param>
+        protected internal ListPropertyInfo(Field field, IListInfo declaringContainer)
         {
             this.Field = field;
             this.Name = field.InternalName;
             this.Title = field.Title;
+            this.Kind = (ListPropertyKind)(int)field.FieldTypeKind;
             this.ValueType = this.GetPropertyType(field);
             this.IsRequired = field.Required;
+            this.DeclaringContainer = declaringContainer;
         }
 
         /// <summary>
@@ -51,6 +54,14 @@ namespace Kephas.SharePoint.Reflection
         /// The title.
         /// </value>
         public string Title { get; }
+
+        /// <summary>
+        /// Gets the property kind.
+        /// </summary>
+        /// <value>
+        /// The property kind.
+        /// </value>
+        public ListPropertyKind Kind { get; }
 
         /// <summary>
         /// Gets the field.
