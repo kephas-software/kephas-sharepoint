@@ -31,6 +31,7 @@ namespace Kephas.SharePoint.Reflection
         {
             this.Field = field;
             this.Name = field.InternalName;
+            this.Title = field.Title;
             this.ValueType = this.GetPropertyType(field);
             this.IsRequired = field.Required;
         }
@@ -42,6 +43,14 @@ namespace Kephas.SharePoint.Reflection
         /// True if a value is required, false if not.
         /// </value>
         public bool IsRequired { get; }
+
+        /// <summary>
+        /// Gets the title.
+        /// </summary>
+        /// <value>
+        /// The title.
+        /// </value>
+        public string Title { get; }
 
         /// <summary>
         /// Gets the field.

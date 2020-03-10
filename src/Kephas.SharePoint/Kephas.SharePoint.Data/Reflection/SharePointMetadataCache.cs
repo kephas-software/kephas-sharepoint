@@ -16,7 +16,7 @@ namespace Kephas.SharePoint.Reflection
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
-
+    using Kephas.Collections;
     using Kephas.Logging;
     using Kephas.Services;
     using Kephas.SharePoint;
@@ -29,20 +29,22 @@ namespace Kephas.SharePoint.Reflection
     [OverridePriority(Priority.Low)]
     public class SharePointMetadataCache : Loggable, ISharePointMetadataCache
     {
-        private readonly IListService libraryService;
+        private readonly IListService listService;
         private readonly ISiteServiceProvider siteServiceProvider;
-        private readonly ConcurrentDictionary<ListIdentity, IListInfo> listInfos = new ConcurrentDictionary<ListIdentity, IListInfo>();
+        private readonly object listInfoMapSync = new object();
+        private readonly IList<(ListIdentity listIdentity, IListInfo listInfo)> listInfoMap =
+            new List<(ListIdentity listIdentity, IListInfo listInfo)>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SharePointMetadataCache"/> class.
         /// </summary>
-        /// <param name="libraryService">The library service.</param>
+        /// <param name="listService">The list service.</param>
         /// <param name="siteServiceProvider">The site service provider.</param>
         /// <param name="logManager">Optional. Manager for log.</param>
-        public SharePointMetadataCache(IListService libraryService, ISiteServiceProvider siteServiceProvider, ILogManager logManager = null)
+        public SharePointMetadataCache(IListService listService, ISiteServiceProvider siteServiceProvider, ILogManager logManager = null)
             : base(logManager)
         {
-            this.libraryService = libraryService;
+            this.listService = listService;
             this.siteServiceProvider = siteServiceProvider;
         }
 
@@ -51,7 +53,10 @@ namespace Kephas.SharePoint.Reflection
         /// </summary>
         public void Clear()
         {
-            this.listInfos.Clear();
+            lock (this.listInfoMapSync)
+            {
+                this.listInfoMap.Clear();
+            }
         }
 
         /// <summary>
@@ -64,14 +69,13 @@ namespace Kephas.SharePoint.Reflection
         /// </returns>
         public async Task<IListInfo> GetListInfoAsync(string listFullName, CancellationToken cancellationToken = default)
         {
-            var key = new ListIdentity(listFullName);
-            this.listInfos.TryGetValue(key, out var typeInfo);
+            var (key, typeInfo) = this.TryGetListEntry(new ListIdentity(listFullName));
             if (typeInfo != null)
             {
                 return typeInfo;
             }
 
-            var (siteName, listName) = this.libraryService.GetListPathFragments(listFullName);
+            var (siteName, listName) = this.listService.GetListPathFragments(listFullName);
             var siteService = this.siteServiceProvider.GetSiteService(siteName);
             var list = await siteService.GetListAsync(listFullName).PreserveThreadContext();
 
@@ -90,8 +94,7 @@ namespace Kephas.SharePoint.Reflection
         /// </returns>
         public async Task<IListInfo> GetListInfoAsync(Guid siteId, string listName, CancellationToken cancellationToken = default)
         {
-            var key = new ListIdentity(siteId, listName);
-            this.listInfos.TryGetValue(key, out var typeInfo);
+            var (key, typeInfo) = this.TryGetListEntry(new ListIdentity(siteId, listName));
             if (typeInfo != null)
             {
                 return typeInfo;
@@ -115,8 +118,7 @@ namespace Kephas.SharePoint.Reflection
         /// </returns>
         public async Task<IListInfo> GetListInfoAsync(Guid siteId, Guid listId, CancellationToken cancellationToken = default)
         {
-            var key = new ListIdentity(siteId, listId);
-            this.listInfos.TryGetValue(key, out var typeInfo);
+            var (key, typeInfo) = this.TryGetListEntry(new ListIdentity(siteId, listId));
             if (typeInfo != null)
             {
                 return typeInfo;
@@ -135,8 +137,7 @@ namespace Kephas.SharePoint.Reflection
         /// <param name="listName">Name of the list.</param>
         public void Invalidate(Guid siteId, string listName)
         {
-            var key = new ListIdentity(siteId, listName);
-            if (!this.listInfos.TryRemove(key, out var typeInfo))
+            if (!this.TryRemoveListEntry(new ListIdentity(siteId, listName)))
             {
                 this.Logger.Info("List {list} not found to invalidate the cache.", $"{siteId}/{listName}");
             }
@@ -148,11 +149,36 @@ namespace Kephas.SharePoint.Reflection
         /// <param name="listFullName">Full name of the list.</param>
         public void Invalidate(string listFullName)
         {
-            var key = new ListIdentity(listFullName);
-            if (!this.listInfos.TryRemove(key, out var typeInfo))
+            if (!this.TryRemoveListEntry(new ListIdentity(listFullName)))
             {
                 this.Logger.Info("List {list} not found to invalidate the cache.", listFullName);
             }
+        }
+
+        private (ListIdentity listIdentity, IListInfo listInfo) TryGetListEntry(ListIdentity key)
+        {
+            lock (this.listInfoMapSync)
+            {
+                var result = this.listInfoMap.FirstOrDefault(e => e.listIdentity.Equals(key));
+                return result.listIdentity == null ? (key, null) : result;
+            }
+        }
+
+        private bool TryRemoveListEntry(ListIdentity key)
+        {
+            lock (this.listInfoMapSync)
+            {
+                for (var i = 0; i < this.listInfoMap.Count; i++)
+                {
+                    if (this.listInfoMap[i].listIdentity == key)
+                    {
+                        this.listInfoMap.RemoveAt(i);
+                        return true;
+                    }
+                }
+            }
+
+            return false;
         }
 
         private async Task<IListInfo> GetOrUpdateListInfoAsync(ListIdentity key, ISiteService siteService, List list)
@@ -164,11 +190,22 @@ namespace Kephas.SharePoint.Reflection
             await clientContext.ExecuteQueryAsync().PreserveThreadContext();
 
             key.UpdateIdentity(siteService, list);
-            var typeInfo = this.listInfos.GetOrAdd(key, k => new ListInfo(list, siteService.SiteName ?? siteService.SiteUrl.ToString(), siteService.SiteUrl.ToString()));
-            return typeInfo;
+
+            lock (this.listInfoMapSync)
+            {
+                var typeInfo = this.listInfoMap.FirstOrDefault(e => e.listIdentity.Equals(key)).listInfo;
+                if (typeInfo != null)
+                {
+                    return typeInfo;
+                }
+
+                typeInfo = new ListInfo(list, siteService.SiteName ?? siteService.SiteUrl.ToString(), siteService.SiteUrl.ToString());
+                this.listInfoMap.Add((key, typeInfo));
+                return typeInfo;
+            }
         }
 
-        private class ListIdentity : IEquatable<ListIdentity>
+        internal class ListIdentity : IEquatable<ListIdentity>
         {
             private HashSet<string> identities = new HashSet<string>();
 
@@ -211,6 +248,16 @@ namespace Kephas.SharePoint.Reflection
             }
 
             /// <summary>
+            /// Determines whether the specified object is equal to the current object.
+            /// </summary>
+            /// <param name="obj">The object to compare with the current object.</param>
+            /// <returns>
+            /// <see langword="true" /> if the specified object  is equal to the current object; otherwise,
+            /// <see langword="false" />.
+            /// </returns>
+            public override bool Equals(object obj) => this.Equals(obj as ListIdentity);
+
+            /// <summary>
             /// Updates the identity.
             /// </summary>
             /// <param name="siteService">The site service.</param>
@@ -222,6 +269,15 @@ namespace Kephas.SharePoint.Reflection
                 this.identities.Add($"{siteService.SiteUrl:N}/{list.Id:N}".ToLower());
                 this.identities.Add($"{siteService.SiteId:N}/{list.Title}".ToLower());
                 this.identities.Add($"{siteService.SiteId:N}/{list.Id:N}".ToLower());
+            }
+
+            /// <summary>
+            /// Updates the identity.
+            /// </summary>
+            /// <param name="identities">The identities.</param>
+            internal void UpdateIdentity(IEnumerable<string> identities)
+            {
+                this.identities.AddRange(identities);
             }
         }
     }

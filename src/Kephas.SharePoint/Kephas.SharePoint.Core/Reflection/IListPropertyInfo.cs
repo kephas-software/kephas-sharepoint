@@ -17,5 +17,12 @@ namespace Kephas.SharePoint.Reflection
     /// </summary>
     public interface IListPropertyInfo : IPropertyInfo
     {
+        /// <summary>
+        /// Gets the title.
+        /// </summary>
+        /// <value>
+        /// The title.
+        /// </value>
+        public string Title { get; }
     }
 }

@@ -3,6 +3,10 @@
     <PropertyGroup>
         <TargetFrameworks>netcoreapp3.1;net461</TargetFrameworks>
         <LangVersion>latest</LangVersion>
+
+        <SignAssembly>True</SignAssembly>
+        <AssemblyOriginatorKeyFile>..\..\..\..\..\..\devops\kephas-apps\kephas-apps.snk</AssemblyOriginatorKeyFile>
+
         <RootNamespace>Kephas.SharePoint.Tests</RootNamespace>
         <UserSecretsId>20a1887e-d852-431d-9278-8e62cf36b05b</UserSecretsId>
     </PropertyGroup>
