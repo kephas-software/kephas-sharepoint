@@ -18,6 +18,8 @@ namespace Kephas.SharePoint
     using Kephas.Services;
     using Microsoft.SharePoint.Client;
 
+    using MsListItem = Microsoft.SharePoint.Client.ListItem;
+
     /// <summary>
     /// Interface for site service.
     /// </summary>
@@ -105,7 +107,7 @@ namespace Kephas.SharePoint
         /// <returns>
         /// An asynchronous result that yields the list items.
         /// </returns>
-        Task<IEnumerable<ListItem>> GetListItemsAsync(List list, CamlQuery query, CancellationToken cancellationToken = default);
+        Task<IEnumerable<MsListItem>> GetListItemsAsync(List list, CamlQuery query, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Gets the list items.
@@ -115,6 +117,6 @@ namespace Kephas.SharePoint
         /// <returns>
         /// The list items.
         /// </returns>
-        IEnumerable<ListItem> GetListItems(List list, CamlQuery query);
+        IEnumerable<MsListItem> GetListItems(List list, CamlQuery query);
     }
 }

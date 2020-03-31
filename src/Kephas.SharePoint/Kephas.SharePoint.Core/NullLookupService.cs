@@ -30,13 +30,13 @@ namespace Kephas.SharePoint
         /// <param name="siteId">Identifier for the site.</param>
         /// <param name="listId">Identifier for the list.</param>
         /// <param name="refField">The reference field.</param>
-        /// <param name="doc">The document to be searched for.</param>
+        /// <param name="listItem">The list item to be searched for.</param>
         /// <param name="textFinder">The text finder.</param>
         /// <param name="cancellationToken">Optional. A token that allows processing to be cancelled.</param>
         /// <returns>
         /// An asynchronous result that yields the reference values and a success flag.
         /// </returns>
-        public Task<IOperationResult<(int? id, object value, bool success)>> TryFindReferenceAsync(Guid siteId, string listId, string refField, Document doc, ITextFinder textFinder, CancellationToken cancellationToken = default)
+        public Task<IOperationResult<(int? id, object value, bool success)>> TryFindReferenceAsync(Guid siteId, string listId, string refField, ListItem listItem, ITextFinder textFinder, CancellationToken cancellationToken = default)
         {
             return Task.FromResult<IOperationResult<(int? id, object value, bool success)>>(new OperationResult<(int? id, object value, bool success)>());
         }

@@ -13,28 +13,28 @@ namespace Kephas.SharePoint
     using Kephas.Diagnostics.Contracts;
 
     /// <summary>
-    /// A library service extensions.
+    /// A list service extensions.
     /// </summary>
-    public static class LibraryServiceExtensions
+    public static class ListServiceExtensions
     {
         /// <summary>
-        /// Gets the document library.
+        /// Gets the containing list.
         /// </summary>
-        /// <param name="libraryService">The libraryService to act on.</param>
-        /// <param name="doc">The document.</param>
+        /// <param name="listService">The list service.</param>
+        /// <param name="listItem">The list item.</param>
         /// <returns>
         /// The document library.
         /// </returns>
-        public static string GetDocumentLibrary(this IListService libraryService, Document doc)
+        public static string GetContainingList(this IListService listService, ListItem listItem)
         {
-            Requires.NotNull(libraryService, nameof(libraryService));
+            Requires.NotNull(listService, nameof(listService));
 
-            string defaultLibrarySpec = libraryService.GetDefaultLibrary();
-            var librarySpec = string.IsNullOrEmpty(doc.Library)
+            string defaultLibrarySpec = listService.GetDefaultLibrary();
+            var librarySpec = string.IsNullOrEmpty(listItem.List)
                 ? defaultLibrarySpec
-                : string.IsNullOrEmpty(doc.Site)
-                    ? doc.Library
-                    : $"{doc.Site}/{doc.Library}";
+                : string.IsNullOrEmpty(listItem.Site)
+                    ? listItem.List
+                    : $"{listItem.Site}/{listItem.List}";
             return librarySpec;
         }
     }

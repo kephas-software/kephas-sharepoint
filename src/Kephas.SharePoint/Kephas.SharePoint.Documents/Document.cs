@@ -16,15 +16,27 @@ namespace Kephas.SharePoint
     /// <summary>
     /// A document.
     /// </summary>
-    public class Document : Expando
+    public class Document : ListItem
     {
         /// <summary>
-        /// Gets or sets the identifier.
+        /// Gets or sets the containing list.
         /// </summary>
         /// <value>
-        /// The identifier.
+        /// The containing list.
         /// </value>
-        public long Id { get; set; }
+        public override string List
+        {
+            get => this.Library;
+            set => this.Library = value;
+        }
+
+        /// <summary>
+        /// Gets or sets the containing list.
+        /// </summary>
+        /// <value>
+        /// The containing list.
+        /// </value>
+        public string Library { get; set; }
 
         /// <summary>
         /// Gets or sets the name.
@@ -33,14 +45,6 @@ namespace Kephas.SharePoint
         /// The name.
         /// </value>
         public string Name { get; set; }
-
-        /// <summary>
-        /// Gets or sets the pathname of the containing folder.
-        /// </summary>
-        /// <value>
-        /// The full pathname of the containing folder.
-        /// </value>
-        public string Folder { get; set; }
 
         /// <summary>
         /// Gets or sets the name of the original file.
@@ -57,30 +61,6 @@ namespace Kephas.SharePoint
         /// The pathname of the original folder.
         /// </value>
         public string OriginalFolder { get; set; }
-
-        /// <summary>
-        /// Gets or sets the title.
-        /// </summary>
-        /// <value>
-        /// The title.
-        /// </value>
-        public string Title { get; set; }
-
-        /// <summary>
-        /// Gets or sets the site.
-        /// </summary>
-        /// <value>
-        /// The site.
-        /// </value>
-        public string Site { get; set; }
-
-        /// <summary>
-        /// Gets or sets the library.
-        /// </summary>
-        /// <value>
-        /// The library.
-        /// </value>
-        public string Library { get; set; }
 
         /// <summary>
         /// Gets or sets the content.
@@ -121,14 +101,6 @@ namespace Kephas.SharePoint
         /// The search keywords.
         /// </value>
         public string[] Keywords { get; set; }
-
-        /// <summary>
-        /// Gets or sets the document properties.
-        /// </summary>
-        /// <value>
-        /// The document properties.
-        /// </value>
-        public IExpando Fields { get; set; } = new Expando();
 
         /// <summary>
         /// Returns a string that represents the current object.
