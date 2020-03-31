@@ -27,9 +27,9 @@ namespace Kephas.SharePoint.Tests.Data.Linq
     public class SharePointQueryProviderTest : DataTestBase
     {
         [Test]
-        [TestCase((string)null)]
-        [TestCase("sc")]
-        public async Task Execute(string siteNamespace)
+        [TestCase((string)null, "Inbox")]
+        [TestCase("sc", "Unsorted")]
+        public async Task Execute(string siteNamespace, string listName)
         {
             var container = this.CreateContainer();
 
@@ -40,7 +40,7 @@ namespace Kephas.SharePoint.Tests.Data.Linq
 
             var dataContext = Substitute.For<IDataContext>();
             dataContext.Attach(Arg.Any<object>()).Returns(ci => new EntityEntry(ci.Arg<object>()));
-            var queryContext = new QueryOperationContext(dataContext).ListFullName($"{siteName}/Unsorted");
+            var queryContext = new QueryOperationContext(dataContext).ListFullName($"{siteName}/{listName}");
 
             var provider = new SharePointQueryProvider(
                 queryContext,
