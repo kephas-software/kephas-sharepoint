@@ -18,6 +18,6 @@ namespace Kephas.SharePoint
         /// <summary>
         /// The folder path key.
         /// </summary>
-        public const string FolderPathKey = "FolderPath";
+        public static readonly string FolderPathKey = "FolderPath";
     }
 }
