@@ -48,13 +48,24 @@
           <e p="SharePointContextExtensions.cs" t="Include" />
           <e p="SharePointRef.cs" t="Include" />
         </e>
+        <e p="FieldSettings.cs" t="Include" />
         <e p="IDefaultSettingsProvider.cs" t="Include" />
         <e p="IListService.cs" t="Include" />
+        <e p="IListUpdaterService.cs" t="Include" />
+        <e p="ILookupService.cs" t="Include" />
+        <e p="ISharePointUpdaterService.cs" t="Include" />
         <e p="ISiteSettingsProvider.cs" t="Include" />
         <e p="Kephas.SharePoint.Core.csproj" t="IncludeRecursive" />
+        <e p="LibrarySettings.cs" t="Include" />
+        <e p="ListItem.cs" t="Include" />
         <e p="ListService.cs" t="Include" />
+        <e p="ListServiceExtensions.cs" t="Include" />
+        <e p="LookupListSettings.cs" t="Include" />
+        <e p="LookupSettings.cs" t="Include" />
         <e p="MaxFileSizeExceededException.cs" t="Include" />
         <e p="NullDefaultSettingsProvider.cs" t="Include" />
+        <e p="NullListUpdaterService.cs" t="Include" />
+        <e p="NullLookupService.cs" t="Include" />
         <e p="NullSiteSettingsProvider.cs" t="Include" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
@@ -74,8 +85,17 @@
           <e p="NullSharePointMetadataCache.cs" t="Include" />
         </e>
         <e p="SharePointException.cs" t="Include" />
+        <e p="SharePointSettings.cs" t="Include" />
+        <e p="SharePointUpdaterService.cs" t="Include" />
         <e p="SiteSettings.cs" t="Include" />
         <e p="stylecop.json" t="Include" />
+        <e p="TextProcessing" t="Include">
+          <e p="FindContext.cs" t="Include" />
+          <e p="FindResult.cs" t="Include" />
+          <e p="IFindContext.cs" t="Include" />
+          <e p="IFindResult.cs" t="Include" />
+          <e p="ITextFinder.cs" t="Include" />
+        </e>
       </e>
       <e p="Kephas.SharePoint.Data" t="IncludeRecursive">
         <e p="Activation" t="Include">
@@ -109,6 +129,9 @@
             </e>
           </e>
         </e>
+        <e p="Properties" t="Include">
+          <e p="AppInfo.Manifest.cs" t="Include" />
+        </e>
         <e p="Reflection" t="Include">
           <e p="ListInfo.cs" t="Include" />
           <e p="ListLookupPropertyInfo.cs" t="Include" />
@@ -124,15 +147,8 @@
         <e p="DefaultSettingsProvider.cs" t="Include" />
         <e p="Document.cs" t="Include" />
         <e p="DocumentFields.cs" t="Include" />
-        <e p="FieldSettings.cs" t="Include" />
-        <e p="ILookupService.cs" t="Include" />
         <e p="InteractionHelper.cs" t="Include" />
         <e p="Kephas.SharePoint.Documents.csproj" t="IncludeRecursive" />
-        <e p="LibraryServiceExtensions.cs" t="Include" />
-        <e p="LibrarySettings.cs" t="Include" />
-        <e p="LookupListSettings.cs" t="Include" />
-        <e p="LookupSettings.cs" t="Include" />
-        <e p="NullLookupService.cs" t="Include" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="net461" t="Include">
@@ -146,20 +162,12 @@
         <e p="Rules" t="Include">
           <e p="IDocumentRule.cs" t="Include" />
         </e>
-        <e p="SharePointSettings.cs" t="Include" />
         <e p="SiteSettingsProvider.cs" t="Include" />
         <e p="Sources" t="Include">
           <e p="DocumentSourceBase.cs" t="Include" />
           <e p="IDocumentSource.cs" t="Include" />
         </e>
         <e p="stylecop.json" t="Include" />
-        <e p="TextProcessing" t="Include">
-          <e p="FindContext.cs" t="Include" />
-          <e p="FindResult.cs" t="Include" />
-          <e p="IFindContext.cs" t="Include" />
-          <e p="IFindResult.cs" t="Include" />
-          <e p="ITextFinder.cs" t="Include" />
-        </e>
       </e>
       <e p="Kephas.SharePoint.sln" t="IncludeFlat" />
       <e p="packages" t="ExcludeRecursive" />
@@ -203,6 +211,9 @@
                 <e p="Kephas.SharePoint.Data.Tests.AssemblyInfo.cs" t="Include" />
               </e>
             </e>
+          </e>
+          <e p="Reflection" t="Include">
+            <e p="SharePointMetadataCacheTest.cs" t="Include" />
           </e>
           <e p="stylecop.json" t="Include" />
         </e>

@@ -16,6 +16,7 @@ namespace Kephas.SharePoint.Data.Linq
     using System.Reflection;
     using System.Threading;
     using System.Threading.Tasks;
+
     using Kephas.Data;
     using Kephas.Data.Linq;
     using Kephas.Diagnostics.Contracts;

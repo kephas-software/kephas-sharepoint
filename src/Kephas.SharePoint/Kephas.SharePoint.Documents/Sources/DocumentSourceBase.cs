@@ -8,6 +8,8 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using Kephas.Operations;
+
 namespace Kephas.SharePoint.Sources
 {
     using System;
@@ -38,9 +40,7 @@ namespace Kephas.SharePoint.Sources
     {
         private readonly IMessageProcessor messageProcessor;
         private readonly IEventHub eventHub;
-        private Task iterationTask;
         private IEventSubscription retrySubscription;
-        private bool stopIteration = false;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DocumentSourceBase{TSettings}"/> class.
@@ -67,7 +67,7 @@ namespace Kephas.SharePoint.Sources
         /// <value>
         /// The settings.
         /// </value>
-        public TSettings Settings { get; }
+        protected TSettings Settings { get; }
 
         /// <summary>
         /// Gets the defaults.
@@ -75,7 +75,7 @@ namespace Kephas.SharePoint.Sources
         /// <value>
         /// The defaults.
         /// </value>
-        public DefaultSettings Defaults { get; }
+        protected DefaultSettings Defaults { get; }
 
         /// <summary>
         /// Gets a context for the application.
@@ -83,7 +83,7 @@ namespace Kephas.SharePoint.Sources
         /// <value>
         /// The application context.
         /// </value>
-        public IContext AppContext { get; private set; }
+        protected IContext AppContext { get; private set; }
 
         /// <summary>
         /// Initializes the source asynchronously.
@@ -93,14 +93,13 @@ namespace Kephas.SharePoint.Sources
         /// <returns>
         /// An asynchronous result.
         /// </returns>
-        public virtual Task InitializeAsync(IContext context = null, CancellationToken cancellationToken = default)
+        public virtual Task InitializeAsync(IContext? context = null, CancellationToken cancellationToken = default)
         {
             this.AppContext = context;
-            this.iterationTask = this.StartIterationAsync();
             this.retrySubscription = this.eventHub.Subscribe<RetryActivitySignal>(
                 (e, ctx, token) => e.ActivityContext[InteractionHelper.SourceArgName] == null
                                     || this.GetServiceName().Equals(e.ActivityContext[InteractionHelper.SourceArgName])
-                                        ? this.RetryAsync(e.ActivityContext, token)
+                                        ? this.RetryUploadFailedDocumentsAsync(e.ActivityContext, token)
                                         : Task.CompletedTask);
             return Task.CompletedTask;
         }
@@ -113,16 +112,19 @@ namespace Kephas.SharePoint.Sources
         /// <returns>
         /// An asynchronous result.
         /// </returns>
-        public virtual async Task FinalizeAsync(IContext context = null, CancellationToken cancellationToken = default)
+        public virtual async Task FinalizeAsync(IContext? context = null, CancellationToken cancellationToken = default)
         {
-            this.stopIteration = true;
-            if (this.iterationTask != null)
-            {
-                await this.iterationTask.PreserveThreadContext();
-            }
-
             this.retrySubscription?.Dispose();
         }
+
+        /// <summary>
+        /// Uploads the pending documents asynchronously.
+        /// </summary>
+        /// <param name="context">Optional. The context.</param>
+        /// <returns>
+        /// An asynchronous result that yields an operation result indicating whether there is more work to do.
+        /// </returns>
+        public abstract Task<IOperationResult<bool>> UploadPendingDocumentsAsync(IContext? context = null);
 
         /// <summary>
         /// Retries to upload the failed documents asynchronously.
@@ -132,36 +134,13 @@ namespace Kephas.SharePoint.Sources
         /// <returns>
         /// An asynchronous result.
         /// </returns>
-        protected virtual Task RetryAsync(IActivityContext retryContext, CancellationToken cancellationToken = default)
+        public virtual Task<IOperationResult> RetryUploadFailedDocumentsAsync(
+            IActivityContext retryContext,
+            CancellationToken cancellationToken = default)
         {
-            return Task.CompletedTask;
-        }
-
-        /// <summary>
-        /// Starts an iteration asynchronously.
-        /// </summary>
-        /// <returns>
-        /// An asynchronous result.
-        /// </returns>
-        protected virtual async Task StartIterationAsync()
-        {
-            var workToDo = await this.UploadPendingDocumentsAsync().PreserveThreadContext();
-
-            if (!this.stopIteration)
-            {
-                // wait 3 seconds for the next iteration;
-                if (!workToDo)
-                {
-                    await Task.Delay(3000).PreserveThreadContext();
-                }
-
-                // start a new iteration if not required to stop.
-                this.iterationTask = this.stopIteration ? null : this.StartIterationAsync();
-            }
-            else
-            {
-                this.iterationTask = null;
-            }
+            return Task.FromResult<IOperationResult>(
+                new OperationResult()
+                    .Complete(TimeSpan.Zero, OperationState.NotStarted));
         }
 
         /// <summary>
@@ -174,14 +153,6 @@ namespace Kephas.SharePoint.Sources
         {
             return this.GetType().GetCustomAttribute<ServiceNameAttribute>()?.Value;
         }
-
-        /// <summary>
-        /// Uploads the pending documents asynchronously.
-        /// </summary>
-        /// <returns>
-        /// An asynchronous result that yields whether there is more work to do.
-        /// </returns>
-        protected abstract Task<bool> UploadPendingDocumentsAsync();
 
         /// <summary>
         /// Uploads a document asynchronous.

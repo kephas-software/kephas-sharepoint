@@ -22,7 +22,6 @@ namespace Kephas.SharePoint.Data.Linq
     /// <typeparam name="T">The entity type.</typeparam>
     public class SharePointQuery<T> : IQueryable<T>
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="SharePointQuery{T}"/> class.
         /// </summary>

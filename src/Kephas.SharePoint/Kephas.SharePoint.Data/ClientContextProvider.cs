@@ -14,10 +14,12 @@ namespace Kephas.SharePoint
     using System.Net;
     using System.Security;
     using System.Threading.Tasks;
+
     using Kephas.Collections;
     using Kephas.Cryptography;
     using Kephas.Threading.Tasks;
     using Microsoft.SharePoint.Client;
+
     using AuthenticationManager = OfficeDevPnP.Core.AuthenticationManager;
 
     /// <summary>

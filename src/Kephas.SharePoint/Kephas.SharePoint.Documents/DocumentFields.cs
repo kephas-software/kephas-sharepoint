@@ -19,5 +19,10 @@ namespace Kephas.SharePoint
         /// The folder path key.
         /// </summary>
         public static readonly string FolderPathKey = "FolderPath";
+
+        /// <summary>
+        /// The redirect key.
+        /// </summary>
+        public static readonly string RedirectKey = "Redirect";
     }
 }
