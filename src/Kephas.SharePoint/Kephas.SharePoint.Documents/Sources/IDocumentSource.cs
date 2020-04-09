@@ -46,5 +46,24 @@ namespace Kephas.SharePoint.Sources
         Task<IOperationResult> RetryUploadFailedDocumentsAsync(
             IActivityContext retryContext,
             CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Handles the provided document, preparing it for upload
+        /// and eventually uploading it.
+        /// </summary>
+        /// <remarks>
+        /// This method is typically called when redirecting from one source to another.
+        /// Once a document was redirected, should not be redirected anymore.
+        /// </remarks>
+        /// <param name="doc">The document to handle.</param>
+        /// <param name="context">Optional. The handling context.</param>
+        /// <param name="cancellationToken">Optional. The cancellation token.</param>
+        /// <returns>
+        /// An asynchronous result that yields an operation result.
+        /// </returns>
+        Task<IOperationResult> HandleDocumentAsync(
+            Document doc,
+            IContext? context = null,
+            CancellationToken cancellationToken = default);
     }
 }
