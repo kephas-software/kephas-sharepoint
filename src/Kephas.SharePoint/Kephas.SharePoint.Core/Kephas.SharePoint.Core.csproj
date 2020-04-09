@@ -4,12 +4,12 @@
         <TargetFrameworks>netstandard2.1;net461</TargetFrameworks>
         <LangVersion>latest</LangVersion>
         <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-        <Version>3.2.1</Version>
+        <Version>3.3.0-dev.1</Version>
         <Authors>Kephas Software SRL</Authors>
         <Company>Kephas Software SRL</Company>
         <Product>Kephas Integration Services for Microsoft (r) SharePoint</Product>
-        <AssemblyVersion>3.2.1.0</AssemblyVersion>
-        <FileVersion>3.2.1.0</FileVersion>
+        <AssemblyVersion>3.3.0.0</AssemblyVersion>
+        <FileVersion>3.3.0.0</FileVersion>
         <Description>Provides a common infrastructure for all the other Microsoft SharePoint integration components.</Description>
         <Copyright>Copyright Kephas Software SRL 2019-2020</Copyright>
         <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
@@ -55,8 +55,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Kephas.Core" Version="7.5.2" />
-        <PackageReference Include="Kephas.Data" Version="7.5.2" />
+        <PackageReference Include="Kephas.Core" Version="7.6.0-dev.1" />
+        <PackageReference Include="Kephas.Data" Version="7.6.0-dev.1" />
         <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
