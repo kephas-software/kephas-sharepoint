@@ -27,10 +27,13 @@ namespace Kephas.SharePoint.Sources
         /// Uploads the pending documents asynchronously.
         /// </summary>
         /// <param name="context">Optional. The context.</param>
+        /// <param name="cancellationToken">Optional. The cancellation token.</param>
         /// <returns>
         /// An asynchronous result that yields an operation result indicating whether there is more work to do.
         /// </returns>
-        Task<IOperationResult<bool>> UploadPendingDocumentsAsync(IContext? context = null);
+        Task<IOperationResult<bool>> UploadPendingDocumentsAsync(
+            IContext? context = null,
+            CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Retries to upload the failed documents asynchronously.
