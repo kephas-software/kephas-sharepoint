@@ -15,12 +15,13 @@ namespace Kephas.SharePoint.Sources
 
     using Kephas.Operations;
     using Kephas.Services;
+    using Kephas.SharePoint.Sources.AttributedModel;
     using Kephas.Workflow;
 
     /// <summary>
     /// Interface for a document source.
     /// </summary>
-    [SingletonAppServiceContract(AllowMultiple = true)]
+    [SingletonAppServiceContract(AllowMultiple = true, MetadataAttributes = new[] { typeof(RedirectPatternAttribute) })]
     public interface IDocumentSource : IAsyncInitializable, IAsyncFinalizable
     {
         /// <summary>

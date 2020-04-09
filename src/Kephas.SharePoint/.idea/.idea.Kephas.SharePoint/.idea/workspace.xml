@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b913be0d-6eda-4c28-adc9-e4108240b7f5" name="Default Changelist" comment="Added missing cancellation token to the IDocumentSource.UploadPendingDocumentsAsync.">
+    <list default="true" id="b913be0d-6eda-4c28-adc9-e4108240b7f5" name="Default Changelist" comment="Added IDocumentSource.HandleDocumentAsync() fore redirected documents.">
+      <change afterPath="$PROJECT_DIR$/Kephas.SharePoint.Core/IListUpdaterBehavior.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Kephas.SharePoint.Documents/Sources/AttributedModel/RedirectPatternAttribute.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Kephas.SharePoint.Documents/Sources/Composition/DocumentSourceMetadata.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Kephas.SharePoint/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Kephas.SharePoint/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Kephas.SharePoint/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Kephas.SharePoint/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kephas.SharePoint.Documents/Sources/DocumentSourceBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Kephas.SharePoint.Documents/Sources/DocumentSourceBase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kephas.SharePoint.Client/Kephas.SharePoint.Client.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Kephas.SharePoint.Client/Kephas.SharePoint.Client.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kephas.SharePoint.Core/Kephas.SharePoint.Core.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Kephas.SharePoint.Core/Kephas.SharePoint.Core.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kephas.SharePoint.Data/Kephas.SharePoint.Data.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Kephas.SharePoint.Data/Kephas.SharePoint.Data.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kephas.SharePoint.Documents/Kephas.SharePoint.Documents.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Kephas.SharePoint.Documents/Kephas.SharePoint.Documents.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Kephas.SharePoint.Documents/Sources/IDocumentSource.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Kephas.SharePoint.Documents/Sources/IDocumentSource.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -21,9 +28,11 @@
     <setting file="file://$PROJECT_DIR$/Tests/Kephas.SharePoint.Core.Tests/Data/SharePointRefTest.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Kephas.SharePoint.Core/MaxFileSizeExceededException.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Kephas.SharePoint.Core/IListService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Kephas.SharePoint.Documents/Sources/AttributedModel/RedirectPatternAttribute.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Kephas.SharePoint.Core/Data/SharePointRef.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/DD6EFE34-E08A-43AF-B51F-0D2219E75933/fb/55279609/ClientContext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Kephas.SharePoint.Core/Data/SharePointContextExtensions.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Kephas.SharePoint.Documents/Sources/Composition/DocumentSourceMetadata.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Kephas.SharePoint.Core/Reflection/IListPropertyInfo.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/EA64558B-9A23-4AB9-AA10-BC217AFF0073/09/18a0a8e3/AuthenticationManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5A41D6B7-1898-42EC-A409-FD0B1C3E3DCF/fe/16c618dd/ICredentials.cs" root0="SKIP_HIGHLIGHTING" />
@@ -42,6 +51,7 @@
     <setting file="file://$PROJECT_DIR$/Kephas.SharePoint.Data/Data/Linq/SharePointQueryProvider.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Tests/Kephas.SharePoint.Data.Tests/Data/SharePointDataContextTest.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Kephas.SharePoint.Data/Reflection/SharePointMetadataCache.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Kephas.SharePoint.Core/IListUpdaterBehavior.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Kephas.SharePoint.Data/SiteServiceProvider.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Tests/Kephas.SharePoint.Data.Tests/Data/Linq/SharePointQueryProviderTest.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Kephas.SharePoint.Data/Reflection/ListInfo.cs" root0="FORCE_HIGHLIGHTING" />
@@ -56,6 +66,7 @@
     <setting file="file://$PROJECT_DIR$/../../../kephas/src/Kephas.Core/Threading/Tasks/TaskHelper.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Kephas.SharePoint.Core/ISiteSettingsProvider.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Kephas.SharePoint.Core/IDefaultSettingsProvider.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../kephas/src/Kephas.Core/Services/MetadataValueAttribute.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Kephas.SharePoint.Core/ListService.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
@@ -78,9 +89,12 @@
         <option value="$PROJECT_DIR$/Kephas.SharePoint.Data/ClientContextProvider.cs" />
         <option value="$PROJECT_DIR$/Kephas.SharePoint.Data/Data/Linq/SharePointQuery.cs" />
         <option value="$PROJECT_DIR$/Kephas.SharePoint.Data/Data/Linq/SharePointQueryProvider.cs" />
-        <option value="$PROJECT_DIR$/Kephas.SharePoint.Core/Kephas.SharePoint.Core.csproj" />
-        <option value="$PROJECT_DIR$/Kephas.SharePoint.Documents/Sources/IDocumentSource.cs" />
         <option value="$PROJECT_DIR$/Kephas.SharePoint.Documents/Sources/DocumentSourceBase.cs" />
+        <option value="$PROJECT_DIR$/Kephas.SharePoint.Core/IListUpdaterBehavior.cs" />
+        <option value="$PROJECT_DIR$/Kephas.SharePoint.Documents/Sources/IDocumentSource.cs" />
+        <option value="$PROJECT_DIR$/Kephas.SharePoint.Documents/Sources/Composition/DocumentSourceMetadata.cs" />
+        <option value="$PROJECT_DIR$/Kephas.SharePoint.Documents/Sources/AttributedModel/RedirectPatternAttribute.cs" />
+        <option value="$PROJECT_DIR$/Kephas.SharePoint.Core/Kephas.SharePoint.Core.csproj" />
       </list>
     </option>
   </component>
@@ -118,7 +132,7 @@
       <workItem from="1573028537260" duration="2836000" />
       <workItem from="1573142396324" duration="664000" />
       <workItem from="1583496242946" duration="3811000" />
-      <workItem from="1586448030041" duration="8754000" />
+      <workItem from="1586448030041" duration="10670000" />
     </task>
     <task id="LOCAL-00001" summary="Upgrade to Kephas 7.5.0-dev.17">
       <created>1583417263702</created>
@@ -169,7 +183,14 @@
       <option name="project" value="LOCAL" />
       <updated>1586461469196</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Added IDocumentSource.HandleDocumentAsync() fore redirected documents.">
+      <created>1586467826902</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1586467826902</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -196,28 +217,30 @@
     <MESSAGE value="Cosmetic changes" />
     <MESSAGE value="Prepared the DocumentSources for integration in scheduler." />
     <MESSAGE value="Added missing cancellation token to the IDocumentSource.UploadPendingDocumentsAsync." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added missing cancellation token to the IDocumentSource.UploadPendingDocumentsAsync." />
+    <MESSAGE value="Added IDocumentSource.HandleDocumentAsync() fore redirected documents." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added IDocumentSource.HandleDocumentAsync() fore redirected documents." />
   </component>
   <component name="WindowStateProjectService">
     <state x="92" y="92" width="1256" height="676" key="DiffContextDialog" timestamp="1583417868873">
       <screen x="0" y="0" width="1440" height="860" />
     </state>
     <state x="92" y="92" width="1256" height="676" key="DiffContextDialog/0.0.1440.860/1440.-540.2560.1400@0.0.1440.860" timestamp="1583417868873" />
-    <state x="-1408" y="221" key="RiderGenerateDialog" timestamp="1583496817982">
-      <screen x="-2560" y="0" width="2560" height="1040" />
+    <state x="3712" y="298" key="RiderGenerateDialog" timestamp="1586469776134">
+      <screen x="2560" y="0" width="2560" height="1400" />
     </state>
     <state x="-1408" y="221" key="RiderGenerateDialog/0.0.2560.1400/-2560.0.2560.1040@-2560.0.2560.1040" timestamp="1583496817982" />
-    <state x="3115" y="265" key="Vcs.Push.Dialog.v2" timestamp="1586461471410">
+    <state x="3712" y="298" key="RiderGenerateDialog/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1586469776134" />
+    <state x="3115" y="265" key="Vcs.Push.Dialog.v2" timestamp="1586467834927">
       <screen x="2560" y="0" width="2560" height="1400" />
     </state>
     <state x="312" y="163" key="Vcs.Push.Dialog.v2/0.0.1440.860/1440.-540.2560.1400@0.0.1440.860" timestamp="1583774626117" />
-    <state x="3115" y="265" key="Vcs.Push.Dialog.v2/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1586461471410" />
-    <state x="3186" y="207" width="1309" height="987" key="find.popup" timestamp="1586461390331">
+    <state x="3115" y="265" key="Vcs.Push.Dialog.v2/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1586467834927" />
+    <state x="3186" y="207" width="1309" height="987" key="find.popup" timestamp="1586470293770">
       <screen x="2560" y="0" width="2560" height="1400" />
     </state>
     <state x="352" y="127" width="736" height="606" key="find.popup/0.0.1440.860/1440.-540.2560.1400@0.0.1440.860" timestamp="1583417231787" />
     <state x="-1934" y="154" width="1309" height="733" key="find.popup/0.0.2560.1400/-2560.0.2560.1040@-2560.0.2560.1040" timestamp="1583826719614" />
-    <state x="3186" y="207" width="1309" height="987" key="find.popup/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1586461390331" />
+    <state x="3186" y="207" width="1309" height="987" key="find.popup/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1586470293770" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

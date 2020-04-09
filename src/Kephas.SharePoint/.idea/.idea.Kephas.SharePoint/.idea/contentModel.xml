@@ -51,6 +51,7 @@
         <e p="FieldSettings.cs" t="Include" />
         <e p="IDefaultSettingsProvider.cs" t="Include" />
         <e p="IListService.cs" t="Include" />
+        <e p="IListUpdaterBehavior.cs" t="Include" />
         <e p="IListUpdaterService.cs" t="Include" />
         <e p="ILookupService.cs" t="Include" />
         <e p="ISharePointUpdaterService.cs" t="Include" />
@@ -164,6 +165,12 @@
         </e>
         <e p="SiteSettingsProvider.cs" t="Include" />
         <e p="Sources" t="Include">
+          <e p="AttributedModel" t="Include">
+            <e p="RedirectPatternAttribute.cs" t="Include" />
+          </e>
+          <e p="Composition" t="Include">
+            <e p="DocumentSourceMetadata.cs" t="Include" />
+          </e>
           <e p="DocumentSourceBase.cs" t="Include" />
           <e p="IDocumentSource.cs" t="Include" />
         </e>
