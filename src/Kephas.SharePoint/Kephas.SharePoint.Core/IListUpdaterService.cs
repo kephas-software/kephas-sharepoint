@@ -35,10 +35,10 @@ namespace Kephas.SharePoint
         /// </summary>
         /// <param name="listItem">The list item.</param>
         /// <param name="context">The context.</param>
-        /// <param name="cancellationToken">A token that allows processing to be cancelled.</param>
+        /// <param name="cancellationToken">Optional. A token that allows processing to be cancelled.</param>
         /// <returns>
         /// An asynchronous result that yields the operation result.
         /// </returns>
-        Task<IOperationResult> UpdateListItemAsync(ListItem listItem, IContext context, CancellationToken cancellationToken);
+        Task<IOperationResult> UpdateListItemAsync(ListItem listItem, IContext context, CancellationToken cancellationToken = default);
     }
 }

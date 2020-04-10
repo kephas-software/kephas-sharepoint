@@ -27,7 +27,7 @@
         <e p="ClientContext.cs" t="Include" />
         <e p="Kephas.SharePoint.Client.csproj" t="IncludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
-          <e p="Release" t="Include">
+          <e p="Debug" t="Include">
             <e p="net461" t="Include">
               <e p="Kephas.SharePoint.Client.AssemblyInfo.cs" t="Include" />
             </e>
@@ -61,6 +61,7 @@
         <e p="ListItem.cs" t="Include" />
         <e p="ListService.cs" t="Include" />
         <e p="ListServiceExtensions.cs" t="Include" />
+        <e p="ListUpdaterServiceBase.cs" t="Include" />
         <e p="LookupListSettings.cs" t="Include" />
         <e p="LookupSettings.cs" t="Include" />
         <e p="MaxFileSizeExceededException.cs" t="Include" />
@@ -69,7 +70,7 @@
         <e p="NullLookupService.cs" t="Include" />
         <e p="NullSiteSettingsProvider.cs" t="Include" />
         <e p="obj" t="ExcludeRecursive">
-          <e p="Release" t="Include">
+          <e p="Debug" t="Include">
             <e p="net461" t="Include">
               <e p="Kephas.SharePoint.Core.AssemblyInfo.cs" t="Include" />
             </e>
@@ -84,6 +85,9 @@
           <e p="IListPropertyInfo.cs" t="Include" />
           <e p="ISharePointMetadataCache.cs" t="Include" />
           <e p="NullSharePointMetadataCache.cs" t="Include" />
+        </e>
+        <e p="Rules" t="Include">
+          <e p="IListItemUpdateRule.cs" t="Include" />
         </e>
         <e p="SharePointException.cs" t="Include" />
         <e p="SharePointSettings.cs" t="Include" />
@@ -121,7 +125,7 @@
         <e p="ISiteServiceProvider.cs" t="Include" />
         <e p="Kephas.SharePoint.Data.csproj" t="IncludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
-          <e p="Release" t="Include">
+          <e p="Debug" t="Include">
             <e p="net461" t="Include">
               <e p="Kephas.SharePoint.Data.AssemblyInfo.cs" t="Include" />
             </e>
@@ -151,7 +155,7 @@
         <e p="InteractionHelper.cs" t="Include" />
         <e p="Kephas.SharePoint.Documents.csproj" t="IncludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
-          <e p="Release" t="Include">
+          <e p="Debug" t="Include">
             <e p="net461" t="Include">
               <e p="Kephas.SharePoint.Documents.AssemblyInfo.cs" t="Include" />
             </e>
@@ -159,9 +163,6 @@
               <e p="Kephas.SharePoint.Documents.AssemblyInfo.cs" t="Include" />
             </e>
           </e>
-        </e>
-        <e p="Rules" t="Include">
-          <e p="IDocumentRule.cs" t="Include" />
         </e>
         <e p="SiteSettingsProvider.cs" t="Include" />
         <e p="Sources" t="Include">
@@ -186,7 +187,7 @@
           </e>
           <e p="Kephas.SharePoint.Core.Tests.csproj" t="IncludeRecursive" />
           <e p="obj" t="ExcludeRecursive">
-            <e p="Release" t="Include">
+            <e p="Debug" t="Include">
               <e p="net461" t="Include">
                 <e p="Kephas.SharePoint.Core.Tests.AssemblyInfo.cs" t="Include" />
               </e>
@@ -210,7 +211,7 @@
           <e p="DataTestBase.cs" t="Include" />
           <e p="Kephas.SharePoint.Data.Tests.csproj" t="IncludeRecursive" />
           <e p="obj" t="ExcludeRecursive">
-            <e p="Release" t="Include">
+            <e p="Debug" t="Include">
               <e p="net461" t="Include">
                 <e p="Kephas.SharePoint.Data.Tests.AssemblyInfo.cs" t="Include" />
               </e>
