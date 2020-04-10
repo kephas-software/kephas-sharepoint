@@ -1,11 +1,8 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="LibraryServiceExtensions.cs" company="Kephas Software SRL">
+// <copyright file="ListServiceExtensions.cs" company="Kephas Software SRL">
 //   Copyright (c) Kephas Software SRL. All rights reserved.
 //   Licensed under the KEPHAS license. See LICENSE file in the project root for full license information.
 // </copyright>
-// <summary>
-//   Implements the site settings provider class.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace Kephas.SharePoint

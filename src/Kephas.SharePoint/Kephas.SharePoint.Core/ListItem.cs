@@ -73,8 +73,8 @@ namespace Kephas.SharePoint
         /// </returns>
         public override string ToString()
         {
-            var folder = string.IsNullOrEmpty(Folder) ? string.Empty : $"{Folder}/";
-            return $"{List}/{folder}{Title}/{Id}";
+            var folder = string.IsNullOrEmpty(this.Folder) ? string.Empty : $"{this.Folder}/";
+            return $"{this.List}/{folder}{this.Title}/{this.Id}";
         }
     }
 }

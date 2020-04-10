@@ -5,8 +5,6 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using Kephas.SharePoint.Behaviors;
-
 namespace Kephas.SharePoint
 {
     using System;
@@ -20,6 +18,7 @@ namespace Kephas.SharePoint
     using Kephas.Operations;
     using Kephas.Services;
     using Kephas.Services.Composition;
+    using Kephas.SharePoint.Behaviors;
     using Kephas.Threading.Tasks;
 
     /// <summary>

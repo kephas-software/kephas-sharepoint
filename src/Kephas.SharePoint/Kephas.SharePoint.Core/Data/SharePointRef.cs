@@ -23,7 +23,7 @@ namespace Kephas.SharePoint.Data
     public class SharePointRef : Ref<ISharePointEntity>, IIndexable
     {
         private object id;
-        private IDictionary<string, object> values;
+        private IDictionary<string, object>? values;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SharePointRef"/> class.
