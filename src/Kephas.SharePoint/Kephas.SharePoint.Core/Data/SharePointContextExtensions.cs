@@ -70,7 +70,7 @@ namespace Kephas.SharePoint.Data
         /// <returns>
         /// A query over the entity type.
         /// </returns>
-        public static IQueryable<T> Query<T>(this IDataContext dataContext, string listFullName, Action<IQueryOperationContext> queryConfig = null)
+        public static IQueryable<T> Query<T>(this IDataContext dataContext, string listFullName, Action<IQueryOperationContext>? queryConfig = null)
             where T : class
         {
             Requires.NotNull(dataContext, nameof(dataContext));

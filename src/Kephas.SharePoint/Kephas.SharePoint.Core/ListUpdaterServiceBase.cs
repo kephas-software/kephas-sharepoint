@@ -23,7 +23,7 @@ namespace Kephas.SharePoint
     /// <summary>
     /// Base class for list updaters.
     /// </summary>
-    public abstract class ListUpdaterServiceBase : Loggable, IListUpdaterService
+    public abstract class ListUpdaterServiceBase : Loggable, IListUpdaterService, IAsyncInitializable, IAsyncFinalizable
     {
         private readonly ICollection<Lazy<IListUpdaterBehavior, AppServiceMetadata>> listItemUpdaters;
 
@@ -41,12 +41,39 @@ namespace Kephas.SharePoint
         }
 
         /// <summary>
-        /// Gets or sets the site name.
+        /// Gets the site name.
         /// </summary>
         /// <value>
         /// The site name.
         /// </value>
-        public string SiteName { get; protected set; }
+        public string SiteName { get; } = string.Empty;
+
+        /// <summary>
+        /// Initializes the service asynchronously.
+        /// </summary>
+        /// <param name="context">Optional. An optional context for initialization.</param>
+        /// <param name="cancellationToken">Optional. The cancellation token.</param>
+        /// <returns>
+        /// An awaitable task.
+        /// </returns>
+        public virtual Task InitializeAsync(IContext? context = null, CancellationToken cancellationToken = default)
+        {
+            this.SiteName = context?[nameof(IListUpdaterService.SiteName)] as string ?? string.Empty;
+            return Task.CompletedTask;
+        }
+
+        /// <summary>
+        /// Finalizes the service asynchronously.
+        /// </summary>
+        /// <param name="context">Optional. An optional context for finalization.</param>
+        /// <param name="cancellationToken">Optional. The cancellation token.</param>
+        /// <returns>
+        /// An asynchronous result.
+        /// </returns>
+        public virtual Task FinalizeAsync(IContext? context = null, CancellationToken cancellationToken = default)
+        {
+            return Task.CompletedTask;
+        }
 
         /// <summary>
         /// Updates the list item asynchronously.

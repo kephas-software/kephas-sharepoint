@@ -39,7 +39,7 @@ namespace Kephas.SharePoint
         /// <returns>
         /// An awaitable task.
         /// </returns>
-        public Task InitializeAsync(IContext context = null, CancellationToken cancellationToken = default)
+        public Task InitializeAsync(IContext? context = null, CancellationToken cancellationToken = default)
         {
             this.SiteName = context?[nameof(IListUpdaterService.SiteName)] as string ?? string.Empty;
             return Task.CompletedTask;
