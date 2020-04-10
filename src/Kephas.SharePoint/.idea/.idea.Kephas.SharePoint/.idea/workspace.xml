@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b913be0d-6eda-4c28-adc9-e4108240b7f5" name="Default Changelist" comment="Added the DocumentUpdateRuleBase.&#10;Made IDocumentSource.HandleDocumentAsync return a bool operation result for indicating whether it could handle the document or not.">
+      <changelist_data />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Kephas.SharePoint/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Kephas.SharePoint/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Kephas.SharePoint.Data.Tests/Data/Linq/SharePointQueryProviderTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Kephas.SharePoint.Data.Tests/Data/Linq/SharePointQueryProviderTest.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,6 +117,7 @@
         <option value="$PROJECT_DIR$/Kephas.SharePoint.Documents/Sources/IDocumentSource.cs" />
         <option value="$PROJECT_DIR$/Kephas.SharePoint.Documents/Sources/DocumentSourceBase.cs" />
         <option value="$PROJECT_DIR$/Tests/Kephas.SharePoint.Data.Tests/Data/Linq/SharePointQueryProviderTest.cs" />
+        <option value="$PROJECT_DIR$/Tests/Kephas.SharePoint.Data.Tests/Data/SharePointDataContextTest.cs" />
       </list>
     </option>
   </component>
@@ -155,7 +156,7 @@
       <workItem from="1573142396324" duration="664000" />
       <workItem from="1583496242946" duration="3811000" />
       <workItem from="1586448030041" duration="10670000" />
-      <workItem from="1586505860936" duration="10696000" />
+      <workItem from="1586505860936" duration="10971000" />
     </task>
     <task id="LOCAL-00001" summary="Upgrade to Kephas 7.5.0-dev.17">
       <created>1583417263702</created>
@@ -269,7 +270,14 @@
       <option name="project" value="LOCAL" />
       <updated>1586517883493</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Added the DocumentUpdateRuleBase.&#10;Made IDocumentSource.HandleDocumentAsync return a bool operation result for indicating whether it could handle the document or not.">
+      <created>1586518112935</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1586518112935</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -319,11 +327,11 @@
     </state>
     <state x="-1408" y="221" key="RiderGenerateDialog/0.0.2560.1400/-2560.0.2560.1040@-2560.0.2560.1040" timestamp="1583496817982" />
     <state x="3712" y="298" key="RiderGenerateDialog/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1586513510851" />
-    <state x="3115" y="265" key="Vcs.Push.Dialog.v2" timestamp="1586517885753">
+    <state x="3115" y="265" key="Vcs.Push.Dialog.v2" timestamp="1586518116309">
       <screen x="2560" y="0" width="2560" height="1400" />
     </state>
     <state x="312" y="163" key="Vcs.Push.Dialog.v2/0.0.1440.860/1440.-540.2560.1400@0.0.1440.860" timestamp="1583774626117" />
-    <state x="3115" y="265" key="Vcs.Push.Dialog.v2/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1586517885753" />
+    <state x="3115" y="265" key="Vcs.Push.Dialog.v2/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1586518116309" />
     <state x="3186" y="207" width="1309" height="987" key="find.popup" timestamp="1586517765279">
       <screen x="2560" y="0" width="2560" height="1400" />
     </state>

@@ -10,13 +10,23 @@ namespace Kephas.SharePoint.Rules
     using System.Threading;
     using System.Threading.Tasks;
 
+    using Kephas.Logging;
     using Kephas.Services;
 
     /// <summary>
     /// Base class for document update rules.
     /// </summary>
-    public abstract class DocumentUpdateRuleBase : IListItemUpdateRule
+    public abstract class DocumentUpdateRuleBase : Loggable, IListItemUpdateRule
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DocumentUpdateRuleBase"/> class.
+        /// </summary>
+        /// <param name="logManager">Optional. Manager for log.</param>
+        public DocumentUpdateRuleBase(ILogManager? logManager = null)
+            : base(logManager)
+        {
+        }
+
         /// <summary>
         /// Applies the rule asynchronously.
         /// </summary>
