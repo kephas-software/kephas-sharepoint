@@ -46,7 +46,7 @@ namespace Kephas.SharePoint
         /// <value>
         /// The site name.
         /// </value>
-        public string SiteName { get; } = string.Empty;
+        public string SiteName { get; private set; } = string.Empty;
 
         /// <summary>
         /// Initializes the service asynchronously.

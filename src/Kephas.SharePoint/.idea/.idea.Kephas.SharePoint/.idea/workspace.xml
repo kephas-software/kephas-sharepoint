@@ -3,9 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="b913be0d-6eda-4c28-adc9-e4108240b7f5" name="Default Changelist" comment="Cosmetic changes">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Kephas.SharePoint/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Kephas.SharePoint/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kephas.SharePoint.Core/Data/SharePointContextExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Kephas.SharePoint.Core/Data/SharePointContextExtensions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kephas.SharePoint.Client/Kephas.SharePoint.Client.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Kephas.SharePoint.Client/Kephas.SharePoint.Client.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kephas.SharePoint.Core/Kephas.SharePoint.Core.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Kephas.SharePoint.Core/Kephas.SharePoint.Core.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Kephas.SharePoint.Core/ListUpdaterServiceBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Kephas.SharePoint.Core/ListUpdaterServiceBase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kephas.SharePoint.Core/NullListUpdaterService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Kephas.SharePoint.Core/NullListUpdaterService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kephas.SharePoint.Data/Kephas.SharePoint.Data.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Kephas.SharePoint.Data/Kephas.SharePoint.Data.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kephas.SharePoint.Documents/Kephas.SharePoint.Documents.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Kephas.SharePoint.Documents/Kephas.SharePoint.Documents.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,6 +104,7 @@
         <option value="$PROJECT_DIR$/Kephas.SharePoint.Core/SharePointUpdaterService.cs" />
         <option value="$PROJECT_DIR$/Kephas.SharePoint.Core/Data/SharePointContextExtensions.cs" />
         <option value="$PROJECT_DIR$/Kephas.SharePoint.Core/NullListUpdaterService.cs" />
+        <option value="$PROJECT_DIR$/Kephas.SharePoint.Client/Kephas.SharePoint.Client.csproj" />
         <option value="$PROJECT_DIR$/Kephas.SharePoint.Core/ListUpdaterServiceBase.cs" />
       </list>
     </option>
@@ -141,7 +144,7 @@
       <workItem from="1573142396324" duration="664000" />
       <workItem from="1583496242946" duration="3811000" />
       <workItem from="1586448030041" duration="10670000" />
-      <workItem from="1586505860936" duration="5886000" />
+      <workItem from="1586505860936" duration="5952000" />
     </task>
     <task id="LOCAL-00001" summary="Upgrade to Kephas 7.5.0-dev.17">
       <created>1583417263702</created>
@@ -213,7 +216,14 @@
       <option name="project" value="LOCAL" />
       <updated>1586512066695</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Cosmetic changes">
+      <created>1586512636266</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1586512636266</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -254,17 +264,17 @@
     </state>
     <state x="-1408" y="221" key="RiderGenerateDialog/0.0.2560.1400/-2560.0.2560.1040@-2560.0.2560.1040" timestamp="1583496817982" />
     <state x="3712" y="298" key="RiderGenerateDialog/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1586507355837" />
-    <state x="3115" y="265" key="Vcs.Push.Dialog.v2" timestamp="1586512067735">
+    <state x="3115" y="265" key="Vcs.Push.Dialog.v2" timestamp="1586512638788">
       <screen x="2560" y="0" width="2560" height="1400" />
     </state>
     <state x="312" y="163" key="Vcs.Push.Dialog.v2/0.0.1440.860/1440.-540.2560.1400@0.0.1440.860" timestamp="1583774626117" />
-    <state x="3115" y="265" key="Vcs.Push.Dialog.v2/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1586512067735" />
-    <state x="3186" y="207" width="1309" height="987" key="find.popup" timestamp="1586511007242">
+    <state x="3115" y="265" key="Vcs.Push.Dialog.v2/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1586512638788" />
+    <state x="3186" y="207" width="1309" height="987" key="find.popup" timestamp="1586512658461">
       <screen x="2560" y="0" width="2560" height="1400" />
     </state>
     <state x="352" y="127" width="736" height="606" key="find.popup/0.0.1440.860/1440.-540.2560.1400@0.0.1440.860" timestamp="1583417231787" />
     <state x="-1934" y="154" width="1309" height="733" key="find.popup/0.0.2560.1400/-2560.0.2560.1040@-2560.0.2560.1040" timestamp="1583826719614" />
-    <state x="3186" y="207" width="1309" height="987" key="find.popup/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1586511007242" />
+    <state x="3186" y="207" width="1309" height="987" key="find.popup/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1586512658461" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
