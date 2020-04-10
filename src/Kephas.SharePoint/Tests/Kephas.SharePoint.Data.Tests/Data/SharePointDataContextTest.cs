@@ -34,7 +34,7 @@ namespace Kephas.SharePoint.Tests.Data
         [Test]
         [TestCase((string)null)]
         [TestCase("sc")]
-        public async Task Query(string siteNamespace)
+        public void Query(string siteNamespace)
         {
             var container = this.CreateContainer();
 

@@ -29,7 +29,7 @@ namespace Kephas.SharePoint.Tests.Data.Linq
         [Test]
         [TestCase((string)null, "Inbox")]
         [TestCase("sc", "Unsorted")]
-        public async Task Execute(string siteNamespace, string listName)
+        public void Execute(string siteNamespace, string listName)
         {
             var container = this.CreateContainer();
 
