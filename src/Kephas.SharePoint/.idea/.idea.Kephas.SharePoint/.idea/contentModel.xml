@@ -168,6 +168,9 @@
             </e>
           </e>
         </e>
+        <e p="Rules" t="Include">
+          <e p="DocumentUpdateRuleBase.cs" t="Include" />
+        </e>
         <e p="SiteSettingsProvider.cs" t="Include" />
         <e p="Sources" t="Include">
           <e p="AttributedModel" t="Include">

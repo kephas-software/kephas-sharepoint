@@ -160,12 +160,14 @@ namespace Kephas.SharePoint.Sources
         /// <returns>
         /// An asynchronous result that yields an operation result.
         /// </returns>
-        public virtual Task<IOperationResult> HandleDocumentAsync(
+        public virtual Task<IOperationResult<bool>> HandleDocumentAsync(
             Document doc,
             IContext? context = null,
             CancellationToken cancellationToken = default)
         {
-            return Task.FromResult<IOperationResult>(new OperationResult().Complete(TimeSpan.Zero));
+            return Task.FromResult<IOperationResult<bool>>(
+                new OperationResult<bool>(false)
+                    .Complete(TimeSpan.Zero));
         }
 
         /// <summary>

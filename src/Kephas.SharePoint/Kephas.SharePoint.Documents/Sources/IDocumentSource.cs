@@ -60,9 +60,9 @@ namespace Kephas.SharePoint.Sources
         /// <param name="context">Optional. The handling context.</param>
         /// <param name="cancellationToken">Optional. The cancellation token.</param>
         /// <returns>
-        /// An asynchronous result that yields an operation result.
+        /// An asynchronous result that yields an operation result indicating whether the source could handle the document.
         /// </returns>
-        Task<IOperationResult> HandleDocumentAsync(
+        Task<IOperationResult<bool>> HandleDocumentAsync(
             Document doc,
             IContext? context = null,
             CancellationToken cancellationToken = default);
