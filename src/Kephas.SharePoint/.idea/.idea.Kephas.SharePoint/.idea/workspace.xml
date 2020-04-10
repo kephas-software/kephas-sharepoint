@@ -1,18 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b913be0d-6eda-4c28-adc9-e4108240b7f5" name="Default Changelist" comment="Added IDocumentSource.HandleDocumentAsync() fore redirected documents.">
-      <change afterPath="$PROJECT_DIR$/Kephas.SharePoint.Core/ListUpdaterServiceBase.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Kephas.SharePoint.Core/Rules/IListItemUpdateRule.cs" afterDir="false" />
+    <list default="true" id="b913be0d-6eda-4c28-adc9-e4108240b7f5" name="Default Changelist" comment="Added ListUpdaterServiceBase; renamed IDocumentRule to IListItemUpdateRule.">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Kephas.SharePoint/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Kephas.SharePoint/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Kephas.SharePoint/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Kephas.SharePoint/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kephas.SharePoint.Client/Kephas.SharePoint.Client.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Kephas.SharePoint.Client/Kephas.SharePoint.Client.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kephas.SharePoint.Core/IListUpdaterService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Kephas.SharePoint.Core/IListUpdaterService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kephas.SharePoint.Core/Kephas.SharePoint.Core.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Kephas.SharePoint.Core/Kephas.SharePoint.Core.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kephas.SharePoint.Data/Kephas.SharePoint.Data.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Kephas.SharePoint.Data/Kephas.SharePoint.Data.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kephas.SharePoint.Documents/Kephas.SharePoint.Documents.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Kephas.SharePoint.Documents/Kephas.SharePoint.Documents.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kephas.SharePoint.Documents/Rules/IDocumentRule.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kephas.SharePoint.Documents/Sources/DocumentSourceBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Kephas.SharePoint.Documents/Sources/DocumentSourceBase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kephas.SharePoint.Core/SharePointUpdaterService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Kephas.SharePoint.Core/SharePointUpdaterService.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,6 +48,7 @@
     <setting file="file://$PROJECT_DIR$/Kephas.SharePoint.Documents/SiteSettingsProvider.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Kephas.SharePoint.Core/IListUpdaterService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Kephas.SharePoint.Documents/Document.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Kephas.SharePoint.Core/SharePointUpdaterService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Kephas.SharePoint.Core/LibrarySettings.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Kephas.SharePoint.Documents/DocumentFields.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../kephas/src/Kephas.Core/Threading/Tasks/TaskHelper.cs" root0="SKIP_HIGHLIGHTING" />
@@ -105,6 +98,7 @@
         <option value="$PROJECT_DIR$/Kephas.SharePoint.Core/IListUpdaterService.cs" />
         <option value="$PROJECT_DIR$/Kephas.SharePoint.Data/Kephas.SharePoint.Data.csproj" />
         <option value="$PROJECT_DIR$/Kephas.SharePoint.Documents/Sources/DocumentSourceBase.cs" />
+        <option value="$PROJECT_DIR$/Kephas.SharePoint.Core/SharePointUpdaterService.cs" />
       </list>
     </option>
   </component>
@@ -143,7 +137,7 @@
       <workItem from="1573142396324" duration="664000" />
       <workItem from="1583496242946" duration="3811000" />
       <workItem from="1586448030041" duration="10670000" />
-      <workItem from="1586505860936" duration="4392000" />
+      <workItem from="1586505860936" duration="5317000" />
     </task>
     <task id="LOCAL-00001" summary="Upgrade to Kephas 7.5.0-dev.17">
       <created>1583417263702</created>
@@ -201,7 +195,14 @@
       <option name="project" value="LOCAL" />
       <updated>1586467826902</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Added ListUpdaterServiceBase; renamed IDocumentRule to IListItemUpdateRule.">
+      <created>1586511195196</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1586511195196</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -229,7 +230,8 @@
     <MESSAGE value="Prepared the DocumentSources for integration in scheduler." />
     <MESSAGE value="Added missing cancellation token to the IDocumentSource.UploadPendingDocumentsAsync." />
     <MESSAGE value="Added IDocumentSource.HandleDocumentAsync() fore redirected documents." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added IDocumentSource.HandleDocumentAsync() fore redirected documents." />
+    <MESSAGE value="Added ListUpdaterServiceBase; renamed IDocumentRule to IListItemUpdateRule." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added ListUpdaterServiceBase; renamed IDocumentRule to IListItemUpdateRule." />
   </component>
   <component name="WindowStateProjectService">
     <state x="92" y="92" width="1256" height="676" key="DiffContextDialog" timestamp="1583417868873">
@@ -241,11 +243,11 @@
     </state>
     <state x="-1408" y="221" key="RiderGenerateDialog/0.0.2560.1400/-2560.0.2560.1040@-2560.0.2560.1040" timestamp="1583496817982" />
     <state x="3712" y="298" key="RiderGenerateDialog/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1586507355837" />
-    <state x="3115" y="265" key="Vcs.Push.Dialog.v2" timestamp="1586470371811">
+    <state x="3115" y="265" key="Vcs.Push.Dialog.v2" timestamp="1586511197467">
       <screen x="2560" y="0" width="2560" height="1400" />
     </state>
     <state x="312" y="163" key="Vcs.Push.Dialog.v2/0.0.1440.860/1440.-540.2560.1400@0.0.1440.860" timestamp="1583774626117" />
-    <state x="3115" y="265" key="Vcs.Push.Dialog.v2/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1586470371811" />
+    <state x="3115" y="265" key="Vcs.Push.Dialog.v2/0.0.2560.1400/2560.0.2560.1400@2560.0.2560.1400" timestamp="1586511197467" />
     <state x="3186" y="207" width="1309" height="987" key="find.popup" timestamp="1586511007242">
       <screen x="2560" y="0" width="2560" height="1400" />
     </state>

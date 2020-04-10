@@ -32,30 +32,30 @@ namespace Kephas.SharePoint
     {
         private readonly InitializationMonitor<ISharePointUpdaterService> initMonitor;
         private readonly IContextFactory contextFactory;
-        private readonly IExportFactory<IListUpdaterService> siteUploaderFactory;
+        private readonly IExportFactory<IListUpdaterService> listUpdaterService;
         private readonly IListService listService;
-        private readonly IDictionary<string, IListUpdaterService> siteUploadersMap = new Dictionary<string, IListUpdaterService>();
-        private SharePointSettings settings;
+        private readonly IDictionary<string, IListUpdaterService> listUpdatersMap = new Dictionary<string, IListUpdaterService>();
+        private readonly SharePointSettings settings;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SharePointUpdaterService"/> class.
         /// </summary>
         /// <param name="contextFactory">The context factory.</param>
-        /// <param name="sharepointConfiguration">The SharePoint configuration.</param>
-        /// <param name="siteUploaderFactory">The site uploader factory.</param>
+        /// <param name="sharePointConfiguration">The SharePoint configuration.</param>
+        /// <param name="listUpdaterService">The list updater service.</param>
         /// <param name="listService">The library service.</param>
         /// <param name="logManager">Manager for log.</param>
         public SharePointUpdaterService(
             IContextFactory contextFactory,
-            IConfiguration<SharePointSettings> sharepointConfiguration,
-            IExportFactory<IListUpdaterService> siteUploaderFactory,
+            IConfiguration<SharePointSettings> sharePointConfiguration,
+            IExportFactory<IListUpdaterService> listUpdaterService,
             IListService listService,
             ILogManager logManager)
             : base(logManager)
         {
-            this.settings = sharepointConfiguration.Settings;
+            this.settings = sharePointConfiguration.Settings;
             this.contextFactory = contextFactory;
-            this.siteUploaderFactory = siteUploaderFactory;
+            this.listUpdaterService = listUpdaterService;
             this.listService = listService;
             this.initMonitor = new InitializationMonitor<ISharePointUpdaterService>(this.GetType());
         }
@@ -68,7 +68,7 @@ namespace Kephas.SharePoint
         /// <returns>
         /// An awaitable task.
         /// </returns>
-        public async Task InitializeAsync(IContext context = null, CancellationToken cancellationToken = default)
+        public async Task InitializeAsync(IContext? context = null, CancellationToken cancellationToken = default)
         {
             this.initMonitor.Start();
 
@@ -85,8 +85,8 @@ namespace Kephas.SharePoint
                     var siteContext = this.contextFactory.CreateContext<Context>().Merge(context);
                     siteContext[nameof(SiteSettings)] = siteSettingsPair.Value;
                     siteContext[nameof(IListUpdaterService.SiteName)] = siteSettingsPair.Key;
-                    var siteUploader = await this.siteUploaderFactory.CreateInitializedValueAsync(siteContext).PreserveThreadContext();
-                    this.siteUploadersMap[siteSettingsPair.Key ?? siteSettingsPair.Value.SiteUrl] = siteUploader;
+                    var listUpdater = await this.listUpdaterService.CreateInitializedValueAsync(siteContext, cancellationToken: cancellationToken).PreserveThreadContext();
+                    this.listUpdatersMap[siteSettingsPair.Key ?? siteSettingsPair.Value.SiteUrl] = listUpdater;
                 }
                 catch (Exception ex)
                 {
@@ -105,11 +105,11 @@ namespace Kephas.SharePoint
         /// <returns>
         /// An asynchronous result.
         /// </returns>
-        public async Task FinalizeAsync(IContext context = null, CancellationToken cancellationToken = default)
+        public async Task FinalizeAsync(IContext? context = null, CancellationToken cancellationToken = default)
         {
-            foreach (var siteUploader in this.siteUploadersMap.Values)
+            foreach (var siteUploader in this.listUpdatersMap.Values)
             {
-                await ServiceHelper.FinalizeAsync(siteUploader, context).PreserveThreadContext();
+                await ServiceHelper.FinalizeAsync(siteUploader, context, cancellationToken).PreserveThreadContext();
             }
 
             this.initMonitor.Reset();
@@ -130,10 +130,11 @@ namespace Kephas.SharePoint
             var librarySpec = this.listService.GetContainingList(listItem);
             var (siteName, _) = this.listService.GetListPathFragments(librarySpec);
 
-            if (!this.siteUploadersMap.TryGetValue(siteName, out var siteUploader))
+            if (!this.listUpdatersMap.TryGetValue(siteName, out var siteUploader))
             {
                 var message = $"SharePoint site {siteName} not configured while updating '{listItem}'.";
                 this.Logger.Error(message);
+
                 return Task.FromResult<IOperationResult>(
                     new OperationResult()
                         .MergeException(new InvalidOperationException(message))

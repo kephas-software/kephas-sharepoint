@@ -27,7 +27,7 @@
         <e p="ClientContext.cs" t="Include" />
         <e p="Kephas.SharePoint.Client.csproj" t="IncludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
-          <e p="Debug" t="Include">
+          <e p="Release" t="Include">
             <e p="net461" t="Include">
               <e p="Kephas.SharePoint.Client.AssemblyInfo.cs" t="Include" />
             </e>
@@ -70,7 +70,7 @@
         <e p="NullLookupService.cs" t="Include" />
         <e p="NullSiteSettingsProvider.cs" t="Include" />
         <e p="obj" t="ExcludeRecursive">
-          <e p="Debug" t="Include">
+          <e p="Release" t="Include">
             <e p="net461" t="Include">
               <e p="Kephas.SharePoint.Core.AssemblyInfo.cs" t="Include" />
             </e>
@@ -125,7 +125,7 @@
         <e p="ISiteServiceProvider.cs" t="Include" />
         <e p="Kephas.SharePoint.Data.csproj" t="IncludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
-          <e p="Debug" t="Include">
+          <e p="Release" t="Include">
             <e p="net461" t="Include">
               <e p="Kephas.SharePoint.Data.AssemblyInfo.cs" t="Include" />
             </e>
@@ -155,7 +155,7 @@
         <e p="InteractionHelper.cs" t="Include" />
         <e p="Kephas.SharePoint.Documents.csproj" t="IncludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
-          <e p="Debug" t="Include">
+          <e p="Release" t="Include">
             <e p="net461" t="Include">
               <e p="Kephas.SharePoint.Documents.AssemblyInfo.cs" t="Include" />
             </e>
@@ -187,7 +187,7 @@
           </e>
           <e p="Kephas.SharePoint.Core.Tests.csproj" t="IncludeRecursive" />
           <e p="obj" t="ExcludeRecursive">
-            <e p="Debug" t="Include">
+            <e p="Release" t="Include">
               <e p="net461" t="Include">
                 <e p="Kephas.SharePoint.Core.Tests.AssemblyInfo.cs" t="Include" />
               </e>
@@ -211,7 +211,7 @@
           <e p="DataTestBase.cs" t="Include" />
           <e p="Kephas.SharePoint.Data.Tests.csproj" t="IncludeRecursive" />
           <e p="obj" t="ExcludeRecursive">
-            <e p="Debug" t="Include">
+            <e p="Release" t="Include">
               <e p="net461" t="Include">
                 <e p="Kephas.SharePoint.Data.Tests.AssemblyInfo.cs" t="Include" />
               </e>
