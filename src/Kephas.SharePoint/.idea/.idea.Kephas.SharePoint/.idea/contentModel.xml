@@ -39,6 +39,10 @@
         <e p="stylecop.json" t="Include" />
       </e>
       <e p="Kephas.SharePoint.Core" t="IncludeRecursive">
+        <e p="Behaviors" t="Include">
+          <e p="IListUpdaterBehavior.cs" t="Include" />
+          <e p="ListUpdaterBehaviorBase.cs" t="Include" />
+        </e>
         <e p="bin" t="ExcludeRecursive" />
         <e p="Configuration" t="Include">
           <e p="DefaultSettings.cs" t="Include" />
@@ -51,7 +55,6 @@
         <e p="FieldSettings.cs" t="Include" />
         <e p="IDefaultSettingsProvider.cs" t="Include" />
         <e p="IListService.cs" t="Include" />
-        <e p="IListUpdaterBehavior.cs" t="Include" />
         <e p="IListUpdaterService.cs" t="Include" />
         <e p="ILookupService.cs" t="Include" />
         <e p="ISharePointUpdaterService.cs" t="Include" />
@@ -84,6 +87,7 @@
           <e p="IListLookupPropertyInfo.cs" t="Include" />
           <e p="IListPropertyInfo.cs" t="Include" />
           <e p="ISharePointMetadataCache.cs" t="Include" />
+          <e p="ListPropertyKind.cs" t="Include" />
           <e p="NullSharePointMetadataCache.cs" t="Include" />
         </e>
         <e p="Rules" t="Include">

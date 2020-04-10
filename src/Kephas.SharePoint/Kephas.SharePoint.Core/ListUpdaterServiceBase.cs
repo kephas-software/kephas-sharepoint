@@ -5,6 +5,8 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using Kephas.SharePoint.Behaviors;
+
 namespace Kephas.SharePoint
 {
     using System;
@@ -30,14 +32,14 @@ namespace Kephas.SharePoint
         /// <summary>
         /// Initializes a new instance of the <see cref="ListUpdaterServiceBase"/> class.
         /// </summary>
-        /// <param name="listItemUpdaters">The list item updaters.</param>
+        /// <param name="listItemUpdaterBehaviors">The list item updater behaviors.</param>
         /// <param name="logManager">Optional. The log manager.</param>
         protected ListUpdaterServiceBase(
-            ICollection<Lazy<IListUpdaterBehavior, AppServiceMetadata>> listItemUpdaters,
+            ICollection<Lazy<IListUpdaterBehavior, AppServiceMetadata>> listItemUpdaterBehaviors,
             ILogManager? logManager = null)
             : base(logManager)
         {
-            this.listItemUpdaters = listItemUpdaters.Order().ToList();
+            this.listItemUpdaters = listItemUpdaterBehaviors.Order().ToList();
         }
 
         /// <summary>

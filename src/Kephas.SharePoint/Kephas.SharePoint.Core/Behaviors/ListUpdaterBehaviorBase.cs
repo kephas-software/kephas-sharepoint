@@ -1,11 +1,11 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IListUpdaterBehavior.cs" company="Kephas Software SRL">
+// <copyright file="ListUpdaterBehaviorBase.cs" company="Kephas Software SRL">
 //   Copyright (c) Kephas Software SRL. All rights reserved.
 //   Licensed under the KEPHAS license. See LICENSE file in the project root for full license information.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Kephas.SharePoint
+namespace Kephas.SharePoint.Behaviors
 {
     using System.Threading;
     using System.Threading.Tasks;
@@ -13,10 +13,9 @@ namespace Kephas.SharePoint
     using Kephas.Services;
 
     /// <summary>
-    /// Behavior for the
+    /// Base class for list updater behaviors.
     /// </summary>
-    [AppServiceContract]
-    public interface IListUpdaterBehavior
+    public abstract class ListUpdaterBehaviorBase : IListUpdaterBehavior
     {
         /// <summary>
         /// Invoked before the list item is updated asynchronously.
@@ -27,7 +26,10 @@ namespace Kephas.SharePoint
         /// <returns>
         /// An asynchronous result.
         /// </returns>
-        Task BeforeUpdateListItemAsync(ListItem listItem, IContext context, CancellationToken cancellationToken);
+        public virtual Task BeforeUpdateListItemAsync(ListItem listItem, IContext context, CancellationToken cancellationToken)
+        {
+            return Task.CompletedTask;
+        }
 
         /// <summary>
         /// Invoked after the list item is updated asynchronously.
@@ -38,6 +40,9 @@ namespace Kephas.SharePoint
         /// <returns>
         /// An asynchronous result.
         /// </returns>
-        Task AfterUpdateListItemAsync(ListItem listItem, IContext context, CancellationToken cancellationToken);
+        public virtual Task AfterUpdateListItemAsync(ListItem listItem, IContext context, CancellationToken cancellationToken)
+        {
+            return Task.CompletedTask;
+        }
     }
 }
