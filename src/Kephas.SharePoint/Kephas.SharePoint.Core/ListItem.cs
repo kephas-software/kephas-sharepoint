@@ -10,6 +10,8 @@
 
 namespace Kephas.SharePoint
 {
+    using System;
+
     using Kephas.Dynamic;
 
     /// <summary>
@@ -18,12 +20,21 @@ namespace Kephas.SharePoint
     public class ListItem : Expando
     {
         /// <summary>
-        /// Gets or sets the identifier.
+        /// Gets or sets the synchronization identifier.
+        /// Not to be taken for the SharePoint list item identifier.
         /// </summary>
         /// <value>
-        /// The identifier.
+        /// The synchronization identifier.
         /// </value>
-        public long Id { get; set; }
+        public long SyncId { get; set; }
+
+        /// <summary>
+        /// Gets or sets a unique identifier.
+        /// </summary>
+        /// <value>
+        /// The identifier of the unique.
+        /// </value>
+        public Guid? UniqueId { get; set; }
 
         /// <summary>
         /// Gets or sets the title.
@@ -74,7 +85,7 @@ namespace Kephas.SharePoint
         public override string ToString()
         {
             var folder = string.IsNullOrEmpty(this.Folder) ? string.Empty : $"{this.Folder}/";
-            return $"{this.List}/{folder}{this.Title}/{this.Id}";
+            return $"{this.List}/{folder}{this.Title}/{this.SyncId}";
         }
     }
 }
