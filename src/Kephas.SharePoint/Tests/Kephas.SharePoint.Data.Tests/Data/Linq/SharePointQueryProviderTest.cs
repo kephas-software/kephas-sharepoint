@@ -27,7 +27,7 @@ namespace Kephas.SharePoint.Tests.Data.Linq
     public class SharePointQueryProviderTest : DataTestBase
     {
         [Test]
-        [TestCase((string)null, "Inbox")]
+        [TestCase((string)null, "Unsorted")]
         [TestCase("sc", "Unsorted")]
         public void Execute(string siteNamespace, string listName)
         {

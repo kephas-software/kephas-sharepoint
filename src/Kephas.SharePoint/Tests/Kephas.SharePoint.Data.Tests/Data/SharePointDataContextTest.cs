@@ -32,9 +32,9 @@ namespace Kephas.SharePoint.Tests.Data
     public class SharePointDataContextTest : DataTestBase
     {
         [Test]
-        [TestCase((string)null)]
-        [TestCase("sc")]
-        public void Query(string siteNamespace)
+        [TestCase((string)null, "Unsorted")]
+        [TestCase("sc", "Unsorted")]
+        public void Query(string siteNamespace, string listName)
         {
             var container = this.CreateContainer();
 
@@ -51,7 +51,7 @@ namespace Kephas.SharePoint.Tests.Data
             var initContext = new DataInitializationContext(dataContext, dataStore);
             dataContext.Initialize(initContext);
 
-            var query = dataContext.Query<ISharePointEntity>($"{siteName}/Unsorted");
+            var query = dataContext.Query<ISharePointEntity>($"{siteName}/{listName}");
 
             var results = query.ToList();
 
