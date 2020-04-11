@@ -20,6 +20,22 @@ namespace Kephas.SharePoint
     public class ListItem : Expando
     {
         /// <summary>
+        /// Gets or sets the identifier.
+        /// </summary>
+        /// <value>
+        /// The identifier.
+        /// </value>
+        public int? Id { get; set; }
+
+        /// <summary>
+        /// Gets or sets the unique identifier.
+        /// </summary>
+        /// <value>
+        /// The unique identifier.
+        /// </value>
+        public Guid? UniqueId { get; set; }
+
+        /// <summary>
         /// Gets or sets the synchronization identifier.
         /// Not to be taken for the SharePoint list item identifier.
         /// </summary>
@@ -27,14 +43,6 @@ namespace Kephas.SharePoint
         /// The synchronization identifier.
         /// </value>
         public long SyncId { get; set; }
-
-        /// <summary>
-        /// Gets or sets a unique identifier.
-        /// </summary>
-        /// <value>
-        /// The identifier of the unique.
-        /// </value>
-        public Guid? UniqueId { get; set; }
 
         /// <summary>
         /// Gets or sets the title.

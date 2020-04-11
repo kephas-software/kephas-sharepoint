@@ -207,18 +207,18 @@ namespace Kephas.SharePoint.Sources
         /// Gets the file names for the target and archive.
         /// </summary>
         /// <param name="filePath">Full pathname of the file.</param>
-        /// <param name="docId">Identifier for the document.</param>
+        /// <param name="syncId">Synchronization identifier for the document.</param>
         /// <param name="preserveOriginalName">True to preserve original name.</param>
         /// <returns>
         /// The file names.
         /// </returns>
-        protected virtual (string targetFileName, string archiveFileName) GetFileNames(string filePath, long docId, bool preserveOriginalName)
+        protected virtual (string targetFileName, string archiveFileName) GetFileNames(string filePath, long syncId, bool preserveOriginalName)
         {
             var fileName = Path.GetFileName(filePath);
 
             var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(filePath);
             var fileExtension = fileName.Substring(fileNameWithoutExtension.Length);
-            var archiveFileName = $"{fileNameWithoutExtension}.{docId:x}{fileExtension}";
+            var archiveFileName = $"{fileNameWithoutExtension}.{syncId:x}{fileExtension}";
 
             return (preserveOriginalName ? fileName : archiveFileName, archiveFileName);
         }
