@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kephas.SharePoint.Core", "K
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deployment", "Deployment", "{D5BBB3B9-C953-44C9-8C40-032AD977AF1F}"
 	ProjectSection(SolutionItems) = preProject
-		Deployment\CreateNugetPackages.ps1 = Deployment\CreateNugetPackages.ps1
 		Deployment\NuGet.exe = Deployment\NuGet.exe
 		Deployment\PushNugetPackages.ps1 = Deployment\PushNugetPackages.ps1
+		Deployment\SignNugetPackages.ps1 = Deployment\SignNugetPackages.ps1
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{2950D260-42D8-4FA8-A014-A4F9E70EC00D}"
@@ -22,7 +22,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kephas.SharePoint.Data.Test
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kephas.SharePoint.Documents", "Kephas.SharePoint.Documents\Kephas.SharePoint.Documents.csproj", "{276A0B32-DCD1-4940-82FA-8C13ED86ECE3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kephas.SharePoint.Client", "Kephas.SharePoint.Client\Kephas.SharePoint.Client.csproj", "{B182BB80-4D76-44DD-B526-E1166A9C5CA4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kephas.SharePoint.Client", "Kephas.SharePoint.Client\Kephas.SharePoint.Client.csproj", "{B182BB80-4D76-44DD-B526-E1166A9C5CA4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
