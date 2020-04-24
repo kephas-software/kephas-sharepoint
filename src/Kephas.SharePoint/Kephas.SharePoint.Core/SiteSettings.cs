@@ -10,34 +10,20 @@
 
 namespace Kephas.SharePoint
 {
+    using Kephas.SharePoint.Security;
+
     /// <summary>
     /// A SharePoint site settings.
     /// </summary>
     public class SiteSettings
     {
         /// <summary>
-        /// Gets or sets the identifier of the application.
+        /// Gets or sets the credential used for the connection.
         /// </summary>
         /// <value>
-        /// The identifier of the application.
+        /// The credential.
         /// </value>
-        public string AppId { get; set; }
-
-        /// <summary>
-        /// Gets or sets the application password.
-        /// </summary>
-        /// <value>
-        /// The application password.
-        /// </value>
-        public string AppPassword { get; set; }
-
-        /// <summary>
-        /// Gets or sets the application encrypted password.
-        /// </summary>
-        /// <value>
-        /// The application encrypted password.
-        /// </value>
-        public string AppEncryptedPassword { get; set; }
+        public ISiteCredential? Credential { get; set; }
 
         /// <summary>
         /// Gets or sets URL of the site.
@@ -46,29 +32,5 @@ namespace Kephas.SharePoint
         /// The site URL.
         /// </value>
         public string SiteUrl { get; set; }
-
-        /// <summary>
-        /// Gets or sets the name of the user.
-        /// </summary>
-        /// <value>
-        /// The name of the user.
-        /// </value>
-        public string UserName { get; set; }
-
-        /// <summary>
-        /// Gets or sets the password.
-        /// </summary>
-        /// <value>
-        /// The password.
-        /// </value>
-        public string UserPassword { get; set; }
-
-        /// <summary>
-        /// Gets or sets the encrypted password.
-        /// </summary>
-        /// <value>
-        /// The encrypted password.
-        /// </value>
-        public string UserEncryptedPassword { get; set; }
     }
 }

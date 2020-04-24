@@ -10,16 +10,21 @@
 
 namespace Kephas.SharePoint.Tests
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-
+    using Kephas.Application;
     using Kephas.Composition;
     using Kephas.Cryptography;
     using Kephas.Data;
     using Kephas.Logging;
+    using Kephas.Reflection;
     using Kephas.Services;
+    using Kephas.Services.Composition;
     using Kephas.SharePoint.Data;
+    using Kephas.SharePoint.Security;
+    using Kephas.SharePoint.Security.Composition;
     using Kephas.Testing.Composition;
     using Kephas.Threading.Tasks;
     using Microsoft.Extensions.Configuration;
@@ -49,7 +54,7 @@ namespace Kephas.SharePoint.Tests
 
         protected static ISiteServiceProvider GetTestSiteServiceProvider(ISiteSettingsProvider siteSettingsProvider, string siteName = "test")
         {
-            var clientContextProvider = new ClientContextProvider(Substitute.For<IEncryptionService>());
+            var clientContextProvider = new ClientContextProvider(GetAuthManagers().ToList());
             var libraryService = new ListService(siteSettingsProvider, new NullDefaultSettingsProvider());
             var siteService = new SiteService(clientContextProvider, libraryService, Substitute.For<ILogManager>());
             var siteServiceProvider = Substitute.For<ISiteServiceProvider>();
@@ -77,9 +82,48 @@ namespace Kephas.SharePoint.Tests
             return new SiteSettings
             {
                 SiteUrl = appSettings[$"{ns}SiteSettings:SiteUrl"] ?? "<please provide site url>",
-                UserName = appSettings[$"{ns}SiteSettings:UserName"] ?? "<please provide user name>",
-                UserPassword = appSettings[$"{ns}SiteSettings:UserPassword"] ?? "<please provide user password>",
+                Credential = GetCredential(appSettings[$"{ns}SiteSettings:CredentialType"], appSettings[$"{ns}SiteSettings:Credential"]),
             };
+        }
+
+        private static IEnumerable<Lazy<ISiteAuthenticationManager, SiteAuthenticationManagerMetadata>> GetAuthManagers()
+        {
+            var encryptionService = Substitute.For<IEncryptionService>();
+
+            yield return new Lazy<ISiteAuthenticationManager, SiteAuthenticationManagerMetadata>(
+                () => new PasswordSiteAuthenticationManager(encryptionService),
+                new SiteAuthenticationManagerMetadata(typeof(PasswordSiteCredential)));
+
+            yield return new Lazy<ISiteAuthenticationManager, SiteAuthenticationManagerMetadata>(
+                () => new AppSiteAuthenticationManager(
+                    encryptionService,
+                    new List<Lazy<ICertificateProvider, AppServiceMetadata>>
+                    {
+                        new Lazy<ICertificateProvider, AppServiceMetadata>(
+                            () => new LocalCertificateProvider(),
+                            new AppServiceMetadata(serviceName: LocalCertificateProvider.ServiceName)),
+                    }),
+                new SiteAuthenticationManagerMetadata(typeof(AppSiteCredential)));
+        }
+
+        private static ISiteCredential GetCredential(string typeName, string credentialString)
+        {
+            if (string.IsNullOrEmpty(typeName))
+            {
+                throw new ArgumentException("Credential type name not provided.");
+            }
+
+            if (string.IsNullOrEmpty(credentialString))
+            {
+                throw new ArgumentException("Credential not provided.");
+            }
+
+            using var appRuntime = new StaticAppRuntime(defaultAssemblyFilter: an => an.Name.StartsWith("Kephas", StringComparison.OrdinalIgnoreCase));
+            ServiceHelper.Initialize(appRuntime);
+            var credentialType = new DefaultTypeResolver(appRuntime).ResolveType(typeName);
+            var credential = (ISiteCredential)credentialType.AsRuntimeTypeInfo().CreateInstance();
+            credential.Load(credentialString);
+            return credential;
         }
     }
 }

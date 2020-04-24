@@ -87,7 +87,7 @@ namespace Kephas.SharePoint
         /// </returns>
         public async Task<IOperationResult> UpdateListItemAsync(ListItem listItem, IContext context, CancellationToken cancellationToken)
         {
-            IOperationResult coreResult = null;
+            IOperationResult? coreResult = null;
             var opResult = await Profiler.WithStopwatchAsync(
                 async () =>
                 {
@@ -100,8 +100,8 @@ namespace Kephas.SharePoint
                 }).PreserveThreadContext();
 
             return opResult
-                .MergeMessages(coreResult)
-                .ReturnValue(coreResult.ReturnValue);
+                .MergeMessages(coreResult!)
+                .ReturnValue(coreResult!.ReturnValue);
         }
 
         /// <summary>

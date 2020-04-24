@@ -38,7 +38,9 @@ namespace Kephas.SharePoint.Tests.Reflection
 
         [Test]
         [TestCase("test/Unsorted", (string)null)]
+        [TestCase("test/Unsorted", "app")]
         [TestCase("test/Lieferanten", "sc")]
+        [TestCase("test/Lieferanten", "scapp")]
         public async Task GetListInfoAsync_unsorted(string listName, string siteNamespace)
         {
             var settingsProvider = GetTestSiteSettingsProvider(siteNamespace: siteNamespace);

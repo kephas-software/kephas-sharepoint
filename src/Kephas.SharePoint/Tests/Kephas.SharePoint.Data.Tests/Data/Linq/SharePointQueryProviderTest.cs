@@ -28,7 +28,9 @@ namespace Kephas.SharePoint.Tests.Data.Linq
     {
         [Test]
         [TestCase((string)null, "Unsorted")]
+        [TestCase("app", "Unsorted")]
         [TestCase("sc", "Unsorted")]
+        [TestCase("scapp", "Unsorted")]
         public void Execute(string siteNamespace, string listName)
         {
             var container = this.CreateContainer();

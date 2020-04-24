@@ -11,12 +11,14 @@
 namespace Kephas.SharePoint
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Net;
-    using System.Security;
     using System.Threading.Tasks;
 
-    using Kephas.Collections;
-    using Kephas.Cryptography;
+    using Kephas.Services;
+    using Kephas.SharePoint.Security;
+    using Kephas.SharePoint.Security.Composition;
     using Kephas.Threading.Tasks;
     using Microsoft.SharePoint.Client;
 
@@ -27,15 +29,15 @@ namespace Kephas.SharePoint
     /// </summary>
     public class ClientContextProvider : IClientContextProvider
     {
-        private readonly IEncryptionService encryptionService;
+        private readonly IList<Lazy<ISiteAuthenticationManager, SiteAuthenticationManagerMetadata>> authManagers;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ClientContextProvider"/> class.
         /// </summary>
-        /// <param name="encryptionService">The encryption service.</param>
-        public ClientContextProvider(IEncryptionService encryptionService)
+        /// <param name="authManagers">The authentication managers.</param>
+        public ClientContextProvider(ICollection<Lazy<ISiteAuthenticationManager, SiteAuthenticationManagerMetadata>> authManagers)
         {
-            this.encryptionService = encryptionService;
+            this.authManagers = authManagers.Order().ToList();
         }
 
         /// <summary>
@@ -49,22 +51,22 @@ namespace Kephas.SharePoint
         {
             // https://www.youtube.com/watch?v=prNlFdHP1ZM
             // https://www.c-sharpcorner.com/article/connect-to-sharepoint-online-site-with-app-only-authentication/
-            var am = new AuthenticationManager();
+
+            if (settings.Credential == null)
+            {
+                throw new SharePointException($"The credential setting is missing, cannot connect to '{settings.SiteUrl}'.");
+            }
+
+            var credentialType = settings.Credential.GetType();
+            var authManager = this.authManagers.FirstOrDefault(l => l.Metadata.CredentialType == credentialType)?.Value;
+            if (authManager == null)
+            {
+                throw new SharePointException($"The credential type '{credentialType}' is not supported, check whether you are missing a site authentication manager implementation.");
+            }
 
             try
             {
-                var clientContext = !string.IsNullOrWhiteSpace(settings.AppId)
-                    ? am.GetAppOnlyAuthenticatedContext(
-                        settings.SiteUrl,
-                        settings.AppId,
-                        this.GetPassword(settings.AppPassword, settings.AppEncryptedPassword))
-                    : !string.IsNullOrWhiteSpace(settings.UserName)
-                        ? am.GetSharePointOnlineAuthenticatedContextTenant(
-                            settings.SiteUrl,
-                            settings.UserName,
-                            this.GetSecurePassword(settings.UserPassword, settings.UserEncryptedPassword))
-                        : throw new InvalidOperationException(
-                            $"Either the application ID and password or the user name and password must be provided to connect to SharePoint.");
+                var clientContext = await authManager.GetAuthenticatedContextAsync(settings, settings.Credential).PreserveThreadContext();
 
                 clientContext.Load(clientContext.Web, w => w.ServerRelativeUrl, w => w.Id, w => w.Url);
                 clientContext.Load(clientContext.Site, s => s.Url, s => s.Id);
@@ -77,34 +79,12 @@ namespace Kephas.SharePoint
                 if (((HttpWebResponse)ex.Response).StatusCode == HttpStatusCode.Unauthorized)
                 {
                     throw new SharePointException(
-                        $"Cannot connect to SharePoint site '{settings.SiteUrl}' with '{settings.AppId ?? settings.UserName}', check whether the user name/password are correct.",
+                        $"Cannot connect to SharePoint site '{settings.SiteUrl}' with '{settings.Credential}', check whether the credentials are correct.",
                         ex);
                 }
 
                 throw;
             }
-        }
-
-        private SecureString GetSecurePassword(string plainPassword, string encryptedPassword)
-        {
-            var password = this.GetPassword(plainPassword, encryptedPassword);
-            if (password == null)
-            {
-                return null;
-            }
-
-            var securePassword = new SecureString();
-            password.ForEach(securePassword.AppendChar);
-            return securePassword;
-        }
-
-        private string GetPassword(string plainPassword, string encryptedPassword)
-        {
-            return string.IsNullOrEmpty(plainPassword)
-                ? string.IsNullOrEmpty(encryptedPassword)
-                    ? null
-                    : this.encryptionService.Decrypt(encryptedPassword)
-                : plainPassword;
         }
     }
 }
