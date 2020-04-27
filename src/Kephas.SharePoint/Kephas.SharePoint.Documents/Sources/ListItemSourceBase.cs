@@ -1,14 +1,12 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="DocumentSourceBase.cs" company="Kephas Software SRL">
+// <copyright file="ListItemSourceBase.cs" company="Kephas Software SRL">
 //   Copyright (c) Kephas Software SRL. All rights reserved.
 //   Licensed under the KEPHAS license. See LICENSE file in the project root for full license information.
 // </copyright>
 // <summary>
-//   Implements the document source base class.
+//   Implements the ListItemSourceBase class.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
-using Kephas.Operations;
 
 namespace Kephas.SharePoint.Sources
 {
@@ -24,6 +22,7 @@ namespace Kephas.SharePoint.Sources
     using Kephas.Logging;
     using Kephas.Messaging;
     using Kephas.Messaging.Messages;
+    using Kephas.Operations;
     using Kephas.Services;
     using Kephas.SharePoint;
     using Kephas.SharePoint.Configuration;
@@ -32,10 +31,10 @@ namespace Kephas.SharePoint.Sources
     using Kephas.Workflow.Interaction;
 
     /// <summary>
-    /// A document source base.
+    /// A list item source base.
     /// </summary>
     /// <typeparam name="TSettings">Type of the settings.</typeparam>
-    public abstract class DocumentSourceBase<TSettings> : Loggable, IDocumentSource
+    public abstract class ListItemSourceBase<TSettings> : Loggable, IListItemSource
         where TSettings : class, new()
     {
         private readonly IMessageProcessor messageProcessor;
@@ -43,13 +42,13 @@ namespace Kephas.SharePoint.Sources
         private IEventSubscription retrySubscription;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DocumentSourceBase{TSettings}"/> class.
+        /// Initializes a new instance of the <see cref="ListItemSourceBase{TSettings}"/> class.
         /// </summary>
         /// <param name="messageProcessor">The message processor.</param>
         /// <param name="eventHub">The event hub.</param>
         /// <param name="configuration">The source configuration.</param>
         /// <param name="defaultsProvider">The defaults provider.</param>
-        protected DocumentSourceBase(
+        protected ListItemSourceBase(
             IMessageProcessor messageProcessor,
             IEventHub eventHub,
             IConfiguration<TSettings> configuration,
@@ -97,9 +96,9 @@ namespace Kephas.SharePoint.Sources
         {
             this.AppContext = context;
             this.retrySubscription = this.eventHub.Subscribe<RetryActivitySignal>(
-                (e, ctx, token) => e.ActivityContext[InteractionHelper.SourceArgName] == null
-                                    || this.GetServiceName().Equals(e.ActivityContext[InteractionHelper.SourceArgName])
-                                        ? this.RetryUploadFailedDocumentsAsync(e.ActivityContext, token)
+                (e, ctx, token) => e.ActivityContext?[InteractionHelper.SourceArgName] == null
+                                    || Equals(this.GetServiceName(), e.ActivityContext[InteractionHelper.SourceArgName])
+                                        ? this.RetryUploadFailedItemsAsync(e.ActivityContext, token)
                                         : Task.CompletedTask);
             return Task.CompletedTask;
         }
@@ -118,27 +117,27 @@ namespace Kephas.SharePoint.Sources
         }
 
         /// <summary>
-        /// Uploads the pending documents asynchronously.
+        /// Uploads the pending items asynchronously.
         /// </summary>
         /// <param name="context">Optional. The context.</param>
         /// <param name="cancellationToken">Optional. The cancellation token.</param>
         /// <returns>
         /// An asynchronous result that yields an operation result indicating whether there is more work to do.
         /// </returns>
-        public abstract Task<IOperationResult<bool>> UploadPendingDocumentsAsync(
+        public abstract Task<IOperationResult<bool>> UploadPendingItemsAsync(
             IContext? context = null,
             CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Retries to upload the failed documents asynchronously.
+        /// Retries to upload the failed items asynchronously.
         /// </summary>
         /// <param name="retryContext">Context for the retry.</param>
         /// <param name="cancellationToken">Optional. A token that allows processing to be cancelled.</param>
         /// <returns>
         /// An asynchronous result.
         /// </returns>
-        public virtual Task<IOperationResult> RetryUploadFailedDocumentsAsync(
-            IActivityContext retryContext,
+        public virtual Task<IOperationResult> RetryUploadFailedItemsAsync(
+            IActivityContext? retryContext,
             CancellationToken cancellationToken = default)
         {
             return Task.FromResult<IOperationResult>(
@@ -147,21 +146,21 @@ namespace Kephas.SharePoint.Sources
         }
 
         /// <summary>
-        /// Handles the provided document, preparing it for upload
+        /// Handles the provided item, preparing it for upload
         /// and eventually uploading it.
         /// </summary>
         /// <remarks>
         /// This method is typically called when redirecting from one source to another.
         /// Once a document was redirected, should not be redirected anymore.
         /// </remarks>
-        /// <param name="doc">The document to handle.</param>
+        /// <param name="listItem">The list item to handle.</param>
         /// <param name="context">Optional. The handling context.</param>
         /// <param name="cancellationToken">Optional. The cancellation token.</param>
         /// <returns>
         /// An asynchronous result that yields an operation result.
         /// </returns>
-        public virtual Task<IOperationResult<bool>> HandleDocumentAsync(
-            Document doc,
+        public virtual Task<IOperationResult<bool>> HandleItemAsync(
+            ListItem listItem,
             IContext? context = null,
             CancellationToken cancellationToken = default)
         {
@@ -176,29 +175,29 @@ namespace Kephas.SharePoint.Sources
         /// <returns>
         /// The service name.
         /// </returns>
-        protected virtual string GetServiceName()
+        protected virtual string? GetServiceName()
         {
             return this.GetType().GetCustomAttribute<ServiceNameAttribute>()?.Value;
         }
 
         /// <summary>
-        /// Uploads a document asynchronous.
+        /// Uploads a list item asynchronous.
         /// </summary>
-        /// <param name="doc">The document.</param>
+        /// <param name="listItem">The list item.</param>
         /// <param name="cancellationToken">A token that allows processing to be cancelled.</param>
         /// <returns>
         /// An asynchronous result that yields the upload document.
         /// </returns>
-        protected virtual async Task<ResponseMessage> UploadDocumentAsync(Document doc, CancellationToken cancellationToken = default)
+        protected virtual async Task<ResponseMessage> UploadListItemAsync(ListItem listItem, CancellationToken cancellationToken = default)
         {
             try
             {
-                var response = (ResponseMessage)await this.messageProcessor.ProcessAsync(doc, ctx => ctx.Impersonate(this.AppContext), cancellationToken).PreserveThreadContext();
+                var response = (ResponseMessage)await this.messageProcessor.ProcessAsync(listItem, ctx => ctx.Impersonate(this.AppContext), cancellationToken).PreserveThreadContext();
                 return response;
             }
             catch (Exception ex)
             {
-                this.Logger.Error(ex, $"Error while uploading document '{doc}'");
+                this.Logger.Error(ex, $"Error while uploading '{listItem}'");
                 return new ResponseMessage { Message = ex.Message, Severity = SeverityLevel.Error };
             }
         }
