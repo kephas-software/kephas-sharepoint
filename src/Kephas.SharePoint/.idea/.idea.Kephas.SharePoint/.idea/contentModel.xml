@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\ioan.crisan\.Rider2019.3\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\ioan.crisan\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_Kephas.SharePoint.-270148604.00" t="ExcludeRecursive" />
-    <e p="D:\.nuget\packages\microsoft.net.test.sdk\16.5.0\build\netcoreapp2.1" t="Include">
+    <e p="C:\Users\ioan.crisan\AppData\local\JetBrains\Rider2020.1\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\ioan.crisan\AppData\local\JetBrains\Rider2020.1\resharper-host\local\Transient\ReSharperHost\v201\SolutionCaches\_Kephas.SharePoint.-270148604.00" t="ExcludeRecursive" />
+    <e p="D:\.nuget\packages\microsoft.net.test.sdk\16.6.1\build\netcoreapp2.1" t="Include">
       <e p="Microsoft.NET.Test.Sdk.Program.cs" t="Include" />
     </e>
-    <e p="D:\.nuget\packages\microsoft.testplatform.testhost\16.5.0\build\netcoreapp2.1\x64\testhost.dll" t="Include" />
-    <e p="D:\.nuget\packages\microsoft.testplatform.testhost\16.5.0\build\netcoreapp2.1\x64\testhost.exe" t="Include" />
+    <e p="D:\.nuget\packages\microsoft.testplatform.testhost\16.6.1\build\netcoreapp2.1\x64\testhost.dll" t="Include" />
+    <e p="D:\.nuget\packages\microsoft.testplatform.testhost\16.6.1\build\netcoreapp2.1\x64\testhost.exe" t="Include" />
     <e p="D:\.nuget\packages\nunit3testadapter\3.16.1\build\net35\nunit.engine.api.dll" t="Include" />
     <e p="D:\.nuget\packages\nunit3testadapter\3.16.1\build\net35\nunit.engine.dll" t="Include" />
     <e p="D:\.nuget\packages\nunit3testadapter\3.16.1\build\net35\NUnit3.TestAdapter.dll" t="Include" />
@@ -18,9 +18,9 @@
     <e p="D:\.nuget\packages\nunit3testadapter\3.16.1\build\netcoreapp2.1\NUnit3.TestAdapter.pdb" t="Include" />
     <e p="D:\ioan\github\kephas-sharepoint\src\Kephas.SharePoint" t="IncludeFlat">
       <e p="Deployment" t="Include">
-        <e p="CreateNugetPackages.ps1" t="Include" />
         <e p="NuGet.exe" t="Include" />
         <e p="PushNugetPackages.ps1" t="Include" />
+        <e p="SignNugetPackages.ps1" t="Include" />
       </e>
       <e p="Kephas.SharePoint.Client" t="IncludeRecursive">
         <e p="bin" t="ExcludeRecursive" />
@@ -93,6 +93,13 @@
         <e p="Rules" t="Include">
           <e p="IListItemUpdateRule.cs" t="Include" />
         </e>
+        <e p="Security" t="Include">
+          <e p="AppSiteCredential.cs" t="Include" />
+          <e p="ICertificateProvider.cs" t="Include" />
+          <e p="ISiteCredential.cs" t="Include" />
+          <e p="LocalCertificateProvider.cs" t="Include" />
+          <e p="PasswordSiteCredential.cs" t="Include" />
+        </e>
         <e p="SharePointException.cs" t="Include" />
         <e p="SharePointSettings.cs" t="Include" />
         <e p="SharePointUpdaterService.cs" t="Include" />
@@ -147,6 +154,15 @@
           <e p="ListPropertyInfo.cs" t="Include" />
           <e p="SharePointMetadataCache.cs" t="Include" />
         </e>
+        <e p="Security" t="Include">
+          <e p="AppSiteAuthenticationManager.cs" t="Include" />
+          <e p="Composition" t="Include">
+            <e p="SiteAuthenticationManagerMetadata.cs" t="Include" />
+          </e>
+          <e p="ISiteAuthenticationManager.cs" t="Include" />
+          <e p="PasswordSiteAuthenticationManager.cs" t="Include" />
+          <e p="SiteAuthenticationManagerBase.cs" t="Include" />
+        </e>
         <e p="SiteService.cs" t="Include" />
         <e p="SiteServiceProvider.cs" t="Include" />
         <e p="stylecop.json" t="Include" />
@@ -177,10 +193,10 @@
             <e p="RedirectPatternAttribute.cs" t="Include" />
           </e>
           <e p="Composition" t="Include">
-            <e p="DocumentSourceMetadata.cs" t="Include" />
+            <e p="ListItemSourceMetadata.cs" t="Include" />
           </e>
-          <e p="DocumentSourceBase.cs" t="Include" />
-          <e p="IDocumentSource.cs" t="Include" />
+          <e p="IListItemSource.cs" t="Include" />
+          <e p="ListItemSourceBase.cs" t="Include" />
         </e>
         <e p="stylecop.json" t="Include" />
       </e>
