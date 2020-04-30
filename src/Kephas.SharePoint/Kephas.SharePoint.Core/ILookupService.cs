@@ -25,6 +25,7 @@ namespace Kephas.SharePoint
     public interface ILookupService
     {
         /// <summary>
+        /// 
         /// Tries to find the reference asynchronously.
         /// </summary>
         /// <param name="siteId">Identifier for the site.</param>
@@ -36,7 +37,7 @@ namespace Kephas.SharePoint
         /// <returns>
         /// An asynchronous result that yields the reference values and a success flag.
         /// </returns>
-        Task<IOperationResult<(int? id, object value, bool success)>> TryFindReferenceAsync(Guid siteId, string listId, string refField, ListItem listItem, ITextFinder textFinder, CancellationToken cancellationToken = default);
+        Task<IOperationResult<(int? id, object? value, bool success)>> TryFindReferenceAsync(Guid siteId, string listId, string refField, ListItem listItem, ITextFinder textFinder, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Tries to find the reference asynchronously.
@@ -49,6 +50,6 @@ namespace Kephas.SharePoint
         /// <returns>
         /// An asynchronous result that yields the reference values and a success flag.
         /// </returns>
-        Task<IOperationResult<(int? id, object value, bool success)>> TryFindReferenceAsync(Guid siteId, string listId, string refField, object refValue, CancellationToken cancellationToken = default);
+        Task<IOperationResult<(int? id, object? value, bool success)>> TryFindReferenceAsync(Guid siteId, string listId, string refField, object refValue, CancellationToken cancellationToken = default);
     }
 }

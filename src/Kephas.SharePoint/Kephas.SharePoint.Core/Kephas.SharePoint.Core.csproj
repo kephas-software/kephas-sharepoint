@@ -5,7 +5,7 @@
         <LangVersion>latest</LangVersion>
         <Nullable>enable</Nullable>
 
-        <Version>3.3.0-dev.24</Version>
+        <Version>3.3.0-dev.25</Version>
         <AssemblyVersion>3.3.0.0</AssemblyVersion>
         <FileVersion>3.3.0.0</FileVersion>
         <Authors>Kephas Software SRL</Authors>
@@ -28,7 +28,7 @@
         <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
         <PackageLicenseUrl>http://opensource.org/licenses/MIT</PackageLicenseUrl>
         <PackageProjectUrl>https://github.com/kephas-software/kephas-sharepoint-uploader-service</PackageProjectUrl>
-        <PackageIconUrl>https://www.kephas-software.com/wp-content/uploads/2020/04/kis.logo_.png</PackageIconUrl>
+        <PackageIconUrl>https://www.kephas-software.com/wp-content/uploads/2020/04/kis.logo_-1.png</PackageIconUrl>
         <RepositoryUrl>https://github.com/kephas-software/kephas-sharepoint-uploader-service</RepositoryUrl>
         <RepositoryType>github</RepositoryType>
         <PackageReleaseNotes>
