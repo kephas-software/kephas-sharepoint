@@ -69,7 +69,7 @@ namespace Kephas.SharePoint.Security
             var certificateResult = await certProvider.Value.GetCertificateAsync(credential.CertificateStore, credential.Certificate, cancellationToken: cancellationToken)
                 .PreserveThreadContext();
 
-            if (certificateResult.ReturnValue == null)
+            if (certificateResult.Value == null)
             {
                 throw new SharePointException($"No certificate found for '{credential.CertificateStore}/{credential.Certificate}'. Possible cause: bad application configuration.");
             }
@@ -79,7 +79,7 @@ namespace Kephas.SharePoint.Security
                 settings.SiteUrl,
                 credential.AppId,
                 credential.Domain,
-                certificateResult.ReturnValue);
+                certificateResult.Value);
         }
     }
 }

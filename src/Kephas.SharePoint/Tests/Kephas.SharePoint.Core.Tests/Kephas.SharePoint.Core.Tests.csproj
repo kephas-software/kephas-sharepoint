@@ -24,7 +24,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Kephas.Testing" Version="7.6.0-dev.11" />
+        <PackageReference Include="Kephas.Testing" Version="7.6.0-dev.12" />
         <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="3.1.1" />
         <PackageReference Include="NSubstitute" Version="4.2.1" />
         <PackageReference Include="NUnit" Version="3.12.0" />

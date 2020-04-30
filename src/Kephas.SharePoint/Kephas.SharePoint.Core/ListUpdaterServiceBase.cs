@@ -87,21 +87,18 @@ namespace Kephas.SharePoint
         /// </returns>
         public async Task<IOperationResult> UpdateListItemAsync(ListItem listItem, IContext context, CancellationToken cancellationToken)
         {
-            IOperationResult? coreResult = null;
-            var opResult = await Profiler.WithStopwatchAsync(
+            return (await Profiler.WithStopwatchAsync(
                 async () =>
                 {
                     await this.ApplyBeforeBehaviorsAsync(listItem, context, cancellationToken).PreserveThreadContext();
 
-                    coreResult = await this.UpdateListItemCoreAsync(listItem, context, cancellationToken)
+                    var result = await this.UpdateListItemCoreAsync(listItem, context, cancellationToken)
                         .PreserveThreadContext();
 
                     await this.ApplyAfterBehaviorsAsync(listItem, context, cancellationToken).PreserveThreadContext();
-                }).PreserveThreadContext();
-
-            return opResult
-                .MergeMessages(coreResult!)
-                .ReturnValue(coreResult!.ReturnValue);
+                    return result;
+                }).PreserveThreadContext())
+                .Flatten();
         }
 
         /// <summary>
