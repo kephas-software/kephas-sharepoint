@@ -3,34 +3,49 @@
     <PropertyGroup>
         <TargetFrameworks>netstandard2.1;net461</TargetFrameworks>
         <LangVersion>latest</LangVersion>
-        <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+        <Nullable>enable</Nullable>
+
         <Version>3.3.0-dev.24</Version>
+        <AssemblyVersion>3.3.0.0</AssemblyVersion>
+        <FileVersion>3.3.0.0</FileVersion>
         <Authors>Kephas Software SRL</Authors>
         <Company>Kephas Software SRL</Company>
         <Product>Kephas Integration Services for Microsoft (r) SharePoint</Product>
-        <AssemblyVersion>3.3.0.0</AssemblyVersion>
-        <FileVersion>3.3.0.0</FileVersion>
-        <Description>Provides the client connectivity for the Microsoft SharePoint integration.</Description>
-        <Copyright>Copyright Kephas Software SRL 2019-2020</Copyright>
+
+        <CurrentYear>$([System.DateTime]::Now.ToString(yyyy))</CurrentYear>
+        <Description>
+            Provides the client connectivity for the Microsoft SharePoint integration.
+        </Description>
+        <Copyright>Copyright © Kephas Software SRL 2010-$(CurrentYear)</Copyright>
+
+        <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
         <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
         <PackageLicenseUrl>http://opensource.org/licenses/MIT</PackageLicenseUrl>
         <PackageProjectUrl>https://github.com/kephas-software/kephas-sharepoint-uploader-service</PackageProjectUrl>
-        <PackageIconUrl>http://kephas-framework.com/favicon.png</PackageIconUrl>
+        <PackageIconUrl>https://www.kephas-software.com/wp-content/uploads/2020/04/kis.logo_.png</PackageIconUrl>
         <RepositoryUrl>https://github.com/kephas-software/kephas-sharepoint-uploader-service</RepositoryUrl>
-        <PackageTags>kephas sharepoint core</PackageTags>
         <RepositoryType>github</RepositoryType>
+        <PackageReleaseNotes>
+            Please check https://github.com/kephas-software/kephas/releases for the change log.
+            Also check the documentation and the samples from https://github.com/kephas-software/kephas/wiki and https://github.com/kephas-software/kephas/tree/master/Samples.
+        </PackageReleaseNotes>
+        <PackageTags>kephas sharepoint client</PackageTags>
+
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <NeutralLanguage>en</NeutralLanguage>
-        <RootNamespace>Kephas.SharePoint</RootNamespace>
+        <DefineConstants>KEPHASAPPS</DefineConstants>
 
         <SignAssembly>True</SignAssembly>
         <AssemblyOriginatorKeyFile>..\..\..\..\..\devops\kephas-apps\kephas-apps.snk</AssemblyOriginatorKeyFile>
+    </PropertyGroup>
 
-        <IncludeSymbols>true</IncludeSymbols>
-        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-
-        <NeutralLanguage>en</NeutralLanguage>
-        <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(MSBuildProjectName).xml</DocumentationFile>
-        <DefineConstants>KEPHASAPPS</DefineConstants>
+    <PropertyGroup>
+        <RootNamespace>Kephas.SharePoint</RootNamespace>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)'=='Debug'">

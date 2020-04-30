@@ -25,28 +25,33 @@
         <Copyright>Copyright © Kephas Software SRL 2010-$(CurrentYear)</Copyright>
 
         <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-        <Description>Provides a common infrastructure for all the other Microsoft SharePoint integration components.</Description>
-        <Copyright>Copyright Kephas Software SRL 2019-2020</Copyright>
         <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
         <PackageLicenseUrl>http://opensource.org/licenses/MIT</PackageLicenseUrl>
         <PackageProjectUrl>https://github.com/kephas-software/kephas-sharepoint-uploader-service</PackageProjectUrl>
-        <PackageIconUrl>http://kephas-framework.com/favicon.png</PackageIconUrl>
+        <PackageIconUrl>https://www.kephas-software.com/wp-content/uploads/2020/04/kis.logo_.png</PackageIconUrl>
         <RepositoryUrl>https://github.com/kephas-software/kephas-sharepoint-uploader-service</RepositoryUrl>
-        <PackageTags>kephas sharepoint core</PackageTags>
         <RepositoryType>github</RepositoryType>
+        <PackageReleaseNotes>
+            Please check https://github.com/kephas-software/kephas/releases for the change log.
+            Also check the documentation and the samples from https://github.com/kephas-software/kephas/wiki and https://github.com/kephas-software/kephas/tree/master/Samples.
+        </PackageReleaseNotes>
+        <PackageTags>kephas sharepoint core</PackageTags>
+
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <NeutralLanguage>en</NeutralLanguage>
-        <RootNamespace>Kephas.SharePoint</RootNamespace>
+        <DefineConstants>KEPHASAPPS</DefineConstants>
 
         <SignAssembly>True</SignAssembly>
         <AssemblyOriginatorKeyFile>..\..\..\..\..\devops\kephas-apps\kephas-apps.snk</AssemblyOriginatorKeyFile>
+    </PropertyGroup>
 
-        <IncludeSymbols>true</IncludeSymbols>
-        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-
-        <NeutralLanguage>en</NeutralLanguage>
+    <PropertyGroup>
         <RootNamespace>Kephas.SharePoint</RootNamespace>
-        <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(MSBuildProjectName).xml</DocumentationFile>
-        <DefineConstants>KEPHASAPPS</DefineConstants>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)'=='Debug'">
