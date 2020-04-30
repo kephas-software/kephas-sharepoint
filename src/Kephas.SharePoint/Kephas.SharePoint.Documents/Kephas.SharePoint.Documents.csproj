@@ -27,7 +27,7 @@
         <RepositoryUrl>https://github.com/kephas-software/kephas-sharepoint-uploader-service</RepositoryUrl>
         <RepositoryType>github</RepositoryType>
         <PackageReleaseNotes>
-            Please check https://github.com/kephas-software/kephas/releases for the change log.
+            Please check https://github.com/kephas-software/kephas-sharepoint/releases for the change log.
             Also check the documentation and the samples from https://github.com/kephas-software/kephas/wiki and https://github.com/kephas-software/kephas/tree/master/Samples.
         </PackageReleaseNotes>
         <PackageTags>kephas sharepoint documents</PackageTags>
