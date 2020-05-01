@@ -2,27 +2,28 @@
 The application automate the business flow of the digitalized documents using SharePoint Online, helping users concentrate on their actual work. 
 
 # System requirements
-The application runs on following operating systems:
+The application runs on the following operating systems:
 
 * Windows
-  * Windows 7 SP1 or newer, Windows Server 2008 R2 SP1 or newer
-  * .NET Framework 4.6.1 or newer
+  * Windows 7 SP1 or newer, Windows Server 2008 R2 SP1 or newer.
+  * .NET Framework 4.6.1 or newer -or- .NET Core 3.1 or newer.
 
 * Linux
-  * Ubuntu 16 or newer
-  * Mono 6.4.0 or newer
+  * Ubuntu 16 or newer.
+  * Mono 6.4.0 or newer -or- .NET Core 3.1 or newer.
 
 # Installation instructions
-  * Unzip the application package into a folder of your choice.
+  * Unzip the application host package into a folder of your choice.
   * Make sure the user starting the application has read/write permissions in the folder where the application is installed.
   
 # Starting the application in setup mode
-  * Run the `sus.exe setup` command and follow the instructions on the screen.
-    * Note: the setup mode does not try to connect to SharePoint, Exchange, or do anything with the documents in the file system. It is used to configure the connection and other settings. When the configuration is done, exit the application command and start it again in service mode.
-  * To terminate the application issue the `quit` command in the application console.
+  * Run the `kis-cli.exe` CLI application (command line interface) and follow the instructions on the screen.
+    * On Linux run `mono kis-cli.exe` for the .NET Framework 4.6.1 targeting application, or `dotnet kis-cli.exe` for the .NET Core 3.1 alternative.
+  * To terminate the CLI application issue the `quit` command in the console.
+  * Note: the setup mode does not try to connect to SharePoint, Exchange, or do anything with the documents in the file system. It is used to configure the connection and other settings. When the configuration is done, exit the application command and start it again in service mode.
 
 # Starting the application in service mode
-  * Run the `sus.exe` command without any further arguments and follow the instructions on the screen.
+  * Run the `kis.exe` command without any further arguments and follow the instructions on the screen.
     * Note: the service mode requires a proper application configuration, otherwise the connection to SharePoint, Exchange, or to the file system may malfunction.
   * To terminate the application issue the `quit` command in the application console.
   
