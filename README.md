@@ -15,6 +15,8 @@ The application runs on the following operating systems:
 # Installation instructions
   * Unzip the application host package into a folder of your choice.
   * Make sure the user starting the application has read/write permissions in the folder where the application is installed.
+    * Important: so far, the application is only a host providing the infrastructure for the actual functionality, which will be installed as plugins in the next steps.
+  * In the `Config` sub directory of the installation folder identify the `NuGet.config` file and open it with a text editor. Please change the values of the `UserName` and `ClearTextPassword` with the one provided by the software publisher. Save the file and close it.
   
 # Starting the application in setup mode
   * Run the `kis-cli.exe` CLI application (command line interface) and follow the instructions on the screen.
