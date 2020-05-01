@@ -1,5 +1,5 @@
-# Kephas SharePoint document uploader service
-This application helps organizations upload their digitalized documents to SharePoint Online.
+# Kephas Integration Services for Microsoft SharePoint Online
+The application automate the business flow of the digitalized documents using SharePoint Online, helping users concentrate on their actual work. 
 
 # System requirements
 The application runs on following operating systems:
