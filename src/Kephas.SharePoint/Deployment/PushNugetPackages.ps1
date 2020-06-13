@@ -1,6 +1,7 @@
 param (
     [string]$version = $( Read-Host "Please provide package version" ),
-    [string]$build = "Release"
+    [string]$build = "Release",
+    [string]$apiKey = ""
 )
 
 $packages = @(
@@ -11,5 +12,10 @@ $packages = @(
 
 foreach ($package in $packages) {
     $packagepath = "..\$package\bin\$build\$package.$version.nupkg"
-    .\NuGet.exe push $packagepath -Source https://api.nuget.org/v3/index.json 
+    if ($apiKey -eq "") {
+        .\NuGet.exe push -Source https://api.nuget.org/v3/index.json $packagepath 
+    }
+    else {
+        .\NuGet.exe push -ApiKey $apiKey -Source https://api.nuget.org/v3/index.json $packagepath 
+    }
 }
