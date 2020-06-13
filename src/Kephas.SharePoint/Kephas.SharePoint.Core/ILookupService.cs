@@ -25,7 +25,6 @@ namespace Kephas.SharePoint
     public interface ILookupService
     {
         /// <summary>
-        /// 
         /// Tries to find the reference asynchronously.
         /// </summary>
         /// <param name="siteId">Identifier for the site.</param>

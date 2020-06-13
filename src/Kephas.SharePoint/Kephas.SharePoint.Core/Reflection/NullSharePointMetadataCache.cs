@@ -14,13 +14,15 @@ namespace Kephas.SharePoint.Reflection
     using System.Threading;
     using System.Threading.Tasks;
 
+    using Kephas.Dynamic;
+    using Kephas.Reflection;
     using Kephas.Services;
 
     /// <summary>
     /// A null SharePoint metadata cache.
     /// </summary>
     [OverridePriority(Priority.Lowest)]
-    public class NullSharePointMetadataCache : ISharePointMetadataCache
+    public class NullSharePointMetadataCache : Expando, ISharePointMetadataCache
     {
         /// <summary>
         /// Clears this object to its blank/initial state.
@@ -70,6 +72,12 @@ namespace Kephas.SharePoint.Reflection
         public Task<IListInfo> GetListInfoAsync(Guid siteId, Guid listId, CancellationToken cancellationToken = default)
         {
             return Task.FromResult<IListInfo>(null);
+        }
+
+        /// <inheritdoc/>
+        public ITypeInfo? GetTypeInfo(object typeToken, bool throwOnNotFound = true)
+        {
+            return null;
         }
 
         /// <summary>

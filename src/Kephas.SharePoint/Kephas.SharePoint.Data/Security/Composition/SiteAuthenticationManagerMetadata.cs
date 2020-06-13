@@ -25,7 +25,7 @@ namespace Kephas.SharePoint.Security.Composition
         /// Initializes a new instance of the <see cref="SiteAuthenticationManagerMetadata"/> class.
         /// </summary>
         /// <param name="metadata">The metadata.</param>
-        public SiteAuthenticationManagerMetadata(IDictionary<string, object> metadata)
+        public SiteAuthenticationManagerMetadata(IDictionary<string, object?> metadata)
             : base(metadata)
         {
             if (metadata == null)
@@ -43,14 +43,14 @@ namespace Kephas.SharePoint.Security.Composition
         /// <param name="processingPriority">Optional. The processing priority.</param>
         /// <param name="overridePriority">Optional. The override priority.</param>
         /// <param name="serviceName">Optional. Name of the service.</param>
-        public SiteAuthenticationManagerMetadata(Type credentialType, int processingPriority = 0, int overridePriority = 0, string serviceName = null)
+        public SiteAuthenticationManagerMetadata(Type credentialType, int processingPriority = 0, int overridePriority = 0, string? serviceName = null)
             : base(processingPriority, overridePriority, serviceName)
         {
             this.CredentialType = credentialType;
         }
 
         /// <summary>
-        /// Gets or sets the type of the credential.
+        /// Gets the type of the credential.
         /// </summary>
         /// <value>
         /// The type of the credential.

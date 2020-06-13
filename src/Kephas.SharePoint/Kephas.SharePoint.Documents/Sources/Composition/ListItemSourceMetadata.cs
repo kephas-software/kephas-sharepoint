@@ -21,7 +21,7 @@ namespace Kephas.SharePoint.Sources.Composition
         /// Initializes a new instance of the <see cref="ListItemSourceMetadata"/> class.
         /// </summary>
         /// <param name="metadata">The metadata.</param>
-        public ListItemSourceMetadata(IDictionary<string, object> metadata)
+        public ListItemSourceMetadata(IDictionary<string, object?> metadata)
             : base(metadata)
         {
             if (metadata == null)

@@ -17,7 +17,10 @@ namespace Kephas.SharePoint.Reflection
     using System.Threading.Tasks;
 
     using Kephas.Collections;
+    using Kephas.Dynamic;
     using Kephas.Logging;
+    using Kephas.Reflection;
+    using Kephas.Reflection.Dynamic;
     using Kephas.Services;
     using Kephas.SharePoint;
     using Kephas.Threading.Tasks;
@@ -27,7 +30,7 @@ namespace Kephas.SharePoint.Reflection
     /// A SharePoint metadata cache.
     /// </summary>
     [OverridePriority(Priority.Low)]
-    public class SharePointMetadataCache : Loggable, ISharePointMetadataCache
+    public class SharePointMetadataCache : DynamicTypeRegistry, ISharePointMetadataCache
     {
         private readonly IListService listService;
         private readonly ISiteServiceProvider siteServiceProvider;
@@ -41,11 +44,35 @@ namespace Kephas.SharePoint.Reflection
         /// <param name="listService">The list service.</param>
         /// <param name="siteServiceProvider">The site service provider.</param>
         /// <param name="logManager">Optional. Manager for log.</param>
-        public SharePointMetadataCache(IListService listService, ISiteServiceProvider siteServiceProvider, ILogManager logManager = null)
-            : base(logManager)
+        public SharePointMetadataCache(IListService listService, ISiteServiceProvider siteServiceProvider, ILogManager? logManager = null)
         {
             this.listService = listService;
             this.siteServiceProvider = siteServiceProvider;
+            this.Logger = logManager?.GetLogger(this.GetType()) ?? this.GetLogger();
+        }
+
+        /// <summary>
+        /// Gets the logger.
+        /// </summary>
+        public ILogger Logger { get; }
+
+        /// <summary>
+        /// Gets the type information based on the type token.
+        /// </summary>
+        /// <param name="typeToken">The type token.</param>
+        /// <param name="throwOnNotFound">If true and if the type information is not found based on the provided token, throws an exception.</param>
+        /// <returns>The type information.</returns>
+        public override ITypeInfo? GetTypeInfo(object typeToken, bool throwOnNotFound = true)
+        {
+            var listInfo = typeToken switch
+            {
+                string listFullName => this.GetListInfoAsync(listFullName).GetResultNonLocking(),
+                Tuple<Guid, string> siteGuidListName => this.GetListInfoAsync(siteGuidListName.Item1, siteGuidListName.Item2).GetResultNonLocking(),
+                Tuple<Guid, Guid> siteGuidListGuid => this.GetListInfoAsync(siteGuidListGuid.Item1, siteGuidListGuid.Item2).GetResultNonLocking(),
+                _ => throw new NotSupportedException($"Token type {typeToken?.GetType()} not supported."),
+            };
+
+            return listInfo;
         }
 
         /// <summary>
@@ -155,7 +182,7 @@ namespace Kephas.SharePoint.Reflection
             }
         }
 
-        private (ListIdentity listIdentity, IListInfo listInfo) TryGetListEntry(ListIdentity key)
+        private (ListIdentity listIdentity, IListInfo? listInfo) TryGetListEntry(ListIdentity key)
         {
             lock (this.listInfoMapSync)
             {
@@ -199,7 +226,7 @@ namespace Kephas.SharePoint.Reflection
                     return typeInfo;
                 }
 
-                typeInfo = new ListInfo(list, siteService.SiteName ?? siteService.SiteUrl.ToString(), siteService.SiteUrl.ToString());
+                typeInfo = new ListInfo(this, list, siteService.SiteName ?? siteService.SiteUrl.ToString(), siteService.SiteUrl.ToString());
                 this.listInfoMap.Add((key, typeInfo));
                 return typeInfo;
             }

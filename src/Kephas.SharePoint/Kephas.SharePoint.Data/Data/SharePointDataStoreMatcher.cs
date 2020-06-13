@@ -41,7 +41,7 @@ namespace Kephas.SharePoint.Data
         /// <returns>
         /// The data store.
         /// </returns>
-        public (IDataStore dataStore, bool canHandle) GetDataStore(string dataStoreName, IContext context = null)
+        public (IDataStore? dataStore, bool canHandle) GetDataStore(string dataStoreName, IContext? context = null)
         {
             if (dataStoreName == SharePointDataContext.DataStoreKind)
             {
@@ -65,7 +65,7 @@ namespace Kephas.SharePoint.Data
         /// <returns>
         /// The data store name and a flag indicating whether the matching was successful.
         /// </returns>
-        public (string dataStoreName, bool canHandle) GetDataStoreName(Type entityType, IContext context = null)
+        public (string? dataStoreName, bool canHandle) GetDataStoreName(Type entityType, IContext? context = null)
         {
             return entityType == typeof(ISharePointEntity) || entityType == typeof(SharePointEntity)
                 ? (SharePointDataContext.DataStoreKind, true)

@@ -33,6 +33,6 @@ namespace Kephas.SharePoint.Security
         /// <returns>
         /// An asynchronous result that yields the certificate.
         /// </returns>
-        Task<IOperationResult<X509Certificate2>> GetCertificateAsync(string storeName, string certificate, IContext? context = null, CancellationToken cancellationToken = default);
+        Task<IOperationResult<X509Certificate2?>> GetCertificateAsync(string storeName, string certificate, IContext? context = null, CancellationToken cancellationToken = default);
     }
 }

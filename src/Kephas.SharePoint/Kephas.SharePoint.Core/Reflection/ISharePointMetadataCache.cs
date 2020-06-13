@@ -14,13 +14,14 @@ namespace Kephas.SharePoint.Reflection
     using System.Threading;
     using System.Threading.Tasks;
 
+    using Kephas.Reflection;
     using Kephas.Services;
 
     /// <summary>
     /// Interface for SharePoint metadata cache.
     /// </summary>
     [SingletonAppServiceContract]
-    public interface ISharePointMetadataCache
+    public interface ISharePointMetadataCache : ITypeRegistry
     {
         /// <summary>
         /// Gets the list type information asynchronously.

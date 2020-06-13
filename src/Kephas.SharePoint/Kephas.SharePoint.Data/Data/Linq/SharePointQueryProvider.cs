@@ -85,13 +85,13 @@ namespace Kephas.SharePoint.Data.Linq
         private class InternalQueryProvider : IAsyncQueryProvider
         {
             private static readonly MethodInfo CreateQueryMethod =
-                ReflectionHelper.GetGenericMethodOf(_ => ((IQueryProvider)null).CreateQuery<int>(null));
+                ReflectionHelper.GetGenericMethodOf(_ => ((IQueryProvider)null!).CreateQuery<int>(null));
 
             private static readonly MethodInfo ExecuteMethod =
-                ReflectionHelper.GetGenericMethodOf(_ => ((IQueryProvider)null).Execute<int>(null));
+                ReflectionHelper.GetGenericMethodOf(_ => ((IQueryProvider)null!).Execute<int>(null));
 
             private static readonly MethodInfo ExecuteAsyncMethod =
-                ReflectionHelper.GetGenericMethodOf(_ => ((IAsyncQueryProvider)null).ExecuteAsync<int>(null, default));
+                ReflectionHelper.GetGenericMethodOf(_ => ((IAsyncQueryProvider)null!).ExecuteAsync<int>(null!, default));
 
             /// <summary>
             /// Gets or sets the provider.

@@ -65,7 +65,7 @@ namespace Kephas.SharePoint.Security
         /// <returns>
         /// An asynchronous result that yields the authenticated context.
         /// </returns>
-        Task<ClientContext> ISiteAuthenticationManager.GetAuthenticatedContextAsync(SiteSettings settings, ISiteCredential credential, IContext? context = null, CancellationToken cancellationToken = default)
+        Task<ClientContext> ISiteAuthenticationManager.GetAuthenticatedContextAsync(SiteSettings settings, ISiteCredential credential, IContext? context, CancellationToken cancellationToken)
         {
             if (credential is TCredential typedCredential)
             {

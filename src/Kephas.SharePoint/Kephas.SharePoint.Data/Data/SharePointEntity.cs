@@ -28,13 +28,10 @@ namespace Kephas.SharePoint.Data
     [ImplementationFor(typeof(ISharePointEntity))]
     public class SharePointEntity : Expando, ISharePointEntity, IChangeStateTrackable, IEntityEntryAware
     {
-        /// <summary>
-        /// Information describing the type.
-        /// </summary>
-        private IListInfo typeInfo;
+        private readonly IListInfo typeInfo;
+        private readonly IDictionary<string, object?> values;
+        private readonly ListItem listItem;
         private WeakReference<IEntityEntry> weakEntityEntry;
-        private IDictionary<string, object> values;
-        private ListItem listItem;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SharePointEntity"/> class.
@@ -51,7 +48,7 @@ namespace Kephas.SharePoint.Data
 
         /// <summary>Gets the identifier for this instance.</summary>
         /// <value>The identifier.</value>
-        object IIdentifiable.Id => this[nameof(IIdentifiable.Id)];
+        object IIdentifiable.Id => this[nameof(IIdentifiable.Id)]!;
 
         /// <summary>Gets or sets the change state of the entity.</summary>
         /// <value>The change state.</value>
@@ -111,7 +108,7 @@ namespace Kephas.SharePoint.Data
         /// <returns>
         /// <c>true</c> if a value is found, <c>false</c> otherwise.
         /// </returns>
-        protected override bool TryGetValue(string key, out object value)
+        protected override bool TryGetValue(string key, out object? value)
         {
             if (key == nameof(IIdentifiable.Id))
             {
@@ -133,7 +130,7 @@ namespace Kephas.SharePoint.Data
         /// <returns>
         /// <c>true</c> if the value could be set, <c>false</c> otherwise.
         /// </returns>
-        protected override bool TrySetValue(string key, object value)
+        protected override bool TrySetValue(string key, object? value)
         {
             if (this.values.TryGetValue(key, out var currentValue))
             {
@@ -151,17 +148,6 @@ namespace Kephas.SharePoint.Data
             }
 
             return true;
-        }
-
-        /// <summary>
-        /// Gets the <see cref="T:Kephas.Reflection.ITypeInfo" /> of this expando object.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="T:Kephas.Reflection.ITypeInfo" /> of this expando object.
-        /// </returns>
-        protected override ITypeInfo GetThisTypeInfo()
-        {
-            return this.GetType().AsRuntimeTypeInfo();
         }
     }
 }

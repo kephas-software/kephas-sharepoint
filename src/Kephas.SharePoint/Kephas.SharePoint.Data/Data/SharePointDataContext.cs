@@ -52,8 +52,8 @@ namespace Kephas.SharePoint.Data
             ISharePointMetadataCache metadataCache,
             ISiteServiceProvider siteServiceProvider,
             IListService libraryService,
-            IDataCommandProvider dataCommandProvider = null,
-            IDataBehaviorProvider dataBehaviorProvider = null)
+            IDataCommandProvider? dataCommandProvider = null,
+            IDataBehaviorProvider? dataBehaviorProvider = null)
             : base(compositionContext, dataCommandProvider, dataBehaviorProvider)
         {
             this.MetadataCache = metadataCache;

@@ -14,6 +14,7 @@ namespace Kephas.SharePoint.Tests
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
+
     using Kephas.Application;
     using Kephas.Composition;
     using Kephas.Cryptography;

@@ -27,11 +27,14 @@ namespace Kephas.SharePoint.Reflection
         /// <summary>
         /// Initializes a new instance of the <see cref="ListInfo"/> class.
         /// </summary>
+        /// <param name="registry">The type registry.</param>
         /// <param name="list">The list.</param>
         /// <param name="siteName">Name of the site.</param>
         /// <param name="siteUrl">URL of the site.</param>
-        internal ListInfo(List list, string siteName, string siteUrl)
+        internal ListInfo(DynamicTypeRegistry registry, List list, string siteName, string siteUrl)
+            : base(registry)
         {
+            this.Id = list.Id;
             this.list = list;
             this.Name = list.Title;
             this.FullName = $"{siteName}/{list.Title}";
@@ -51,14 +54,6 @@ namespace Kephas.SharePoint.Reflection
         /// The properties.
         /// </value>
         public new IEnumerable<IListPropertyInfo> Properties => base.Properties.OfType<IListPropertyInfo>();
-
-        /// <summary>
-        /// Gets the identifier.
-        /// </summary>
-        /// <value>
-        /// The identifier.
-        /// </value>
-        public object Id => this.list.Id;
 
         /// <summary>
         /// Creates property information.

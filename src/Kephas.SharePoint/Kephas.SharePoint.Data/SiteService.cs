@@ -100,7 +100,7 @@ namespace Kephas.SharePoint
         /// <returns>
         /// An awaitable task.
         /// </returns>
-        public async Task InitializeAsync(IContext context = null, CancellationToken cancellationToken = default)
+        public async Task InitializeAsync(IContext? context = null, CancellationToken cancellationToken = default)
         {
             this.initMonitor.Start();
 
@@ -147,7 +147,7 @@ namespace Kephas.SharePoint
         /// <returns>
         /// An asynchronous result.
         /// </returns>
-        public async Task FinalizeAsync(IContext context = null, CancellationToken cancellationToken = default)
+        public async Task FinalizeAsync(IContext? context = null, CancellationToken cancellationToken = default)
         {
             this.keepAlive?.Dispose();
             this.clientContext?.Dispose();

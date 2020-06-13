@@ -82,7 +82,7 @@ namespace Kephas.SharePoint.Sources
         /// <value>
         /// The application context.
         /// </value>
-        protected IContext AppContext { get; private set; }
+        protected IContext? AppContext { get; private set; }
 
         /// <summary>
         /// Initializes the source asynchronously.
@@ -111,9 +111,10 @@ namespace Kephas.SharePoint.Sources
         /// <returns>
         /// An asynchronous result.
         /// </returns>
-        public virtual async Task FinalizeAsync(IContext? context = null, CancellationToken cancellationToken = default)
+        public virtual Task FinalizeAsync(IContext? context = null, CancellationToken cancellationToken = default)
         {
             this.retrySubscription?.Dispose();
+            return Task.CompletedTask;
         }
 
         /// <summary>

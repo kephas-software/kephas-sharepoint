@@ -36,9 +36,9 @@ namespace Kephas.SharePoint
         /// <returns>
         /// An asynchronous result that yields the reference values and a success flag.
         /// </returns>
-        public Task<IOperationResult<(int? id, object value, bool success)>> TryFindReferenceAsync(Guid siteId, string listId, string refField, ListItem listItem, ITextFinder textFinder, CancellationToken cancellationToken = default)
+        public Task<IOperationResult<(int? id, object? value, bool success)>> TryFindReferenceAsync(Guid siteId, string listId, string refField, ListItem listItem, ITextFinder textFinder, CancellationToken cancellationToken = default)
         {
-            return Task.FromResult<IOperationResult<(int? id, object value, bool success)>>(new OperationResult<(int? id, object value, bool success)>());
+            return Task.FromResult<IOperationResult<(int? id, object? value, bool success)>>(new OperationResult<(int? id, object? value, bool success)>());
         }
 
         /// <summary>
@@ -52,9 +52,9 @@ namespace Kephas.SharePoint
         /// <returns>
         /// An asynchronous result that yields the reference values and a success flag.
         /// </returns>
-        public Task<IOperationResult<(int? id, object value, bool success)>> TryFindReferenceAsync(Guid siteId, string listId, string refField, object refValue, CancellationToken cancellationToken = default)
+        public Task<IOperationResult<(int? id, object? value, bool success)>> TryFindReferenceAsync(Guid siteId, string listId, string refField, object refValue, CancellationToken cancellationToken = default)
         {
-            return Task.FromResult<IOperationResult<(int? id, object value, bool success)>>(new OperationResult<(int? id, object value, bool success)>());
+            return Task.FromResult<IOperationResult<(int? id, object? value, bool success)>>(new OperationResult<(int? id, object? value, bool success)>());
         }
     }
 }
