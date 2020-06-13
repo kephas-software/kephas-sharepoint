@@ -31,7 +31,7 @@ namespace Kephas.SharePoint.Reflection
         /// <param name="list">The list.</param>
         /// <param name="siteName">Name of the site.</param>
         /// <param name="siteUrl">URL of the site.</param>
-        internal ListInfo(DynamicTypeRegistry registry, List list, string siteName, string siteUrl)
+        internal ListInfo(ITypeRegistry registry, List list, string siteName, string siteUrl)
             : base(registry)
         {
             this.Id = list.Id;

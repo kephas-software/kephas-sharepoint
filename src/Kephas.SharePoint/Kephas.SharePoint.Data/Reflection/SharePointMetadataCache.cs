@@ -20,7 +20,6 @@ namespace Kephas.SharePoint.Reflection
     using Kephas.Dynamic;
     using Kephas.Logging;
     using Kephas.Reflection;
-    using Kephas.Reflection.Dynamic;
     using Kephas.Services;
     using Kephas.SharePoint;
     using Kephas.Threading.Tasks;
@@ -30,7 +29,7 @@ namespace Kephas.SharePoint.Reflection
     /// A SharePoint metadata cache.
     /// </summary>
     [OverridePriority(Priority.Low)]
-    public class SharePointMetadataCache : DynamicTypeRegistry, ISharePointMetadataCache
+    public class SharePointMetadataCache : Expando, ISharePointMetadataCache
     {
         private readonly IListService listService;
         private readonly ISiteServiceProvider siteServiceProvider;
@@ -62,7 +61,7 @@ namespace Kephas.SharePoint.Reflection
         /// <param name="typeToken">The type token.</param>
         /// <param name="throwOnNotFound">If true and if the type information is not found based on the provided token, throws an exception.</param>
         /// <returns>The type information.</returns>
-        public override ITypeInfo? GetTypeInfo(object typeToken, bool throwOnNotFound = true)
+        public virtual ITypeInfo? GetTypeInfo(object typeToken, bool throwOnNotFound = true)
         {
             var listInfo = typeToken switch
             {
