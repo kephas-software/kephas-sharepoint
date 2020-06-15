@@ -30,7 +30,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Kephas.Testing" Version="8.0.0-dev.38" />
+        <PackageReference Include="Kephas.Testing" Version="8.0.0-dev.39" />
         <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="3.1.1" />
         <PackageReference Include="NSubstitute" Version="4.2.1" />
         <PackageReference Include="NUnit" Version="3.12.0" />
