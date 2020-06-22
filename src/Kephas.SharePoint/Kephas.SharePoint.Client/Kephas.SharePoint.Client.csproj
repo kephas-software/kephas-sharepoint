@@ -5,7 +5,7 @@
         <LangVersion>latest</LangVersion>
         <Nullable>enable</Nullable>
 
-        <Version>3.3.0-dev.80.41</Version>
+        <Version>3.3.0-dev.80.42</Version>
         <AssemblyVersion>3.3.0.0</AssemblyVersion>
         <FileVersion>3.3.0.0</FileVersion>
         <Authors>Kephas Software SRL</Authors>
@@ -69,7 +69,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Kephas.Core" Version="8.0.0-dev.41" />
+        <PackageReference Include="Kephas.Core" Version="8.0.0-dev.42" />
         <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
