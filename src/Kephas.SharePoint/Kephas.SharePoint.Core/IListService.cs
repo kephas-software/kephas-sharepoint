@@ -47,10 +47,19 @@ namespace Kephas.SharePoint
         /// <summary>
         /// Gets the site settings.
         /// </summary>
-        /// <param name="libraryFullName">The library full name, including site.</param>
+        /// <param name="listFullName">The list full name, including site.</param>
         /// <returns>
         /// The site settings.
         /// </returns>
-        SiteSettings GetSiteSettings(string libraryFullName);
+        SiteSettings GetSiteSettings(string listFullName);
+
+        /// <summary>
+        /// Gets the site account settings.
+        /// </summary>
+        /// <param name="listFullName">The list full name, including site.</param>
+        /// <returns>
+        /// The site account settings.
+        /// </returns>
+        SiteAccountSettings GetAccountSettings(string listFullName);
     }
 }

@@ -83,7 +83,7 @@ namespace Kephas.SharePoint
                 try
                 {
                     var siteContext = this.contextFactory.CreateContext<Context>().Merge(context);
-                    siteContext[nameof(SiteAccountSettings)] = this.GetSiteAccountSettings(siteSettingsPair.Key, siteSettingsPair.Value.Account);
+                    siteContext[nameof(SiteAccountSettings)] = this.GetAccountSettings(siteSettingsPair.Key, siteSettingsPair.Value.Account);
                     siteContext[nameof(SiteSettings)] = siteSettingsPair.Value;
                     siteContext[nameof(IListUpdaterService.SiteName)] = siteSettingsPair.Key;
                     var listUpdater = await this.listUpdaterService.CreateInitializedValueAsync(siteContext, cancellationToken: cancellationToken).PreserveThreadContext();
@@ -145,7 +145,7 @@ namespace Kephas.SharePoint
             return siteUploader.UpdateListItemAsync(listItem, context, cancellationToken);
         }
 
-        private SiteAccountSettings? GetSiteAccountSettings(string? site, string? account)
+        private SiteAccountSettings? GetAccountSettings(string? site, string? account)
         {
             if (this.settings.Accounts == null)
             {

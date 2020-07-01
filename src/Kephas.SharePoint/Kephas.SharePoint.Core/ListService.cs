@@ -13,10 +13,12 @@ namespace Kephas.SharePoint
     using System;
     using System.Linq;
 
+    using Kephas.Logging;
+
     /// <summary>
     /// A list service.
     /// </summary>
-    public class ListService : IListService
+    public class ListService : Loggable, IListService
     {
         private const char FullNameSeparator = '/';
         private readonly ISiteSettingsProvider siteSettingsProvider;
@@ -27,9 +29,12 @@ namespace Kephas.SharePoint
         /// </summary>
         /// <param name="siteSettingsProvider">The site settings provider.</param>
         /// <param name="defaultSettingsProvider">The default settings provider.</param>
+        /// <param name="logManager">Optional. The log manager.</param>
         public ListService(
             ISiteSettingsProvider siteSettingsProvider,
-            IDefaultSettingsProvider defaultSettingsProvider)
+            IDefaultSettingsProvider defaultSettingsProvider,
+            ILogManager? logManager = null)
+            : base(logManager)
         {
             this.siteSettingsProvider = siteSettingsProvider;
             this.defaultSettingsProvider = defaultSettingsProvider;
@@ -82,6 +87,26 @@ namespace Kephas.SharePoint
             var siteName = listSeparator <= 0 ? defaultSettings.Site : listFullName.Substring(0, listSeparator);
 
             return (siteName, libraryName);
+        }
+
+        /// <summary>
+        /// Gets the site account settings.
+        /// </summary>
+        /// <param name="listFullName">The list full name, including site.</param>
+        /// <returns>
+        /// The site account settings.
+        /// </returns>
+        public SiteAccountSettings GetAccountSettings(string listFullName)
+        {
+            var siteSettings = this.GetSiteSettings(listFullName);
+            var accounts = this.siteSettingsProvider.GetAccountSettings();
+            var siteAccount = accounts.FirstOrDefault(kv => kv.name == siteSettings.Account).settings;
+            if (siteAccount == null)
+            {
+                throw new SharePointException($"No account settings found for {siteSettings.Account} and site {siteSettings.SiteUrl}.");
+            }
+
+            return siteAccount;
         }
 
         /// <summary>
