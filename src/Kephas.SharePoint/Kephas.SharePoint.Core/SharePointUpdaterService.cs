@@ -83,6 +83,7 @@ namespace Kephas.SharePoint
                 try
                 {
                     var siteContext = this.contextFactory.CreateContext<Context>().Merge(context);
+                    siteContext[nameof(SiteAccountSettings)] = this.GetSiteAccountSettings(siteSettingsPair.Key, siteSettingsPair.Value.Account);
                     siteContext[nameof(SiteSettings)] = siteSettingsPair.Value;
                     siteContext[nameof(IListUpdaterService.SiteName)] = siteSettingsPair.Key;
                     var listUpdater = await this.listUpdaterService.CreateInitializedValueAsync(siteContext, cancellationToken: cancellationToken).PreserveThreadContext();
@@ -95,6 +96,29 @@ namespace Kephas.SharePoint
             }
 
             this.initMonitor.Complete();
+        }
+
+        private SiteAccountSettings? GetSiteAccountSettings(string? site, string? account)
+        {
+            if (this.settings.Accounts == null)
+            {
+                this.Logger.Error("No account settings configured for SharePoint sites (site {site}).", site);
+                return null;
+            }
+
+            if (string.IsNullOrEmpty(account))
+            {
+                this.Logger.Error("No account configured for site {site}.", site);
+                return null;
+            }
+
+            if (!this.settings.Accounts.TryGetValue(account, out var settings))
+            {
+                this.Logger.Error("No account settings found for {account} and site {site}.", account, site);
+                return null;
+            }
+
+            return settings;
         }
 
         /// <summary>

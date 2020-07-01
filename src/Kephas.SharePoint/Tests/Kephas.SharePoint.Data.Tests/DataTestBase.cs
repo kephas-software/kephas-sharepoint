@@ -45,10 +45,13 @@ namespace Kephas.SharePoint.Tests
 
         protected static ISiteSettingsProvider GetTestSiteSettingsProvider(string siteName = "test", string siteNamespace = null)
         {
-            var testSettings = GetTestSiteSettings(siteNamespace);
+            var (account, testSettings) = GetTestSiteSettings(siteNamespace);
             var siteSettingsProvider = Substitute.For<ISiteSettingsProvider>();
             siteSettingsProvider.GetSiteSettings().Returns(
                 new List<(string name, SiteSettings settings)> { (siteName, testSettings) });
+
+            siteSettingsProvider.GetAccountSettings().Returns(
+                new List<(string name, SiteAccountSettings settings)> { (testSettings.Account, account) });
 
             return siteSettingsProvider;
         }
@@ -63,16 +66,18 @@ namespace Kephas.SharePoint.Tests
             siteServiceProvider.GetSiteService(siteName, Arg.Any<bool>()).Returns(siteService);
 
             var (_, siteSettings) = siteSettingsProvider.GetSiteSettings().First(s => s.name == siteName);
+            var (_, siteAccountSettings) = siteSettingsProvider.GetAccountSettings().First(s => s.name == siteSettings.Account);
 
             var context = new Context(Substitute.For<ICompositionContext>())
                 .Set(nameof(ISiteService.SiteName), siteName)
+                .Set(nameof(SiteAccountSettings), siteAccountSettings)
                 .Set(nameof(SiteSettings), siteSettings);
             siteService.InitializeAsync(context).WaitNonLocking();
 
             return siteServiceProvider;
         }
 
-        protected static SiteSettings GetTestSiteSettings(string siteNamespace)
+        protected static (SiteAccountSettings account, SiteSettings site) GetTestSiteSettings(string siteNamespace)
         {
             var appSettings = new ConfigurationBuilder()
                 .AddUserSecrets<DataTestBase>()
@@ -80,11 +85,16 @@ namespace Kephas.SharePoint.Tests
             var ns = string.IsNullOrEmpty(siteNamespace)
                 ? string.Empty
                 : $"{siteNamespace}-";
-            return new SiteSettings
-            {
-                SiteUrl = appSettings[$"{ns}SiteSettings:SiteUrl"] ?? "<please provide site url>",
-                Credential = GetCredential(appSettings[$"{ns}SiteSettings:CredentialType"], appSettings[$"{ns}SiteSettings:Credential"]),
-            };
+            return (
+                new SiteAccountSettings
+                {
+                    Credential = GetCredential(appSettings[$"{ns}SiteSettings:CredentialType"], appSettings[$"{ns}SiteSettings:Credential"]),
+                },
+                new SiteSettings
+                {
+                    Account = "test-account",
+                    SiteUrl = appSettings[$"{ns}SiteSettings:SiteUrl"] ?? "<please provide site url>",
+                });
         }
 
         private static IEnumerable<Lazy<ISiteAuthenticationManager, SiteAuthenticationManagerMetadata>> GetAuthManagers()

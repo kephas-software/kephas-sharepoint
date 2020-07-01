@@ -31,7 +31,8 @@ namespace Kephas.SharePoint
         private readonly IClientContextProvider contextProvider;
         private readonly IListService libraryService;
         private readonly InitializationMonitor<ISiteService> initMonitor;
-        private SiteSettings siteSettings;
+        private SiteAccountSettings? siteAccountSettings;
+        private SiteSettings? siteSettings;
         private ClientContext clientContext;
         private Timer keepAlive;
 
@@ -108,7 +109,13 @@ namespace Kephas.SharePoint
             try
             {
                 this.SiteName = context?[nameof(this.SiteName)] as string;
+                this.siteAccountSettings = context?[nameof(SiteAccountSettings)] as SiteAccountSettings;
                 this.siteSettings = context?[nameof(SiteSettings)] as SiteSettings;
+                if (this.siteAccountSettings == null)
+                {
+                    throw new SharePointException($"No site account settings provided for '{this.SiteName}'.");
+                }
+
                 if (this.siteSettings == null)
                 {
                     throw new SharePointException($"No site settings provided for '{this.SiteName}'.");
@@ -119,7 +126,7 @@ namespace Kephas.SharePoint
                     throw new SharePointException($"No site URL provided for '{this.SiteName}'.");
                 }
 
-                this.clientContext = await this.contextProvider.GetClientContextAsync(this.siteSettings).PreserveThreadContext();
+                this.clientContext = await this.contextProvider.GetClientContextAsync(this.siteAccountSettings, this.siteSettings).PreserveThreadContext();
 
                 this.SiteId = this.clientContext.Web.Id;
                 this.SiteUrl = new Uri(this.siteSettings.SiteUrl);

@@ -106,6 +106,8 @@ namespace Kephas.SharePoint.Tests.Data
                 this.innerProvider = GetTestSiteSettingsProvider();
             }
 
+            public IEnumerable<(string name, SiteAccountSettings settings)> GetAccountSettings() => this.innerProvider.GetAccountSettings();
+
             public IEnumerable<(string name, SiteSettings settings)> GetSiteSettings() => this.innerProvider.GetSiteSettings();
         }
     }

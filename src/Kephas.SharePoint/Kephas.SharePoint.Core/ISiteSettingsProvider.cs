@@ -20,11 +20,19 @@ namespace Kephas.SharePoint
     public interface ISiteSettingsProvider
     {
         /// <summary>
-        /// Gets the site settings in this collection.
+        /// Gets the site settings.
         /// </summary>
         /// <returns>
-        /// An enumerator that allows foreach to be used to process the site settings in this collection.
+        /// An enumeration of site name and settings tuples.
         /// </returns>
         IEnumerable<(string name, SiteSettings settings)> GetSiteSettings();
+
+        /// <summary>
+        /// Gets the site account settings.
+        /// </summary>
+        /// <returns>
+        /// An enumeration of site account name and settings tuples.
+        /// </returns>
+        IEnumerable<(string name, SiteAccountSettings settings)> GetAccountSettings();
     }
 }

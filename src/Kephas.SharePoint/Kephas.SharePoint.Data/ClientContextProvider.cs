@@ -43,21 +43,22 @@ namespace Kephas.SharePoint
         /// <summary>
         /// Gets the client context asynchronously.
         /// </summary>
-        /// <param name="settings">Options for controlling the operation.</param>
+        /// <param name="account">The account settings.</param>
+        /// <param name="settings">The site settings.</param>
         /// <returns>
         /// An asynchronous result that yields the client context.
         /// </returns>
-        public async Task<ClientContext> GetClientContextAsync(SiteSettings settings)
+        public async Task<ClientContext> GetClientContextAsync(SiteAccountSettings account, SiteSettings settings)
         {
             // https://www.youtube.com/watch?v=prNlFdHP1ZM
             // https://www.c-sharpcorner.com/article/connect-to-sharepoint-online-site-with-app-only-authentication/
 
-            if (settings.Credential == null)
+            if (account?.Credential == null)
             {
                 throw new SharePointException($"The credential setting is missing, cannot connect to '{settings.SiteUrl}'.");
             }
 
-            var credentialType = settings.Credential.GetType();
+            var credentialType = account.Credential.GetType();
             var authManager = this.authManagers.FirstOrDefault(l => l.Metadata.CredentialType == credentialType)?.Value;
             if (authManager == null)
             {
@@ -66,7 +67,7 @@ namespace Kephas.SharePoint
 
             try
             {
-                var clientContext = await authManager.GetAuthenticatedContextAsync(settings, settings.Credential).PreserveThreadContext();
+                var clientContext = await authManager.GetAuthenticatedContextAsync(settings, account.Credential).PreserveThreadContext();
 
                 clientContext.Load(clientContext.Web, w => w.ServerRelativeUrl, w => w.Id, w => w.Url);
                 clientContext.Load(clientContext.Site, s => s.Url, s => s.Id);
@@ -79,7 +80,7 @@ namespace Kephas.SharePoint
                 if (((HttpWebResponse)ex.Response).StatusCode == HttpStatusCode.Unauthorized)
                 {
                     throw new SharePointException(
-                        $"Cannot connect to SharePoint site '{settings.SiteUrl}' with '{settings.Credential}', check whether the credentials are correct.",
+                        $"Cannot connect to SharePoint site '{settings.SiteUrl}' with '{account.Credential}', check whether the credentials are correct.",
                         ex);
                 }
 

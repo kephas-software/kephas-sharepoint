@@ -25,6 +25,14 @@ namespace Kephas.SharePoint
         /// <value>
         /// The sites.
         /// </value>
+        public IDictionary<string, SiteAccountSettings> Accounts { get; set; } = new Dictionary<string, SiteAccountSettings>();
+
+        /// <summary>
+        /// Gets or sets the sites.
+        /// </summary>
+        /// <value>
+        /// The sites.
+        /// </value>
         public IDictionary<string, SiteSettings> Sites { get; set; } = new Dictionary<string, SiteSettings>();
 
         /// <summary>

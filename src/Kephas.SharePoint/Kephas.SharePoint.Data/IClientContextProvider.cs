@@ -24,10 +24,11 @@ namespace Kephas.SharePoint
         /// <summary>
         /// Gets the client context asynchronously.
         /// </summary>
-        /// <param name="settings">Options for controlling the operation.</param>
+        /// <param name="account">The account settings.</param>
+        /// <param name="settings">The site settings.</param>
         /// <returns>
         /// An asynchronous result that yields the client context.
         /// </returns>
-        Task<ClientContext> GetClientContextAsync(SiteSettings settings);
+        Task<ClientContext> GetClientContextAsync(SiteAccountSettings account, SiteSettings settings);
     }
 }
