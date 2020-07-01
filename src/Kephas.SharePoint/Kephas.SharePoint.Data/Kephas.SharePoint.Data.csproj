@@ -88,8 +88,8 @@
     </Choose>
 
     <ItemGroup>
-        <PackageReference Include="Kephas.Core" Version="8.0.0-dev.44" />
-        <PackageReference Include="Kephas.Data" Version="8.0.0-dev.44" />
+        <PackageReference Include="Kephas.Core" Version="8.0.0" />
+        <PackageReference Include="Kephas.Data" Version="8.0.0" />
         <PackageReference Include="Microsoft.Data.OData" Version="5.8.4" />
         <PackageReference Include="Microsoft.Data.Services.Client" Version="5.8.4" />
         <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">

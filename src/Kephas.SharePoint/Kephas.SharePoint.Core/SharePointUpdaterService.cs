@@ -98,29 +98,6 @@ namespace Kephas.SharePoint
             this.initMonitor.Complete();
         }
 
-        private SiteAccountSettings? GetSiteAccountSettings(string? site, string? account)
-        {
-            if (this.settings.Accounts == null)
-            {
-                this.Logger.Error("No account settings configured for SharePoint sites (site {site}).", site);
-                return null;
-            }
-
-            if (string.IsNullOrEmpty(account))
-            {
-                this.Logger.Error("No account configured for site {site}.", site);
-                return null;
-            }
-
-            if (!this.settings.Accounts.TryGetValue(account, out var settings))
-            {
-                this.Logger.Error("No account settings found for {account} and site {site}.", account, site);
-                return null;
-            }
-
-            return settings;
-        }
-
         /// <summary>
         /// Finalizes the service.
         /// </summary>
@@ -166,6 +143,29 @@ namespace Kephas.SharePoint
             }
 
             return siteUploader.UpdateListItemAsync(listItem, context, cancellationToken);
+        }
+
+        private SiteAccountSettings? GetSiteAccountSettings(string? site, string? account)
+        {
+            if (this.settings.Accounts == null)
+            {
+                this.Logger.Error("No account settings configured for SharePoint sites (site {site}).", site);
+                return null;
+            }
+
+            if (string.IsNullOrEmpty(account))
+            {
+                this.Logger.Error("No account configured for site {site}.", site);
+                return null;
+            }
+
+            if (!this.settings.Accounts.TryGetValue(account, out var settings))
+            {
+                this.Logger.Error("No account settings found for {account} and site {site}.", account, site);
+                return null;
+            }
+
+            return settings;
         }
     }
 }
