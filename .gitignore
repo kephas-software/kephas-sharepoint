@@ -228,8 +228,7 @@ _Pvt_Extensions
 /src/NDependOut
 
 # Custom entries
-/src/.idea/
-/src/Kephas.SharePoint/.idea/
+.idea/
 /src/Deployment/SetNuGetApiKey.bat
 /externals/local-package-source
 !/externals/nugets/MongoDB*/lib/**/*.dll

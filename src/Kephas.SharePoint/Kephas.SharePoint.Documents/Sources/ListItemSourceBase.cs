@@ -26,6 +26,7 @@ namespace Kephas.SharePoint.Sources
     using Kephas.Services;
     using Kephas.SharePoint;
     using Kephas.SharePoint.Configuration;
+    using Kephas.SharePoint.Messaging;
     using Kephas.Threading.Tasks;
     using Kephas.Workflow;
     using Kephas.Workflow.Interaction;
@@ -189,17 +190,34 @@ namespace Kephas.SharePoint.Sources
         /// <returns>
         /// An asynchronous result that yields the upload document.
         /// </returns>
-        protected virtual async Task<ResponseMessage> UploadListItemAsync(ListItem listItem, CancellationToken cancellationToken = default)
+        protected virtual async Task<IOperationResult> UploadListItemAsync(ListItem listItem, CancellationToken cancellationToken = default)
         {
             try
             {
-                var response = (ResponseMessage)(await this.messageProcessor.ProcessAsync(listItem, ctx => ctx.Impersonate(this.AppContext), cancellationToken).PreserveThreadContext())!;
-                return response;
+                var response = (UploadResponseMessage)(await this.messageProcessor.ProcessAsync(listItem, ctx => ctx.Impersonate(this.AppContext), cancellationToken).PreserveThreadContext())!;
+                return response.Result != null
+                    ? new OperationResult<UploadResponseMessage>(response)
+                        .MergeAll(response.Result)
+                        .OperationState(response.Result.OperationState)
+                    : new OperationResult<UploadResponseMessage>(response)
+                        .MergeMessage(response.Message)
+                        .OperationState(
+                            response.Severity <= SeverityLevel.Error
+                                ? OperationState.Failed
+                                : response.Severity == SeverityLevel.Warning
+                                    ? OperationState.Warning
+                                    : OperationState.Completed);
             }
             catch (Exception ex)
             {
                 this.Logger.Error(ex, $"Error while uploading '{listItem}'");
-                return new ResponseMessage { Message = ex.Message, Severity = SeverityLevel.Error };
+                return new OperationResult<UploadResponseMessage>(
+                        new UploadResponseMessage
+                        {
+                            Message = ex.Message,
+                            Severity = SeverityLevel.Error,
+                        })
+                    .Fail(ex);
             }
         }
 
