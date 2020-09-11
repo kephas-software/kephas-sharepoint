@@ -91,7 +91,7 @@ namespace Kephas.SharePoint
                 }
                 catch (Exception ex)
                 {
-                    this.Logger.Debug(ex, $"Could not connect to {siteSettingsPair.Value.SiteUrl}.");
+                    this.Logger.Warn(ex, $"Could not connect to {siteSettingsPair.Value.SiteUrl}.");
                 }
             }
 
