@@ -34,5 +34,13 @@ namespace Kephas.SharePoint
         /// An enumeration of site account name and settings tuples.
         /// </returns>
         IEnumerable<(string name, SiteAccountSettings settings)> GetAccountSettings();
+
+        /// <summary>
+        /// Gets the site account settings for the provided site.
+        /// </summary>
+        /// <param name="siteName">The site name.</param>
+        /// <param name="accountName">Optional. The account name. If none is provided, the account name configured in the site settings will be used.</param>
+        /// <returns>The site account settings.</returns>
+        SiteAccountSettings? GetSiteAccountSettings(string siteName, string? accountName = null);
     }
 }

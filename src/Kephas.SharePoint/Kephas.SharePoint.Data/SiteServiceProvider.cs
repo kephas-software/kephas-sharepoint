@@ -68,7 +68,6 @@ namespace Kephas.SharePoint
             this.initMonitor.Start();
 
             var logger = this.Logger.Merge(context?.Logger);
-            var accounts = this.siteSettingsProvider.GetAccountSettings().ToList();
             foreach (var (siteName, siteSettings) in this.siteSettingsProvider.GetSiteSettings())
             {
                 if (siteName == null)
@@ -78,11 +77,23 @@ namespace Kephas.SharePoint
 
                 try
                 {
-                    var accountSettings = accounts.FirstOrDefault(a => a.name == siteName).settings;
                     var siteContext = this.contextFactory.CreateContext<Context>().Merge(context);
+                    var siteAccountSettings = this.siteSettingsProvider.GetSiteAccountSettings(siteName, siteSettings.Account);
+                    if (siteAccountSettings == null)
+                    {
+                        if (string.IsNullOrEmpty(siteSettings.Account))
+                        {
+                            logger.Error("No account configured for site '{site}'.", siteName);
+                        }
+                        else
+                        {
+                            logger.Error("Could not find the account settings for '{account}' when connecting to site '{site}'.", siteSettings.Account, siteName);
+                        }
+                    }
+
                     siteContext[nameof(ISiteService.SiteName)] = siteName;
                     siteContext[nameof(SiteSettings)] = siteSettings;
-                    siteContext[nameof(SiteAccountSettings)] = accountSettings;
+                    siteContext[nameof(SiteAccountSettings)] = siteAccountSettings;
                     var siteService = await this.siteServiceFactory
                         .CreateInitializedValueAsync(siteContext, cancellationToken: cancellationToken)
                         .PreserveThreadContext();
@@ -90,7 +101,7 @@ namespace Kephas.SharePoint
                 }
                 catch (Exception ex)
                 {
-                    this.Logger.Debug(ex, $"Could not connect to {siteSettings.SiteUrl}.");
+                    logger.Warn(ex, $"Could not connect to {siteSettings.SiteUrl}.");
                 }
             }
 

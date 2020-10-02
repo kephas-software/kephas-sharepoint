@@ -34,29 +34,29 @@ namespace Kephas.SharePoint
         private readonly IContextFactory contextFactory;
         private readonly IExportFactory<IListUpdaterService> listUpdaterService;
         private readonly IListService listService;
+        private readonly ISiteSettingsProvider siteSettingsProvider;
         private readonly IDictionary<string, IListUpdaterService> listUpdatersMap = new Dictionary<string, IListUpdaterService>();
-        private readonly SharePointSettings settings;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SharePointUpdaterService"/> class.
         /// </summary>
         /// <param name="contextFactory">The context factory.</param>
-        /// <param name="sharePointConfiguration">The SharePoint configuration.</param>
         /// <param name="listUpdaterService">The list updater service.</param>
         /// <param name="listService">The library service.</param>
+        /// <param name="siteSettingsProvider">The site settings provider.</param>
         /// <param name="logManager">Manager for log.</param>
         public SharePointUpdaterService(
             IContextFactory contextFactory,
-            IConfiguration<SharePointSettings> sharePointConfiguration,
             IExportFactory<IListUpdaterService> listUpdaterService,
             IListService listService,
+            ISiteSettingsProvider siteSettingsProvider,
             ILogManager logManager)
             : base(logManager)
         {
-            this.settings = sharePointConfiguration.Settings;
             this.contextFactory = contextFactory;
             this.listUpdaterService = listUpdaterService;
             this.listService = listService;
+            this.siteSettingsProvider = siteSettingsProvider;
             this.initMonitor = new InitializationMonitor<ISharePointUpdaterService>(this.GetType());
         }
 
@@ -73,9 +73,9 @@ namespace Kephas.SharePoint
             this.initMonitor.Start();
 
             var logger = this.Logger.Merge(context?.Logger);
-            foreach (var siteSettingsPair in this.settings.Sites)
+            foreach (var (siteName, siteSettings) in this.siteSettingsProvider.GetSiteSettings())
             {
-                if (siteSettingsPair.Value == null)
+                if (siteSettings == null)
                 {
                     continue;
                 }
@@ -83,15 +83,29 @@ namespace Kephas.SharePoint
                 try
                 {
                     var siteContext = this.contextFactory.CreateContext<Context>().Merge(context);
-                    siteContext[nameof(SiteAccountSettings)] = this.GetAccountSettings(siteSettingsPair.Key, siteSettingsPair.Value.Account);
-                    siteContext[nameof(SiteSettings)] = siteSettingsPair.Value;
-                    siteContext[nameof(IListUpdaterService.SiteName)] = siteSettingsPair.Key;
+
+                    var siteAccountSettings = this.siteSettingsProvider.GetSiteAccountSettings(siteName, siteSettings.Account);
+                    if (siteAccountSettings == null)
+                    {
+                        if (string.IsNullOrEmpty(siteSettings.Account))
+                        {
+                            logger.Error("No account configured for site '{site}'.", siteName);
+                        }
+                        else
+                        {
+                            logger.Error("Could not find the account settings for '{account}' when connecting to site '{site}'.", siteSettings.Account, siteName);
+                        }
+                    }
+
+                    siteContext[nameof(IListUpdaterService.SiteName)] = siteName;
+                    siteContext[nameof(SiteSettings)] = siteSettings;
+                    siteContext[nameof(SiteAccountSettings)] = siteAccountSettings;
                     var listUpdater = await this.listUpdaterService.CreateInitializedValueAsync(siteContext, cancellationToken: cancellationToken).PreserveThreadContext();
-                    this.listUpdatersMap[siteSettingsPair.Key ?? siteSettingsPair.Value.SiteUrl] = listUpdater;
+                    this.listUpdatersMap[siteName ?? siteSettings.SiteUrl] = listUpdater;
                 }
                 catch (Exception ex)
                 {
-                    this.Logger.Warn(ex, $"Could not connect to {siteSettingsPair.Value.SiteUrl}.");
+                    logger.Warn(ex, $"Could not connect to {siteSettings.SiteUrl}.");
                 }
             }
 
@@ -143,29 +157,6 @@ namespace Kephas.SharePoint
             }
 
             return siteUploader.UpdateListItemAsync(listItem, context, cancellationToken);
-        }
-
-        private SiteAccountSettings? GetAccountSettings(string? site, string? account)
-        {
-            if (this.settings.Accounts == null)
-            {
-                this.Logger.Error("No account settings configured for SharePoint sites (site {site}).", site);
-                return null;
-            }
-
-            if (string.IsNullOrEmpty(account))
-            {
-                this.Logger.Error("No account configured for site {site}.", site);
-                return null;
-            }
-
-            if (!this.settings.Accounts.TryGetValue(account, out var settings))
-            {
-                this.Logger.Error("No account settings found for {account} and site {site}.", account, site);
-                return null;
-            }
-
-            return settings;
         }
     }
 }

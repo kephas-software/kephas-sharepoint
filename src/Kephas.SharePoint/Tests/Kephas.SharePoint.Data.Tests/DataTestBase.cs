@@ -53,6 +53,8 @@ namespace Kephas.SharePoint.Tests
             siteSettingsProvider.GetAccountSettings().Returns(
                 new List<(string name, SiteAccountSettings settings)> { (testSettings.Account, account) });
 
+            siteSettingsProvider.GetSiteAccountSettings(siteName, Arg.Any<string?>()).Returns(account);
+
             return siteSettingsProvider;
         }
 
