@@ -68,6 +68,7 @@ namespace Kephas.SharePoint
             this.initMonitor.Start();
 
             var logger = this.Logger.Merge(context?.Logger);
+            var accounts = this.siteSettingsProvider.GetAccountSettings().ToList();
             foreach (var (siteName, siteSettings) in this.siteSettingsProvider.GetSiteSettings())
             {
                 if (siteName == null)
@@ -77,10 +78,14 @@ namespace Kephas.SharePoint
 
                 try
                 {
+                    var accountSettings = accounts.FirstOrDefault(a => a.name == siteName).settings;
                     var siteContext = this.contextFactory.CreateContext<Context>().Merge(context);
-                    siteContext[nameof(SiteSettings)] = siteSettings;
                     siteContext[nameof(ISiteService.SiteName)] = siteName;
-                    var siteService = await this.siteServiceFactory.CreateInitializedValueAsync(siteContext).PreserveThreadContext();
+                    siteContext[nameof(SiteSettings)] = siteSettings;
+                    siteContext[nameof(SiteAccountSettings)] = accountSettings;
+                    var siteService = await this.siteServiceFactory
+                        .CreateInitializedValueAsync(siteContext, cancellationToken: cancellationToken)
+                        .PreserveThreadContext();
                     this.siteServicesMap[siteName] = siteService;
                 }
                 catch (Exception ex)
