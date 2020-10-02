@@ -32,6 +32,14 @@ namespace Kephas.SharePoint
         }
 
         /// <summary>
+        /// Gets the site account settings for the provided site.
+        /// </summary>
+        /// <param name="siteName">The site name.</param>
+        /// <param name="accountName">Optional. The account name. If none is provided, the account name configured in the site settings will be used.</param>
+        /// <returns>The site account settings.</returns>
+        public SiteAccountSettings? GetSiteAccountSettings(string siteName, string? accountName = null) => null;
+
+        /// <summary>
         /// Gets the site settings.
         /// </summary>
         /// <returns>
