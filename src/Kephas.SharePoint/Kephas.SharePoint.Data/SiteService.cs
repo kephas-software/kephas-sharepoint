@@ -108,9 +108,9 @@ namespace Kephas.SharePoint
             var logger = this.Logger.Merge(context?.Logger);
             try
             {
-                this.SiteName = context?[nameof(this.SiteName)] as string;
-                this.siteAccountSettings = context?[nameof(SiteAccountSettings)] as SiteAccountSettings;
+                this.SiteName = context?[nameof(ISiteService.SiteName)] as string ?? string.Empty;
                 this.siteSettings = context?[nameof(SiteSettings)] as SiteSettings;
+                this.siteAccountSettings = context?[nameof(SiteAccountSettings)] as SiteAccountSettings;
                 if (this.siteAccountSettings == null)
                 {
                     throw new SharePointException($"No site account settings provided for '{this.SiteName}'.");
@@ -139,7 +139,7 @@ namespace Kephas.SharePoint
             }
             catch (Exception ex)
             {
-                var message = $"Error while connecting to SharePoint server '{this.siteSettings.SiteUrl}'. Possible cause: bad app ID/user name and password. Check the information in the inner exception.";
+                var message = $"Error while connecting to SharePoint server '{this.siteSettings!.SiteUrl}'. Possible cause: bad app ID/user name and password. Check the information in the inner exception.";
                 context?.Logger.Error(message);
                 this.Logger.Error(ex, message);
                 this.initMonitor.Reset();
@@ -154,10 +154,12 @@ namespace Kephas.SharePoint
         /// <returns>
         /// An asynchronous result.
         /// </returns>
-        public async Task FinalizeAsync(IContext? context = null, CancellationToken cancellationToken = default)
+        public Task FinalizeAsync(IContext? context = null, CancellationToken cancellationToken = default)
         {
             this.keepAlive?.Dispose();
             this.clientContext?.Dispose();
+
+            return Task.CompletedTask;
         }
 
         /// <summary>
