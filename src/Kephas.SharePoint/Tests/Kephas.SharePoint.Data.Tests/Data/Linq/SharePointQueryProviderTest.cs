@@ -27,7 +27,7 @@ namespace Kephas.SharePoint.Tests.Data.Linq
     public class SharePointQueryProviderTest : DataTestBase
     {
         [Test]
-        [TestCase((string)null, "Unsorted")]
+        [TestCase((string?)null, "Unsorted")]
         [TestCase("app", "Unsorted")]
         [TestCase("sc", "Unsorted")]
         [TestCase("scapp", "Unsorted")]

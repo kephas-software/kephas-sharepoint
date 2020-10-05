@@ -10,7 +10,7 @@
         </When>
         <Otherwise>
             <ItemGroup>
-                <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.1" />
+                <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
             </ItemGroup>
         </Otherwise>
     </Choose>
@@ -24,11 +24,11 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Kephas.Testing" Version="8.0.0" />
+        <PackageReference Include="Kephas.Testing" Version="8.1.0" />
         <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="3.1.1" />
-        <PackageReference Include="NSubstitute" Version="4.2.1" />
+        <PackageReference Include="NSubstitute" Version="4.2.2" />
         <PackageReference Include="NUnit" Version="3.12.0" />
-        <PackageReference Include="NUnit3TestAdapter" Version="3.16.1">
+        <PackageReference Include="NUnit3TestAdapter" Version="3.17.0">
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>

@@ -43,7 +43,7 @@ namespace Kephas.SharePoint.Tests
             };
         }
 
-        protected static ISiteSettingsProvider GetTestSiteSettingsProvider(string siteName = "test", string siteNamespace = null)
+        protected static ISiteSettingsProvider GetTestSiteSettingsProvider(string siteName = "test", string? siteNamespace = null)
         {
             var (account, testSettings) = GetTestSiteSettings(siteNamespace);
             var siteSettingsProvider = Substitute.For<ISiteSettingsProvider>();

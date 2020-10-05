@@ -22,7 +22,7 @@
         <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
         <PackageLicenseUrl>http://opensource.org/licenses/MIT</PackageLicenseUrl>
         <PackageProjectUrl>https://github.com/kephas-software/kephas-sharepoint-uploader-service</PackageProjectUrl>
-        <PackageIconUrl>https://www.kephas-software.com/wp-content/uploads/kis.logo_.png</PackageIconUrl>
+        <PackageIcon>kis.logo.png</PackageIcon>
         <RepositoryUrl>https://github.com/kephas-software/kephas-sharepoint-uploader-service</RepositoryUrl>
         <RepositoryType>github</RepositoryType>
         <PackageReleaseNotes>
@@ -69,9 +69,9 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Kephas.Core" Version="8.0.0" />
-        <PackageReference Include="Kephas.Messaging" Version="8.0.0" />
-        <PackageReference Include="Kephas.Workflow" Version="8.0.0" />
+        <PackageReference Include="Kephas.Core" Version="8.1.0" />
+        <PackageReference Include="Kephas.Messaging" Version="8.1.0" />
+        <PackageReference Include="Kephas.Workflow" Version="8.1.0" />
         <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -97,5 +97,9 @@
             <LastGenOutput>Strings.Designer.cs</LastGenOutput>
         </EmbeddedResource>
     </ItemGroup>
+
+	<ItemGroup>
+		<None Include="kis.logo.png" Pack="true" PackagePath="\" />
+	</ItemGroup>
 
 </Project>

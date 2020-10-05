@@ -45,16 +45,17 @@ namespace Kephas.SharePoint.Security
         /// <returns>
         /// An asynchronous result that yields the authenticated context.
         /// </returns>
-        public override Task<ClientContext> GetAuthenticatedContextAsync(
+        public override async Task<ClientContext> GetAuthenticatedContextAsync(
             SiteSettings settings,
             PasswordSiteCredential credential,
             IContext? context = null,
             CancellationToken cancellationToken = default)
         {
-            return ((Func<ClientContext>)(() => new AuthenticationManager().GetSharePointOnlineAuthenticatedContextTenant(
+            await Task.Yield();
+            return new AuthenticationManager().GetAzureADCredentialsContext(
                 settings.SiteUrl,
                 credential.UserName,
-                this.GetSecurePassword(credential.UserPassword, credential.UserEncryptedPassword)))).AsAsync();
+                this.GetSecurePassword(credential.UserPassword, credential.UserEncryptedPassword));
         }
     }
 }

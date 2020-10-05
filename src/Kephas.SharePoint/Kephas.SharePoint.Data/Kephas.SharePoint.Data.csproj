@@ -22,7 +22,7 @@
         <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
         <PackageLicenseUrl>http://opensource.org/licenses/MIT</PackageLicenseUrl>
         <PackageProjectUrl>https://github.com/kephas-software/kephas-sharepoint-uploader-service</PackageProjectUrl>
-        <PackageIconUrl>https://www.kephas-software.com/wp-content/uploads/kis.logo_.png</PackageIconUrl>
+        <PackageIcon>kis.logo.png</PackageIcon>
         <RepositoryUrl>https://github.com/kephas-software/kephas-sharepoint-uploader-service</RepositoryUrl>
         <RepositoryType>github</RepositoryType>
         <PackageReleaseNotes>
@@ -46,6 +46,7 @@
 
     <PropertyGroup>
         <RootNamespace>Kephas.SharePoint</RootNamespace>
+        <UserSecretsId>3c1f1ef1-2077-418f-a820-c2bdda835cfb</UserSecretsId>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)'=='Debug'">
@@ -77,19 +78,19 @@
     <Choose>
         <When Condition="'$(TargetFramework)'=='net461'">
             <ItemGroup>
-                <PackageReference Include="SharePointPnPCoreOnline" Version="3.20.2004" />
+                <PackageReference Include="SharePointPnPCoreOnline" Version="3.25.2009.1" />
             </ItemGroup>
         </When>
-        <Otherwise>
-            <ItemGroup>
-                <PackageReference Include="Kephas.SharePoint.PnP.Core" Version="3.20.2004" />
-            </ItemGroup>
-        </Otherwise>
-    </Choose>
+		<Otherwise>
+			<ItemGroup>
+				<PackageReference Include="Kephas.SharePoint.PnP.Core" Version="3.25.2009.1" />
+			</ItemGroup>
+		</Otherwise>
+	</Choose>
 
     <ItemGroup>
-        <PackageReference Include="Kephas.Core" Version="8.0.0" />
-        <PackageReference Include="Kephas.Data" Version="8.0.0" />
+        <PackageReference Include="Kephas.Core" Version="8.1.0" />
+        <PackageReference Include="Kephas.Data" Version="8.1.0" />
         <PackageReference Include="Microsoft.Data.OData" Version="5.8.4" />
         <PackageReference Include="Microsoft.Data.Services.Client" Version="5.8.4" />
         <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
@@ -118,5 +119,9 @@
             <LastGenOutput>Strings.Designer.cs</LastGenOutput>
         </EmbeddedResource>
     </ItemGroup>
+
+	<ItemGroup>
+		<None Include="kis.logo.png" Pack="true" PackagePath="\" />
+	</ItemGroup>
 
 </Project>
